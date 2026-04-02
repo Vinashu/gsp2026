@@ -1,0 +1,2 @@
+timestamp	manifest	hypothesis	solver_version	solved_count	avg_ratio	avg_ratio_synthetic	avg_ratio_real	optimal_count	per_puzzle_ratios
+2026-04-02T03:30:39.846Z	phase2-dev	Phase 2 baseline from current v7 solver	v7	14	1.0305	0.8891	1.2191	9	level20:1.000;level21:0.727;level22:0.917;level28:0.929;level29:0.840;6304847664db33850899ed81:0.833;6304855064db33850899ed89:1.000;630497b064db33850899ed91:1.053;level30:0.833;level31:1.067;level32:0.800;clostridium_easy_01:2.000;clostridium_medium_02:1.333;clostridium_hard_03:1.095

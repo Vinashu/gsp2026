@@ -1,0 +1,44 @@
+{
+  "name": "phase2-holdout",
+  "description": "Reserved Phase 2 holdout manifest. These puzzles are intentionally excluded from iterative tuning and should be used only for milestone checks or final claims.",
+  "resultsPath": "results_phase2.tsv",
+  "decisionRule": "Do not tune against this manifest. Use it only after a cluster of accepted changes or before claiming a new Phase 2 baseline.",
+  "puzzles": [
+    {
+      "kind": "markdown",
+      "id": "level33",
+      "path": "syntetic_puzles/dev/level33.md",
+      "source": "synthetic",
+      "category": ["phase2-holdout", "synthetic-dev", "large", "hard", "repetitive"],
+      "referenceScore": 22,
+      "referenceScoreSource": "generator move count in puzzle file"
+    },
+    {
+      "kind": "markdown",
+      "id": "level34",
+      "path": "syntetic_puzles/dev/level34.md",
+      "source": "synthetic",
+      "category": ["phase2-holdout", "synthetic-dev", "medium", "shorter-macro"],
+      "referenceScore": 14,
+      "referenceScoreSource": "generator move count in puzzle file"
+    },
+    {
+      "kind": "markdown",
+      "id": "clostridium_hard_04",
+      "path": "real_puzzles/dev/clostridium_hard_04.md",
+      "source": "real",
+      "category": ["phase2-holdout", "real-dev", "large", "real-bacterial", "hard", "asymmetric"],
+      "referenceScore": 23,
+      "referenceScoreSource": "OrthoAlign topScore"
+    },
+    {
+      "kind": "markdown",
+      "id": "clostridium_very_hard_05",
+      "path": "real_puzzles/dev/clostridium_very_hard_05.md",
+      "source": "real",
+      "category": ["phase2-holdout", "real-dev", "large", "real-bacterial", "very-hard", "terminus-shift"],
+      "referenceScore": 46,
+      "referenceScoreSource": "OrthoAlign topScore"
+    }
+  ]
+}

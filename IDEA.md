@@ -2,164 +2,149 @@
 
 ## Objective
 
-Develop a **novel heuristic algorithm for the genome sorting problem** using an iterative autoresearch loop where an AI agent:
+Develop a novel heuristic algorithm for the genome sorting problem using an
+iterative autoresearch loop where an AI agent:
 
-- proposes solver strategies,
-- tests them on a frozen benchmark,
-- refines them based on performance.
+- proposes solver strategies
+- tests them on fixed evaluation tracks
+- refines them based on performance
 
-The goal is not a black-box winner. It is a **generalizable, explainable heuristic** grounded in both player behavior (GeSort insights) and emergent agent-discovered patterns.
+The goal is not a black-box winner. It is a generalizable, explainable
+heuristic grounded in both player behavior and emergent agent-discovered
+patterns.
 
----
-
-## Core Analogy (Karpathy Autoresearch)
+## Core Analogy
 
 | Karpathy autoresearch | This project |
 |-----------------------|--------------|
 | Editable artifact: `train.py` | Editable artifact: `solver.js` |
-| Fixed environment | Fixed puzzle benchmark + rules |
-| Metric: validation loss | Metric: avgRatio (moves / known best) |
+| Fixed environment | Fixed rules plus fixed puzzle manifests |
+| Metric: validation loss | Metric: `avgRatio` |
 | Iterative experiments | Iterative solver refinement |
-| Keep best version | Keep best heuristic (revert with git) |
+| Keep best version | Keep best heuristic, revert regressions |
 
-The agent evolves the solver strategy. Nothing else changes.
-
----
+The solver evolves. The study design defines how we judge that evolution.
 
 ## System Architecture
 
-### Fixed components (never change)
+### Fixed components
 
-- `benchmark/puzzles.json` — 8 benchmark puzzles (5 synthetic + 3 real bacterial)
-- `gameEngine.js` — rules engine implementing all three operations with constraints
-- `evaluate.js` — evaluation harness; fixed budget, fixed metric
-- `program.md` — research doctrine the agent reads before each session
+- `benchmark/puzzles.json` - frozen 8-puzzle legacy benchmark
+- `benchmark/phase2_dev.json` - curated Phase 2 development manifest
+- `benchmark/phase2_holdout.json` - reserved Phase 2 holdout manifest
+- `gameEngine.js` - rules engine implementing all operations and constraints
+- `evaluate.js` - legacy benchmark harness
+- `evaluate_dataset.js` - Phase 2 manifest evaluator
+- `program.md` - research doctrine for future agent sessions
 
-### Mutable component (only this evolves)
+### Mutable component
 
-- `solver.js` — the heuristic strategy
+- `solver.js` - the heuristic strategy
   - move selection logic
   - prioritization of inversions vs dup/del
-  - search strategy (greedy, beam, two-phase, etc.)
+  - search strategy
   - move scoring functions
 
----
+## Phase 1 Benchmark Design
 
-## Benchmark Design
-
-8 puzzles across difficulty categories:
+The original benchmark contains 8 puzzles across difficulty categories:
 
 | Category | Puzzles | Notes |
 |----------|---------|-------|
-| Small synthetic | level20, level21, level22 | 15–22 genes, known solution count |
+| Small synthetic | level20, level21, level22 | 15-22 genes |
 | Medium synthetic | level28 | 26 genes |
-| Large synthetic | level29 | ~115 genes, hardest synthetic |
-| Real bacterial | ed81, ed89 | ~100 genes, human beat OrthoAlign by 45% |
-| Real bacterial (hard) | ed91 | ~107 genes, 1723s human solve time |
+| Large synthetic | level29 | ~115 genes |
+| Real bacterial | ed81, ed89 | ~100 genes |
+| Real bacterial hard | ed91 | ~107 genes |
 
-In addition to the frozen benchmark, the repo now includes auxiliary
-development sets that are useful for exploratory testing but should not replace
-the headline benchmark:
+This benchmark remains frozen so Phase 2 work stays comparable to the earlier
+study.
 
-- `syntetic_puzles/dev/` - extra synthetic puzzles generated from the legacy
-  level creator to stress inversion-heavy, repeat-heavy, and macro-move cases
-- `real_puzzles/dev/` - extra genomic puzzles built from Clostridium genome
-  pairs, filtered so the mutable genome contains all target gene symbols and
-  annotated with OrthoAlign `topScore` estimates
+## Phase 2 Study Design
 
----
+The original 8-puzzle loop was productive, but it is now close to saturation.
+Phase 2 keeps the legacy benchmark for continuity while moving to a more robust
+three-track evaluation design.
+
+### Track roles
+
+| Track | Files | Role |
+|------|-------|------|
+| Legacy continuity | `benchmark/puzzles.json` | Preserve comparability with Phase 1 and catch regressions |
+| Phase 2 dev | `benchmark/phase2_dev.json` | Main day-to-day hypothesis testing set |
+| Phase 2 holdout | `benchmark/phase2_holdout.json` | Reserved untouched validation set |
+
+### Current Phase 2 split
+
+| Split | Puzzles |
+|-------|---------|
+| Phase 2 dev | legacy 8, level30, level31, level32, clostridium_easy_01, clostridium_medium_02, clostridium_hard_03 |
+| Phase 2 holdout | level33, level34, clostridium_hard_04, clostridium_very_hard_05 |
+
+The new puzzles come from:
+
+- `syntetic_puzles/dev/` - extra synthetic generator outputs targeting
+  inversion-heavy, repeat-heavy, and macro-move cases
+- `real_puzzles/dev/` - extra Clostridium genome-pair puzzles filtered so the
+  mutable genome contains every target gene symbol and scored with OrthoAlign
 
 ## Evaluation Protocol
 
-Primary metric: **avgRatio** (mean of solver_moves / known_best across solved puzzles).
+All tracks keep the same 150-move budget and the same ratio metric:
 
-Secondary:
-- `solvedCount` — puzzles solved within budget (150 moves max)
-- `optimalCount` — puzzles matched at known best score
-- `avgRatioSynthetic` / `avgRatioReal` — per-source breakdown
+`avgRatio = mean(solver moves / reference score)` across solved puzzles
 
-Every experiment uses the same 8 puzzles, the same 150-move budget, and the same metric formula. This is the controlled comparison that makes iterations comparable.
+Secondary metrics:
 
-The new dev-only puzzle sets are still valuable, but they should be used as a
-secondary diagnostic track:
+- `solvedCount`
+- `optimalCount`
+- `avgRatioSynthetic`
+- `avgRatioReal`
 
-- use dev puzzles to probe whether a hypothesis generalizes beyond the 8 fixed
-  benchmark cases
-- use the frozen 8-puzzle benchmark for the official keep/revert decision
-- if a change only helps the dev set but not the benchmark, treat it as an
-  exploratory clue rather than a confirmed improvement
+### Phase 2 decision rule
 
----
+- optimize primarily on `phase2_dev`
+- reject changes that cause a clear regression on the legacy benchmark
+- keep `phase2_holdout` out of the inner loop
+- use holdout only for milestone checks or before claiming a new baseline
 
-## Baseline Solver (v0)
-
-Implemented in `solver.js`. Strategy: **terminus-anchored greedy with inversion priority**.
-
-Current result: **0/8 solved**. The solver gets stuck because it uses positional alignment score (from index 0), which fails when genomes have different lengths. This is the deliberate research starting point.
-
-First natural hypothesis for the agent: compare alignment relative to terminus position rather than absolute index 0.
-
----
+This gives us a broader optimization target without giving up continuity or a
+true untouched validation set.
 
 ## Autoresearch Loop
 
+```text
+1. Read program.md, solver.js, and the latest Phase 2 / legacy results
+2. Propose one hypothesis
+3. Implement it in solver.js only
+4. Run evaluate_dataset.js on benchmark/phase2_dev.json
+5. If Phase 2 dev improved, run evaluate.js on the legacy benchmark
+6. Keep the change only if Phase 2 dev improved and legacy did not regress clearly
+7. Use phase2_holdout only for milestone checks
+8. Repeat
 ```
-1. Agent reads program.md + solver.js
-2. Proposes ONE hypothesis in plain English
-3. Implements it in solver.js (only)
-4. Runs: HYPOTHESIS="..." node evaluate.js
-5. Compares new avgRatio to last row in results.tsv
-6. Improved → keep change, write experiment report
-   Not improved → git checkout HEAD -- solver.js
-7. Repeat
-```
 
-To start a session: open Claude Code in this directory, paste `RESEARCH_LOOP_PROMPT.md`.
+## Heuristic Extraction
 
----
+After many iterations, recurring successful patterns should be promoted into
+explicit algorithmic rules, for example:
 
-## Heuristic Extraction Phase
-
-After many iterations, patterns that appear repeatedly across successful experiments should be promoted into explicit algorithmic rules. For example:
-
-- "score inversions by bilateral improvement (both sides of [t])"
-- "prefer moves that reduce genome length difference before fixing positions"
-- "align terminus-adjacent region before addressing periphery"
+- score inversions by bilateral improvement around `[t]`
+- prefer large exact frontier macros when available
+- align the terminus-adjacent region before addressing the periphery
 
 These recurring discoveries become the final algorithm.
 
----
-
 ## Final Deliverable
 
-Not "the best run." A **structured, explainable heuristic algorithm** that can be described in plain language, validated on the benchmark, and written up as a research contribution.
+Not just "the best run." The final deliverable is a structured, explainable
+heuristic algorithm that can be described in plain language, validated on the
+legacy benchmark, strengthened on Phase 2 dev, and sanity-checked on holdout.
 
-Example structure (to be discovered, not prescribed):
-1. Phase 1: Align terminus-adjacent region
-2. Phase 2: Identify major structural mismatches
-3. Phase 3: Evaluate high-value inversion candidates
-4. Phase 4: Apply globally beneficial dup/del operations
-5. Phase 5: Clean residual local mismatches
+## Expected Contributions
 
----
-
-## Optional Extensions
-
-### Multi-agent roles
-- Explorer agent — proposes ambitious hypotheses
-- Critic agent — rejects weak reasoning
-- Archivist agent — updates doctrine with confirmed principles
-
-### Dual-track experiment
-- Track A: vanilla agents without accumulated doctrine
-- Track B: agents with doctrine updated after each successful experiment
-
-Compare which track discovers stronger strategies faster.
-
----
-
-## Expected Research Contributions
-
-- A novel heuristic for the genome sorting problem
-- Insights into: inversion timing, global vs local optimization, terminus anchoring
-- A methodology template for applying autoresearch to combinatorial biology problems
+- a stronger heuristic for the genome sorting problem
+- insights into inversion timing, global vs local optimization, and terminus
+  anchoring
+- a reusable methodology for applying autoresearch to combinatorial biology
+  problems

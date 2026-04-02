@@ -1,116 +1,133 @@
-# Autoresearch Session: Genome Sorting Problem
+# Autoresearch Session: Genome Sorting Problem (Phase 2)
 
 Read `program.md` carefully before starting. It is your research doctrine.
 
----
+## Your Loop
 
-## Your loop — repeat until I tell you to stop
+Repeat until I tell you to stop.
 
-### Step 1 — Read current state
-Read `program.md` and the current `solver.js`.  
-Also read the last row of `results.tsv` to know the current best scores.
+### Step 1 - Read current state
 
-### Step 2 — Form one hypothesis
-Propose **ONE** heuristic change in plain English.  
-Example: *"I will try scoring inversions by how many positions they fix on both sides of [t], not just raw alignment."*
+Read:
+
+- `program.md`
+- the current `solver.js`
+- the most recent `phase2-dev` row in `results_phase2.tsv` to know the current Phase 2 dev baseline
+- the last row of `results.tsv` to know the current legacy benchmark baseline
+
+### Step 2 - Form one hypothesis
+
+Propose exactly one heuristic change in plain English.
 
 Your hypothesis must explain:
-- What you are changing
-- Why you expect it to help
-- Which puzzle categories it should benefit
 
-### Step 3 — Implement
-Modify **ONLY** `solver.js` to implement the hypothesis.  
-- Increment the `// @version` comment at the top (v0 → v1 → v2 …)
-- Do not change the `solve(mutableGenome, targetGenome, options)` signature
-- Do not change `MAX_MOVES_BUDGET` in `evaluate.js`
+- what you are changing
+- why you expect it to help
+- which puzzle categories it should benefit
 
-### Step 4 — Evaluate
+### Step 3 - Implement
+
+Modify only `solver.js`.
+
+- increment the `// @version` comment at the top
+- do not change the `solve(mutableGenome, targetGenome, options)` signature
+- do not change any evaluation harness or puzzle manifest
+
+### Step 4 - Evaluate on Phase 2 dev
+
 Run:
+
+```bash
+HYPOTHESIS="<your hypothesis in one sentence>" node evaluate_dataset.js --manifest benchmark/phase2_dev.json
 ```
+
+### Step 5 - Sanity-check the legacy benchmark
+
+If the Phase 2 dev result improved, also run:
+
+```bash
 HYPOTHESIS="<your hypothesis in one sentence>" node evaluate.js
 ```
 
-### Step 5 — Decide
-Compare the new `avgRatio` and `solvedCount` to the previous row in `results.tsv`.
+### Step 6 - Decide
 
-- **Improved** → keep the change. Write a structured experiment report (see below).
-- **No improvement** → revert `solver.js` to the previous version. Log a brief note about what failed and why.
+Compare the new results to the previous `phase2-dev` row in `results_phase2.tsv`
+and the previous row in `results.tsv`.
 
-### Step 6 — Repeat from Step 1
+- Improved on `phase2_dev` and no meaningful legacy regression -> keep the
+  change and write a structured experiment report.
+- No `phase2_dev` improvement, or a clear legacy regression -> revert
+  `solver.js` to the previous version and log a brief failure note.
+
+### Step 7 - Use holdout sparingly
+
+Do not tune against `benchmark/phase2_holdout.json`.
+
+Run it only:
+
+- after a cluster of accepted changes
+- or before claiming a new milestone solver baseline
+
+### Step 8 - Repeat
 
 Do not pause to ask me whether to continue. Run the loop autonomously.
 
----
+## Experiment Report Format
 
-## Experiment report format (for every kept change)
+For every kept change, report:
 
-```
-### Experiment — [solver version]
+```text
+### Experiment - [solver version]
 
-**Hypothesis:** [what you tested]
-
-**Change:** [what you modified in solver.js]
-
-**Expected benefit:** [why it should help]
-
-**Result:**
-- avgRatio: [before] → [after]
-- Solved: [before] → [after]
-- Optimal: [before] → [after]
-- Per category: synthetic=[x], real=[y]
-
-**Failure modes:** [which puzzles got worse, if any]
-
-**Interpretation:** [what this tells us about the problem]
-
-**Recommendation:** Keep / Discard / Revise
+Hypothesis: [what you tested]
+Change: [what you modified in solver.js]
+Expected benefit: [why it should help]
+Result:
+- Phase 2 dev avgRatio: [before] -> [after]
+- Phase 2 dev solved: [before] -> [after]
+- Legacy avgRatio: [before] -> [after]
+- Legacy solved: [before] -> [after]
+- Optional holdout check: [not run / summary]
+Failure modes: [which puzzles got worse, if any]
+Interpretation: [what this tells us about the problem]
+Recommendation: Keep / Discard / Revise
 ```
 
----
-
-## Hard rules
+## Hard Rules
 
 | Rule | Why |
 |------|-----|
 | Never modify `gameEngine.js` | Rules must stay fixed for fair comparison |
-| Never modify `evaluate.js` | Harness must stay fixed for fair comparison |
-| Never modify `benchmark/puzzles.json` | Benchmark must stay fixed for fair comparison |
+| Never modify `evaluate.js` | Legacy harness must stay fixed |
+| Never modify `evaluate_dataset.js` | Phase 2 harness must stay fixed |
+| Never modify `benchmark/puzzles.json` | Legacy benchmark must stay fixed |
+| Never modify `benchmark/phase2_dev.json` or `benchmark/phase2_holdout.json` during a solver loop | Dataset split must stay fixed |
 | Never hardcode puzzle IDs in solver logic | Overfitting, not research |
-| Propose exactly ONE change per iteration | Interpretability |
+| Propose exactly one change per iteration | Interpretability |
 | You may only modify `solver.js` | Everything else is the fixed environment |
 
----
+## How to Revert `solver.js`
 
-## How to revert `solver.js`
-
-If a change does not improve results, restore the previous version:
 ```bash
 git checkout HEAD -- solver.js
 ```
-Then continue from Step 2 with a new hypothesis.
 
----
+## What Counts as Improvement
 
-## What counts as improvement
+Primary Phase 2 criterion:
 
-Primary criterion (both must hold or at least one must improve without the other worsening):
-- Lower `avgRatio` (fewer moves relative to known best)
-- Higher `solvedCount` (more puzzles solved within budget)
+- lower `phase2_dev` `avgRatio`
+- higher `phase2_dev` `solvedCount`
 
-Secondary (useful signals, not primary criteria):
-- Higher `optimalCount`
-- Better `avgRatioSynthetic` or `avgRatioReal`
+Legacy guardrail:
 
-A change that helps on one category but significantly harms another is **not** an improvement — investigate why before deciding.
+- do not accept a change that clearly worsens the frozen 8-puzzle benchmark
 
----
+Secondary signals:
 
-## Research mindset
+- higher `optimalCount`
+- better `avgRatioSynthetic` or `avgRatioReal`
+- better milestone behavior on `phase2_holdout`
 
-You are not searching for a winning benchmark run.  
-You are searching for **reusable heuristic principles**.
-
-If multiple successful iterations independently converge on the same pattern (e.g., "inversions that fix both sides of [t] are worth more"), promote that pattern from an experimental tweak into an explicit rule in the solver design.
-
-The final goal is a solver whose strategy you can describe clearly in one paragraph — and that performs well because of that strategy, not despite it.
+The final goal is not just a lower score. It is a stronger and more
+explainable heuristic.

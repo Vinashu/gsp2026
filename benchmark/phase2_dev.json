@@ -1,0 +1,94 @@
+{
+  "name": "phase2-dev",
+  "description": "Primary Phase 2 development manifest. Combines the frozen Phase 1 benchmark with a curated set of new synthetic and genomic puzzles for broader hypothesis testing.",
+  "resultsPath": "results_phase2.tsv",
+  "decisionRule": "Tune on this manifest during Phase 2. Before accepting a solver revision, confirm that the legacy benchmark in benchmark/puzzles.json does not show a meaningful regression. Keep phase2_holdout.json reserved for milestone checks.",
+  "puzzles": [
+    {
+      "kind": "benchmark",
+      "id": "level20"
+    },
+    {
+      "kind": "benchmark",
+      "id": "level21"
+    },
+    {
+      "kind": "benchmark",
+      "id": "level22"
+    },
+    {
+      "kind": "benchmark",
+      "id": "level28"
+    },
+    {
+      "kind": "benchmark",
+      "id": "level29"
+    },
+    {
+      "kind": "benchmark",
+      "id": "6304847664db33850899ed81"
+    },
+    {
+      "kind": "benchmark",
+      "id": "6304855064db33850899ed89"
+    },
+    {
+      "kind": "benchmark",
+      "id": "630497b064db33850899ed91"
+    },
+    {
+      "kind": "markdown",
+      "id": "level30",
+      "path": "syntetic_puzles/dev/level30.md",
+      "source": "synthetic",
+      "category": ["phase2-dev", "synthetic-dev", "medium", "inversion-heavy"],
+      "referenceScore": 12,
+      "referenceScoreSource": "generator move count in puzzle file"
+    },
+    {
+      "kind": "markdown",
+      "id": "level31",
+      "path": "syntetic_puzles/dev/level31.md",
+      "source": "synthetic",
+      "category": ["phase2-dev", "synthetic-dev", "medium", "repeat-source-ambiguity"],
+      "referenceScore": 15,
+      "referenceScoreSource": "generator move count in puzzle file"
+    },
+    {
+      "kind": "markdown",
+      "id": "level32",
+      "path": "syntetic_puzles/dev/level32.md",
+      "source": "synthetic",
+      "category": ["phase2-dev", "synthetic-dev", "large", "macro-copy"],
+      "referenceScore": 20,
+      "referenceScoreSource": "generator move count in puzzle file"
+    },
+    {
+      "kind": "markdown",
+      "id": "clostridium_easy_01",
+      "path": "real_puzzles/dev/clostridium_easy_01.md",
+      "source": "real",
+      "category": ["phase2-dev", "real-dev", "easy", "real-bacterial"],
+      "referenceScore": 1,
+      "referenceScoreSource": "OrthoAlign topScore"
+    },
+    {
+      "kind": "markdown",
+      "id": "clostridium_medium_02",
+      "path": "real_puzzles/dev/clostridium_medium_02.md",
+      "source": "real",
+      "category": ["phase2-dev", "real-dev", "medium", "real-bacterial"],
+      "referenceScore": 6,
+      "referenceScoreSource": "OrthoAlign topScore"
+    },
+    {
+      "kind": "markdown",
+      "id": "clostridium_hard_03",
+      "path": "real_puzzles/dev/clostridium_hard_03.md",
+      "source": "real",
+      "category": ["phase2-dev", "real-dev", "large", "real-bacterial", "hard"],
+      "referenceScore": 21,
+      "referenceScoreSource": "OrthoAlign topScore"
+    }
+  ]
+}
