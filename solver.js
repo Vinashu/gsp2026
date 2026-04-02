@@ -1,4 +1,4 @@
-// @version v2
+// @version v7
 // Genome Sorting Heuristic Solver - Terminus-Frontier Block Grower
 //
 // Strategy: build an exact matching core around [t], prefer block duplications
@@ -17,9 +17,11 @@ const {
 } = require('./gameEngine');
 
 const MAX_INVERSION_RADIUS = 12;
-const MAX_BLOCK_DUPLICATION = 16;
-const MAX_FRONTIER_DELETION = 16;
+const MAX_BLOCK_DUPLICATION = 64;
+const MAX_FRONTIER_DELETION = 64;
 const MAX_SOURCE_MATCHES = 4;
+const LOOKAHEAD_CANDIDATES = 8;
+const MAX_DUPLICATION_LENGTH_OPTIONS = 2;
 
 /**
  * Solve a genome sorting puzzle.
@@ -40,27 +42,8 @@ function solve(mutableGenome, targetGenome, options = {}) {
   while (!genomesEqual(current, target) && moves.length < maxMoves) {
     const baseScore = scoreGenome(current, target);
     const candidates = generateCandidates(current, target);
-
-    let best = null;
-
-    for (const move of candidates) {
-      let result;
-      try {
-        result = applyMove(current, move);
-      } catch (_) {
-        continue;
-      }
-
-      const serial = serializeGenome(result);
-      if (seen.has(serial)) continue;
-
-      const score = scoreGenome(result, target);
-      if (compareScores(score, baseScore) <= 0) continue;
-
-      if (!best || compareScores(score, best.score) > 0) {
-        best = { move, result, score };
-      }
-    }
+    const immediate = evaluateImmediateCandidates(current, target, candidates, seen, baseScore);
+    const best = chooseLookaheadMove(target, immediate, seen);
 
     if (!best) {
       if (debug) {
@@ -102,6 +85,72 @@ function generateCandidates(current, target) {
   return [...candidates.values()];
 }
 
+function evaluateImmediateCandidates(current, target, candidates, seen, baseScore) {
+  const evaluated = [];
+
+  for (const move of candidates) {
+    let result;
+    try {
+      result = applyMove(current, move);
+    } catch (_) {
+      continue;
+    }
+
+    const serial = serializeGenome(result);
+    if (seen.has(serial)) continue;
+
+    const score = scoreGenome(result, target);
+    if (compareScores(score, baseScore) <= 0) continue;
+
+    evaluated.push({ move, result, score, serial });
+  }
+
+  evaluated.sort((a, b) => compareScores(b.score, a.score));
+  return evaluated;
+}
+
+function chooseLookaheadMove(target, immediate, seen) {
+  if (immediate.length === 0) return null;
+
+  const shortlist = immediate.slice(0, LOOKAHEAD_CANDIDATES);
+  let best = null;
+
+  for (const candidate of shortlist) {
+    const lookahead = bestSuccessorScore(candidate.result, target, seen, candidate.serial, candidate.score);
+    const rank = [...lookahead, ...candidate.score];
+
+    if (!best || compareScores(rank, best.rank) > 0) {
+      best = { ...candidate, rank };
+    }
+  }
+
+  return best || immediate[0];
+}
+
+function bestSuccessorScore(current, target, seen, currentSerial, fallbackScore) {
+  const candidates = generateCandidates(current, target);
+  let best = fallbackScore;
+
+  for (const move of candidates) {
+    let result;
+    try {
+      result = applyMove(current, move);
+    } catch (_) {
+      continue;
+    }
+
+    const serial = serializeGenome(result);
+    if (seen.has(serial) || serial === currentSerial) continue;
+
+    const score = scoreGenome(result, target);
+    if (compareScores(score, best) > 0) {
+      best = score;
+    }
+  }
+
+  return best;
+}
+
 function addFrontierDuplicationCandidates(candidates, current, target, core, side) {
   const targetFrontier = side === 'left' ? core.targetLeftFrontier : core.targetRightFrontier;
   const remaining = side === 'left'
@@ -112,6 +161,7 @@ function addFrontierDuplicationCandidates(candidates, current, target, core, sid
 
   const destIndex = side === 'left' ? core.currentLeftFrontier : core.currentRightFrontier;
   const maxLen = Math.min(MAX_BLOCK_DUPLICATION, remaining);
+  let matchedLengths = 0;
 
   for (let len = maxLen; len >= 1; len--) {
     const desired = side === 'left'
@@ -128,7 +178,10 @@ function addFrontierDuplicationCandidates(candidates, current, target, core, sid
       });
     }
 
-    if (matches.length > 0) return;
+    if (matches.length > 0) {
+      matchedLengths++;
+      if (matchedLengths >= MAX_DUPLICATION_LENGTH_OPTIONS) return;
+    }
   }
 }
 
