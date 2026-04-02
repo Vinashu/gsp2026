@@ -1,4 +1,4 @@
-// @version v16
+// @version v17
 // Genome Sorting Heuristic Solver - Terminus-Frontier Block Grower
 //
 // Strategy: build an exact matching core around [t], prefer block duplications
@@ -26,6 +26,8 @@ const EXTRA_SHORT_INVERSION_CANDIDATES = 4;
 const INVERSION_ROLLOUT_CORE_THRESHOLD = 1;
 const INVERSION_ROLLOUT_CANDIDATES = 6;
 const INVERSION_ROLLOUT_MAX_MOVES = 24;
+const DUPLICATION_LENGTH_ROLLOUT_CANDIDATES = 4;
+const DUPLICATION_LENGTH_ROLLOUT_MAX_MOVES = 12;
 
 /**
  * Solve a genome sorting puzzle.
@@ -144,7 +146,14 @@ function chooseLookaheadMove(current, target, immediate, seen, rolloutMode = fal
   if (!rolloutMode) {
     const rolloutBest = chooseOpeningRolloutCandidate(current, target, immediate, best);
     if (rolloutBest) {
-      return rolloutBest;
+      best = rolloutBest;
+    }
+  }
+
+  if (!rolloutMode) {
+    const lengthRolloutBest = chooseDuplicationLengthRolloutCandidate(target, immediate, best);
+    if (lengthRolloutBest) {
+      best = lengthRolloutBest;
     }
   }
 
@@ -196,6 +205,53 @@ function chooseOpeningRolloutCandidate(current, target, immediate, fallback) {
   }
 
   return best || fallback;
+}
+
+function chooseDuplicationLengthRolloutCandidate(target, immediate, fallback) {
+  if (!fallback || fallback.move.type !== 'duplication') return fallback;
+
+  const shorterLengths = immediate
+    .filter(candidate =>
+      candidate.move.type === 'duplication' &&
+      candidate.move.destIndex === fallback.move.destIndex &&
+      candidate.move.srcStart === fallback.move.srcStart &&
+      candidate.move.srcLength < fallback.move.srcLength
+    )
+    .sort((a, b) => {
+      const leftGap = fallback.move.srcLength - a.move.srcLength;
+      const rightGap = fallback.move.srcLength - b.move.srcLength;
+      if (leftGap !== rightGap) return leftGap - rightGap;
+      return compareScores(b.score, a.score);
+    })
+    .slice(0, Math.max(0, DUPLICATION_LENGTH_ROLLOUT_CANDIDATES - 1));
+
+  if (shorterLengths.length === 0) return fallback;
+
+  const fallbackRollout = solve(fallback.result, target, {
+    maxMoves: DUPLICATION_LENGTH_ROLLOUT_MAX_MOVES,
+    rolloutMode: true
+  });
+
+  let best = fallback;
+  let bestRollout = fallbackRollout;
+
+  for (const candidate of shorterLengths) {
+    const rollout = solve(candidate.result, target, {
+      maxMoves: DUPLICATION_LENGTH_ROLLOUT_MAX_MOVES,
+      rolloutMode: true
+    });
+
+    const candidateBeatsFallback =
+      rollout.solved &&
+      (!bestRollout.solved || rollout.moveCount < bestRollout.moveCount);
+
+    if (candidateBeatsFallback) {
+      best = candidate;
+      bestRollout = rollout;
+    }
+  }
+
+  return best;
 }
 
 function bestSuccessorScore(current, target, seen, currentSerial, fallbackScore) {
