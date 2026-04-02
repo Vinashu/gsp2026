@@ -23,6 +23,16 @@ Selection rules for the dev set:
 These dev puzzles are for exploration and diagnostics. They are not part of the
 frozen benchmark used for official `results.tsv` comparisons.
 
+## Phase 3 hard set
+
+The `phase3/` subfolder contains a curated hard-genomic subset selected from
+the recurring loss clusters in the full all-pairs Clostridium sweep stored in
+`analysis/clostridium_pairs_full/`.
+
+These puzzles are not meant to replace the Phase 2 artifacts. They are the new
+active Phase 3 development target, with `v19` frozen as the historical Phase 2
+winner.
+
 ## Benchmark file fields
 
 ### _id
@@ -58,3 +68,7 @@ The dev files use a simpler markdown format:
 
 They omit historical gameplay metadata and keep only the information needed for
 research and solver testing.
+
+The Phase 3 markdown files use the same format, but additionally record the
+current `v19` move count observed during the all-pairs sweep so the Phase 3
+hard subset remains traceable back to its selection evidence.

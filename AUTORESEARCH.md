@@ -39,7 +39,11 @@ The benchmark puzzles, game rules, evaluation budget, and scoring formula are al
 - the known weakness of the current baseline,
 - and the experimental discipline rules.
 
-The agent reads it at the start of every session.
+The agent reads it at the start of every Phase 2 session.
+
+Phase 3 uses `PHASE3_PROGRAM.md` instead. The original `program.md` and
+`RESEARCH_LOOP_PROMPT.md` are preserved as historical artifacts so the Phase 2
+story can be reconstructed later.
 
 ### 3. A stable fitness metric
 
@@ -115,9 +119,11 @@ git add solver.js results.tsv && git commit -m "feat: v0 baseline"
 ```
 
 ### Starting a research session
-Open Claude Code in this directory and paste the contents of `RESEARCH_LOOP_PROMPT.md`.
+For historical Phase 2 reproduction, use `RESEARCH_LOOP_PROMPT.md`.
 
-The agent will run autonomously until you tell it to stop.
+For active work going forward, use `PHASE3_LOOP_PROMPT.md`, which treats `v19`
+as the frozen Phase 2 baseline and optimizes the hard-genomic Phase 3 manifest
+plus runtime.
 
 ### Reviewing progress
 ```bash
@@ -139,3 +145,7 @@ A **human-readable heuristic algorithm** for genome sorting that:
 - and can be described and justified to a research audience.
 
 That is the real adaptation of autoresearch to this domain: not autonomous coding for its own sake, but an **autonomous heuristic discovery pipeline**.
+
+Phase 3 extends that pipeline into a second mode: not just discovering a strong
+heuristic, but generalizing and accelerating an already-strong solver while
+keeping the previous phase frozen for historical comparison.

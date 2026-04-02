@@ -33,18 +33,27 @@ gsp2026/
 |- solver.js                       # Heuristic solver, the main research artifact
 |- evaluate.js                     # Legacy 8-puzzle benchmark harness
 |- evaluate_dataset.js             # Phase 2 manifest-based evaluator
+|- measure_dataset_runtime.js      # Manifest runtime harness for Phase 3
 |- results.tsv                     # Legacy benchmark experiment log
 |- results_phase2.tsv              # Phase 2 manifest experiment log
-|- program.md                      # Research doctrine for agents
-|- RESEARCH_LOOP_PROMPT.md         # Prompt for autonomous research sessions
+|- results_phase3.tsv              # Phase 3 hard-genomic experiment log
+|- timings_phase3.tsv              # Phase 3 runtime log
+|- program.md                      # Historical Phase 2 doctrine
+|- PHASE3_PROGRAM.md               # Active Phase 3 doctrine
+|- RESEARCH_LOOP_PROMPT.md         # Historical Phase 2 research prompt
+|- PHASE3_LOOP_PROMPT.md           # Active prompt for new research sessions
+|- analysis/
+|  `- clostridium_pairs_full/      # Full all-pairs Clostridium sweep artifacts
 |- benchmark/
 |  |- puzzles.json                 # Frozen 8-puzzle legacy benchmark
 |  |- phase2_dev.json              # Phase 2 development manifest
 |  |- phase2_holdout.json          # Phase 2 holdout manifest
+|  |- phase3_hard_genomic.json     # Phase 3 hard genomic development manifest
 |  `- validation/
 |     `- checkBenchmark.js         # One-time engine validator
 |- real_puzzles/
-|  `- dev/                         # Extra Clostridium genome-pair puzzles
+|  |- dev/                         # Phase 2 Clostridium genome-pair puzzles
+|  `- phase3/                      # Phase 3 hard genomic subset from the sweep
 `- syntetic_puzles/
    `- dev/                         # Extra synthetic generator outputs
 ```
@@ -77,7 +86,21 @@ HYPOTHESIS="baseline on phase2 dev" node evaluate_dataset.js --manifest benchmar
 This runs the current `solver.js` on the broader Phase 2 development set and
 appends to `results_phase2.tsv`.
 
-### 4. Run the Phase 2 holdout manifest
+### 4. Run the Phase 3 hard-genomic manifest
+
+```bash
+HYPOTHESIS="baseline on phase3 hard genomic" node evaluate_dataset.js --manifest benchmark/phase3_hard_genomic.json
+```
+
+This is the new Phase 3 development target.
+
+### 5. Measure Phase 3 runtime
+
+```bash
+HYPOTHESIS="runtime baseline on phase3 hard genomic" node measure_dataset_runtime.js --manifest benchmark/phase3_hard_genomic.json
+```
+
+### 6. Run the Phase 2 holdout manifest
 
 ```bash
 node evaluate_dataset.js --manifest benchmark/phase2_holdout.json
@@ -85,19 +108,19 @@ node evaluate_dataset.js --manifest benchmark/phase2_holdout.json
 
 Use the holdout manifest only for milestone checks, not for day-to-day tuning.
 
-### 5. Run a single puzzle
+### 7. Run a single puzzle
 
 ```bash
 node evaluate.js --puzzle level20 --verbose
 node evaluate_dataset.js --manifest benchmark/phase2_dev.json --puzzle level30 --verbose
 ```
 
-### 6. Start an autoresearch session
+### 8. Start an autoresearch session
 
 Open Codex or Claude Code in this directory and paste the contents of
-`RESEARCH_LOOP_PROMPT.md`. The loop now tunes on `phase2_dev`, checks the
-legacy benchmark for regressions, and keeps `phase2_holdout` reserved for
-milestones.
+`PHASE3_LOOP_PROMPT.md`.
+
+Use `RESEARCH_LOOP_PROMPT.md` only as a historical Phase 2 reference.
 
 ## Research Approach
 
@@ -143,7 +166,21 @@ Secondary metrics:
 For an important caveat on genomic references derived from the legacy
 OrthoAlign tool, see [ORTHOALIGN_COMPARATOR_NOTE.md](/c:/Repos/gsp2026/ORTHOALIGN_COMPARATOR_NOTE.md).
 
-## Phase 2 Study Design
+## Current Baseline
+
+`v19` is the frozen Phase 2 winner.
+
+Phase 2 established the current heuristic baseline on the curated manifests and
+the frozen legacy benchmark. The full Clostridium all-pairs sweep in
+`analysis/clostridium_pairs_full/` then showed that `v19` also generalizes well
+on a much larger genomic comparison set.
+
+That means the active research question has changed:
+
+- Phase 2: discover a strong heuristic
+- Phase 3: preserve that heuristic while making it broader and faster
+
+## Phase 2 and Phase 3 Study Design
 
 Phase 1 established a strong solver on the frozen 8-puzzle benchmark. Phase 2
 keeps that benchmark for continuity, but expands the study into three explicit
@@ -157,9 +194,19 @@ tracks:
 - `benchmark/phase2_holdout.json`
   Reserved holdout puzzles for milestone checks and generalization claims.
 
-Recommended Phase 2 workflow:
+Those Phase 2 artifacts remain historical reference points.
 
-- tune on `phase2_dev`
+Phase 3 adds a new primary development track:
+
+- `benchmark/phase3_hard_genomic.json`
+  A curated hard-genomic subset selected from the recurring loss clusters in
+  the full Clostridium pair sweep.
+
+Recommended workflow now:
+
+- tune on `phase3_hard_genomic`
+- measure runtime on `phase3_hard_genomic`
+- use `phase2_dev` as a non-regression quality guardrail
 - confirm no meaningful regression on the legacy benchmark
 - check `phase2_holdout` only after a cluster of accepted changes or before
   claiming a new baseline

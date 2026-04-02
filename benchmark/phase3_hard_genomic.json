@@ -1,0 +1,81 @@
+{
+  "name": "phase3-hard-genomic",
+  "description": "Phase 3 hard-genomic development manifest. Curated from the recurring loss clusters in the full Clostridium pair sweep, with v19 frozen as the historical Phase 2 winner.",
+  "resultsPath": "results_phase3.tsv",
+  "timingsPath": "timings_phase3.tsv",
+  "decisionRule": "Optimize this manifest for better generalization and lower runtime, while treating phase2_dev and the legacy benchmark as non-regression guardrails. Use phase2_holdout only for milestone checks.",
+  "puzzles": [
+    {
+      "kind": "markdown",
+      "id": "phase3_hard_01",
+      "path": "real_puzzles/phase3/phase3_hard_01.md",
+      "source": "real",
+      "category": ["phase3-dev", "real-hard", "growth-cluster", "ap012212", "long-target"],
+      "referenceScore": 52,
+      "referenceScoreSource": "OrthoAlign topScore from full Clostridium sweep"
+    },
+    {
+      "kind": "markdown",
+      "id": "phase3_hard_02",
+      "path": "real_puzzles/phase3/phase3_hard_02.md",
+      "source": "real",
+      "category": ["phase3-dev", "real-hard", "growth-cluster", "ap012212", "long-target"],
+      "referenceScore": 53,
+      "referenceScoreSource": "OrthoAlign topScore from full Clostridium sweep"
+    },
+    {
+      "kind": "markdown",
+      "id": "phase3_hard_03",
+      "path": "real_puzzles/phase3/phase3_hard_03.md",
+      "source": "real",
+      "category": ["phase3-dev", "real-hard", "growth-cluster", "ap012212", "very-long-target"],
+      "referenceScore": 60,
+      "referenceScoreSource": "OrthoAlign topScore from full Clostridium sweep"
+    },
+    {
+      "kind": "markdown",
+      "id": "phase3_hard_04",
+      "path": "real_puzzles/phase3/phase3_hard_04.md",
+      "source": "real",
+      "category": ["phase3-dev", "real-hard", "growth-cluster", "ap012212", "very-long-target"],
+      "referenceScore": 60,
+      "referenceScoreSource": "OrthoAlign topScore from full Clostridium sweep"
+    },
+    {
+      "kind": "markdown",
+      "id": "phase3_hard_05",
+      "path": "real_puzzles/phase3/phase3_hard_05.md",
+      "source": "real",
+      "category": ["phase3-dev", "real-hard", "growth-cluster", "ap012212", "asymmetric"],
+      "referenceScore": 48,
+      "referenceScoreSource": "OrthoAlign topScore from full Clostridium sweep"
+    },
+    {
+      "kind": "markdown",
+      "id": "phase3_hard_06",
+      "path": "real_puzzles/phase3/phase3_hard_06.md",
+      "source": "real",
+      "category": ["phase3-dev", "real-hard", "repeated-long-target", "cp000721-cluster"],
+      "referenceScore": 25,
+      "referenceScoreSource": "OrthoAlign topScore from full Clostridium sweep"
+    },
+    {
+      "kind": "markdown",
+      "id": "phase3_hard_07",
+      "path": "real_puzzles/phase3/phase3_hard_07.md",
+      "source": "real",
+      "category": ["phase3-dev", "real-hard", "repeated-long-target", "cp000721-cluster"],
+      "referenceScore": 25,
+      "referenceScoreSource": "OrthoAlign topScore from full Clostridium sweep"
+    },
+    {
+      "kind": "markdown",
+      "id": "phase3_hard_08",
+      "path": "real_puzzles/phase3/phase3_hard_08.md",
+      "source": "real",
+      "category": ["phase3-dev", "real-hard", "repeated-long-target", "cp006777-cluster"],
+      "referenceScore": 25,
+      "referenceScoreSource": "OrthoAlign topScore from full Clostridium sweep"
+    }
+  ]
+}
