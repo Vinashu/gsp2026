@@ -1,4 +1,4 @@
-// @version v7
+// @version v14
 // Genome Sorting Heuristic Solver - Terminus-Frontier Block Grower
 //
 // Strategy: build an exact matching core around [t], prefer block duplications
@@ -19,9 +19,9 @@ const {
 const MAX_INVERSION_RADIUS = 12;
 const MAX_BLOCK_DUPLICATION = 64;
 const MAX_FRONTIER_DELETION = 64;
-const MAX_SOURCE_MATCHES = 4;
+const MAX_SOURCE_MATCHES = 8;
 const LOOKAHEAD_CANDIDATES = 8;
-const MAX_DUPLICATION_LENGTH_OPTIONS = 2;
+const MAX_DUPLICATION_LENGTH_OPTIONS = 3;
 
 /**
  * Solve a genome sorting puzzle.
@@ -341,10 +341,10 @@ function scoreGenome(current, target) {
   return [
     core.left + core.right,
     Math.min(core.left, core.right),
-    anchoredMatches,
-    weightedMatches,
     -countPenalty,
-    -lengthPenalty
+    -lengthPenalty,
+    anchoredMatches,
+    weightedMatches
   ];
 }
 
