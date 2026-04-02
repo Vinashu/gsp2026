@@ -1,4 +1,4 @@
-// @version v25
+// @version v30
 // Genome Sorting Heuristic Solver - Terminus-Frontier Block Grower
 //
 // Strategy: build an exact matching core around [t], prefer block duplications
@@ -31,6 +31,7 @@ const DUPLICATION_LENGTH_ROLLOUT_MAX_MOVES = 12;
 const NEUTRAL_INVERSION_ROLLOUT_CANDIDATES = 3;
 const STRONG_GROWTH_GAP_THRESHOLD = 20;
 const GROWTH_STATE_SOURCE_MATCH_LIMIT = 4;
+const FRONTIER_DELETION_ENABLE_GAP = 3;
 
 /**
  * Solve a genome sorting puzzle.
@@ -468,7 +469,7 @@ function shouldUseDuplicationLengthRollout(current, target) {
 }
 
 function shouldUseFrontierDeletions(current, target) {
-  return !isStrongGrowthState(current, target);
+  return (target.genes.length - current.genes.length) <= FRONTIER_DELETION_ENABLE_GAP;
 }
 
 function shouldUseInversionCandidates(current, target, core) {
