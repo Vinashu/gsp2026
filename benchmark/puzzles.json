@@ -1,0 +1,82 @@
+[
+  {
+    "id": "level20",
+    "source": "synthetic",
+    "category": ["small", "inversion-critical"],
+    "knownBestScore": 10,
+    "baselineScore": null,
+    "notes": "10 moves (target→mutable direction). Inversion of Tyr,[t],Asn is the key closing move.",
+    "target":  ["Lys","Ser","Lys","Met","Gln","Gly","Gln","Gly","Asp","Gly","Asn","[t]","Tyr","Ile","Pro","Asn","Met","Phe","Pro","Pro","Glu","Trp"],
+    "mutable": ["Lys","Met","Gln","Gly","Gln","Gly","Asp","Val","Tyr","His","[t]","Asn","Ile","Ser","Pro","Asn","Phe","Pro","Pro","Glu","Trp"]
+  },
+  {
+    "id": "level21",
+    "source": "synthetic",
+    "category": ["small", "inversion-heavy"],
+    "knownBestScore": 11,
+    "baselineScore": null,
+    "notes": "11 moves. Multiple nested inversions around [t].",
+    "target":  ["Thr","Gln","Gln","Val","Thr","Ala","Cys","Cys","Ile","Phe","[t]","Gly","Val","His","Thr","Asp","Asn","Gln","Ile","Val"],
+    "mutable": ["Thr","Gln","Thr","Ala","Cys","Cys","Ile","Val","His","Gly","[t]","Phe","Asp","Asn","Asn","Gln","Ile","Ala","Glu","Phe","Val"]
+  },
+  {
+    "id": "level22",
+    "source": "synthetic",
+    "category": ["small", "mixed"],
+    "knownBestScore": 12,
+    "baselineScore": null,
+    "notes": "12 moves. Mutable is longer; requires many deletions plus inversions.",
+    "target":  ["Arg","Trp","Gly","Cys","Lys","Trp","Phe","Thr","Arg","Lys","[t]","Phe","Ser","Cys","Arg"],
+    "mutable": ["Phe","Asp","Trp","Gly","Cys","His","Lys","Trp","Lys","Asp","[t]","Phe","Phe","Thr","Thr","Ser","Glu","Cys","His","Cys","Arg"]
+  },
+  {
+    "id": "level28",
+    "source": "synthetic",
+    "category": ["medium", "mixed"],
+    "knownBestScore": 14,
+    "baselineScore": null,
+    "notes": "14 moves. 26-gene target. Mix of all three operation types. Gene 'Trw' used.",
+    "target":  ["Ala","Gly","Ile","Asn","Leu","Met","Glu","Cys","Ile","[t]","Trw","Val","Gln","Ser","Gly","Pro","Ile","Met","Val","Leu","Glu","Pro","Ala","Lys","Ile","Gln"],
+    "mutable": ["Ala","Gly","Ile","Asn","Leu","Leu","Met","Glu","Cys","Val","Ile","[t]","Asn","Trw","Ser","Pro","Ile","Glu","Pro","Ala","Lys","Gln","Glu"]
+  },
+  {
+    "id": "level29",
+    "source": "synthetic",
+    "category": ["large", "hard"],
+    "knownBestScore": 25,
+    "baselineScore": null,
+    "notes": "25 moves. ~115-gene genome. Most complex synthetic puzzle. Gene 'Trw' used.",
+    "target":  ["Met","Val","Met","Tyr","Asn","Ser","Arg","Cys","Val","Tyr","Gly","Lys","His","Pro","Ser","His","Lys","Gly","Leu","Asn","Glu","Asn","Glu","Glu","Cys","Ala","Lys","Pro","Tyr","Pro","Trw","Asp","Thr","Gln","Thr","Met","Trw","Trw","Gly","Asn","Cys","Glu","Ala","Val","Phe","Asn","Ile","Val","Phe","Gly","Asn","Arg","Gly","Lys","Asn","Leu","Tyr","Thr","[t]","Val","Glu","Val","Tyr","Thr","Asn","Thr","Glu","Thr","Asn","Val","Glu","Ser","Ile","His","Tyr","Met","Val","Arg","Leu","Ala","Arg","Ile","Arg","Cys","Thr","Thr","Ala","Gly","His","Tyr","Ile","Leu","Phe","Pro","Met","Tyr","Cys","Lys","Ala","Met","Cys","Pro","Phe","Ala","Asn","Val","Pro","Phe","Tyr","Met","His","Val"],
+    "mutable": ["Met","Val","Met","Tyr","Asn","Ser","Arg","Cys","Val","Tyr","Gly","Lys","Cys","His","Ser","His","Lys","Gly","Leu","Asn","Glu","Asn","Glu","Glu","Cys","Pro","Tyr","Pro","Trw","Asp","Thr","Gln","Thr","Met","Leu","Gly","Trw","Trw","Asn","Gly","Asn","Cys","Glu","Ala","Val","Arg","Phe","Asn","Ile","Val","Phe","Gly","Asn","Arg","Lys","Lys","Asn","Leu","Tyr","Thr","[t]","Val","Glu","Val","Tyr","Pro","Thr","Asn","Thr","Glu","Thr","Thr","Asn","Val","Glu","Asn","Ser","His","Arg","Leu","His","Thr","Tyr","Ala","Arg","Ile","Thr","Val","Arg","Cys","Thr","Thr","Ala","Glu","Met","Gly","His","Thr","Tyr","Ile","Ile","Leu","Phe","Pro","Met","Cys","Lys","Ala","Met","Cys","Pro","Phe","Ala","Asn","Val","Pro","Phe","Tyr","Met","His","Val"]
+  },
+  {
+    "id": "6304847664db33850899ed81",
+    "source": "real",
+    "category": ["large", "real-bacterial"],
+    "knownBestScore": 6,
+    "baselineScore": 11,
+    "notes": "CP001078→CP006903. Human solved in 6 moves vs OrthoAlign 11.",
+    "target":  ["16S","23S","5S","Met","Ala","Ser","Ser","Ser","Ser","Arg","Leu","Met","Met","Leu","Met","Met","Leu","Asn","Asn","Asn","16S","Ala","Ile","23S","5S","Phe","Cys","Thr","Pro","Gly","Arg","Pro","Gly","Arg","His","Gln","Lys","Leu","Gly","Gly","Lys","His","Gln","Lys","Leu","Gly","Gly","Arg","16S","Ile","23S","Asn","Tyr","Val","Thr","Tyr","Val","Thr","Tyr","Trp","Trp","Met","Arg","Lys","Arg","Lys","[t]","Cys","Leu","Glu","Phe","5S","Ala","Met","5S","23S","16S","5S","23S","16S","Ser","Arg","5S","23S","16S","5S","23S","16S","5S","23S","16S","5S","23S","16S","5S","23S","16S","Lys","5S","Lys","5S","23S","16S","Asp","Val","Glu","Thr","Asp","Val","Glu"],
+    "mutable": ["16S","23S","5S","Met","Ala","Ser","Ser","Ser","Ser","Arg","Leu","Met","Met","Leu","Asn","Asn","Asn","16S","Ala","Ile","23S","5S","Phe","Cys","Thr","Pro","Gly","Arg","Pro","Gly","Arg","His","Gln","Lys","Leu","Gly","Gly","Lys","His","Gln","Lys","Leu","Gly","Gly","Arg","16S","Ile","23S","Asn","Tyr","Val","Thr","Tyr","Trp","Trp","Met","Cys","[t]","Lys","Arg","Lys","Arg","Arg","Leu","Glu","Phe","5S","Ala","Met","5S","23S","16S","5S","23S","16S","Ser","Arg","5S","23S","16S","5S","23S","16S","5S","23S","16S","5S","23S","16S","Lys","5S","Lys","5S","23S","16S","Asp","Val","Glu","Thr","Asp","Val","Glu"]
+  },
+  {
+    "id": "6304855064db33850899ed89",
+    "source": "real",
+    "category": ["large", "real-bacterial"],
+    "knownBestScore": 6,
+    "baselineScore": 11,
+    "notes": "CP006903→CP001078. Inverse pair of ed81. Human solved in 6 moves.",
+    "target":  ["16S","23S","5S","Met","Ala","Ser","Ser","Ser","Ser","Arg","Leu","Met","Met","Leu","Asn","Asn","Asn","16S","Ala","Ile","23S","5S","Phe","Cys","Thr","Pro","Gly","Arg","Pro","Gly","Arg","His","Gln","Lys","Leu","Gly","Gly","Lys","His","Gln","Lys","Leu","Gly","Gly","Arg","16S","Ile","23S","Asn","Tyr","Val","Thr","Tyr","Trp","Trp","Met","Cys","[t]","Lys","Arg","Lys","Arg","Arg","Leu","Glu","Phe","5S","Ala","Met","5S","23S","16S","5S","23S","16S","Ser","Arg","5S","23S","16S","5S","23S","16S","5S","23S","16S","5S","23S","16S","Lys","5S","Lys","5S","23S","16S","Asp","Val","Glu","Thr","Asp","Val","Glu"],
+    "mutable": ["16S","23S","5S","Met","Ala","Ser","Ser","Ser","Ser","Arg","Leu","Met","Met","Leu","Met","Met","Leu","Asn","Asn","Asn","16S","Ala","Ile","23S","5S","Phe","Cys","Thr","Pro","Gly","Arg","Pro","Gly","Arg","His","Gln","Lys","Leu","Gly","Gly","Lys","His","Gln","Lys","Leu","Gly","Gly","Arg","16S","Ile","23S","Asn","Tyr","Val","Thr","Tyr","Val","Thr","Tyr","Trp","Trp","Met","Arg","Lys","Arg","Lys","[t]","Cys","Leu","Glu","Phe","5S","Ala","Met","5S","23S","16S","5S","23S","16S","Ser","Arg","5S","23S","16S","5S","23S","16S","5S","23S","16S","5S","23S","16S","5S","23S","16S","Lys","5S","Lys","5S","23S","16S","Asp","Val","Glu","Thr","Asp","Val","Glu","Thr","Asp","Val","Glu"]
+  },
+  {
+    "id": "630497b064db33850899ed91",
+    "source": "real",
+    "category": ["large", "real-bacterial", "hard"],
+    "knownBestScore": 19,
+    "baselineScore": 25,
+    "notes": "HG917868→CP002160. 19 human moves vs OrthoAlign 25. Hardest puzzle (1723s solve time).",
+    "target":  ["16S","23S","5S","Met","Ala","Ser","Ser","Ser","Arg","Arg","Ser","16S","23S","5S","Lys","16S","23S","5S","Phe","16S","23S","5S","Phe","Cys","16S","23S","5S","Met","16S","23S","5S","Val","Asp","Asn","[t]","Leu","Asn","5S","23S","16S","Leu","Cys","Arg","Gly","Gly","Leu","Lys","Gln","His","Lys","Arg","Gly","Pro","Arg","Gly","Pro","Trw","Tyr","Thr","Tyr","Thr","Val","Thr","Asn","5S","23S","16S","Met","5S","Asn","Leu","Met","Met","Leu","Pro","Thr","Asp","Val","Glu","Asp","Val","Glu"],
+    "mutable": ["16S","23S","5S","Met","Ala","Ser","Ser","Ser","Arg","Arg","Ser","16S","23S","5S","Glu","Gly","16S","23S","5S","Lys","16S","23S","5S","Phe","16S","23S","5S","Lys","16S","23S","5S","Phe","Cys","16S","23S","5S","Pro","Gly","Arg","His","Gln","Lys","Leu","Gly","Gly","Arg","Pro","Gly","Arg","His","Gln","Lys","Leu","Gly","Gly","Arg","Val","Phe","Gly","Cys","Leu","[t]","Gln","Glu","Leu","Gln","Gly","Gly","Leu","Lys","Lys","Lys","Asn","5S","23S","Ile","Ala","16S","Leu","Trw","Tyr","Thr","Val","Thr","Asn","Asn","5S","23S","Ile","Ala","16S","Ala","Met","5S","Asn","Met","Met","Leu","Met","Met","Leu","Pro","Thr","Asp","Val","Glu","Asp","Val","Glu"]
+  }
+]
