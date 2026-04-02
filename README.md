@@ -39,8 +39,10 @@ gsp2026/
 │   ├── puzzles.json                   # 8 benchmark puzzles (5 synthetic + 3 real)
 │   └── validation/
 │       └── checkBenchmark.js          # One-time engine validator (87 checks)
-├── real_puzzles/                      # Source: 3 real bacterial genome puzzles
-└── syntetic_puzles/                   # Source: 5 synthetic puzzles
+├── real_puzzles/                      # Source: 3 benchmark real puzzles + dev genomic sets
+│   └── dev/                           # Extra Clostridium genome-pair puzzles (not benchmarked)
+└── syntetic_puzles/                   # Source: 5 benchmark synthetic puzzles + dev sets
+    └── dev/                           # Extra synthetic generator outputs (not benchmarked)
 ```
 
 ---
@@ -109,3 +111,37 @@ Primary: **avgRatio** = average of (solver moves / known best score) across solv
 Secondary: `solvedCount`, `optimalCount`, `avgRatioSynthetic`, `avgRatioReal`.
 
 The benchmark is frozen for the duration of the research. Only `solver.js` evolves.
+
+---
+
+## Additional Dev Puzzle Sets
+
+The main benchmark stays fixed at 8 puzzles, but the repo now also includes
+extra development-only puzzles for broader hypothesis testing.
+
+### Synthetic dev puzzles
+
+`syntetic_puzles/dev/` contains additional synthetic puzzles generated from the
+legacy generator in `_legacy/levelCreator/levelCreator-v2.py`.
+
+These were added to stress-test categories that the benchmark only samples
+lightly:
+- inversion-heavy cases
+- repeat-source ambiguity
+- large macro-copy / macro-deletion pressure
+- large repetitive cleanup
+- mixed cases where a shorter macro may beat the longest exact match
+
+### Genomic dev puzzles
+
+`real_puzzles/dev/` contains additional genomic puzzles built from pairs of
+Clostridium genomes in `_legacy/levelCreator/Clostridium_gesort_format`.
+
+Selection rules for these dev puzzles:
+- `mutable` must contain at least one copy of every gene symbol present in
+  `target`, so the puzzle is solvable under the game rules
+- an achievable `topScore` is estimated with the legacy OrthoAlign tool in
+  `_legacy/levelCreator/OrthoAlign`
+
+These extra sets are for exploration and diagnostics, not for replacing the
+frozen benchmark used in `results.tsv`.

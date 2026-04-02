@@ -57,6 +57,16 @@ The agent evolves the solver strategy. Nothing else changes.
 | Real bacterial | ed81, ed89 | ~100 genes, human beat OrthoAlign by 45% |
 | Real bacterial (hard) | ed91 | ~107 genes, 1723s human solve time |
 
+In addition to the frozen benchmark, the repo now includes auxiliary
+development sets that are useful for exploratory testing but should not replace
+the headline benchmark:
+
+- `syntetic_puzles/dev/` - extra synthetic puzzles generated from the legacy
+  level creator to stress inversion-heavy, repeat-heavy, and macro-move cases
+- `real_puzzles/dev/` - extra genomic puzzles built from Clostridium genome
+  pairs, filtered so the mutable genome contains all target gene symbols and
+  annotated with OrthoAlign `topScore` estimates
+
 ---
 
 ## Evaluation Protocol
@@ -69,6 +79,15 @@ Secondary:
 - `avgRatioSynthetic` / `avgRatioReal` — per-source breakdown
 
 Every experiment uses the same 8 puzzles, the same 150-move budget, and the same metric formula. This is the controlled comparison that makes iterations comparable.
+
+The new dev-only puzzle sets are still valuable, but they should be used as a
+secondary diagnostic track:
+
+- use dev puzzles to probe whether a hypothesis generalizes beyond the 8 fixed
+  benchmark cases
+- use the frozen 8-puzzle benchmark for the official keep/revert decision
+- if a change only helps the dev set but not the benchmark, treat it as an
+  exploratory clue rather than a confirmed improvement
 
 ---
 
