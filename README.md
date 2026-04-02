@@ -140,6 +140,9 @@ Secondary metrics:
 - `avgRatioSynthetic`
 - `avgRatioReal`
 
+For an important caveat on genomic references derived from the legacy
+OrthoAlign tool, see [ORTHOALIGN_COMPARATOR_NOTE.md](/c:/Repos/gsp2026/ORTHOALIGN_COMPARATOR_NOTE.md).
+
 ## Phase 2 Study Design
 
 Phase 1 established a strong solver on the frozen 8-puzzle benchmark. Phase 2
@@ -190,6 +193,11 @@ Selection rules for these puzzles:
   `target`, so the puzzle is solvable under the game rules
 - an achievable `topScore` is estimated with the legacy OrthoAlign tool in
   `_legacy/levelCreator/OrthoAlign`
+
+Important: OrthoAlign uses a broader event model than this repo's game engine,
+so those genomic `topScore` values should be treated as external comparative
+references, not strict like-for-like lower bounds. See
+[ORTHOALIGN_COMPARATOR_NOTE.md](/c:/Repos/gsp2026/ORTHOALIGN_COMPARATOR_NOTE.md).
 
 These dev puzzles feed the Phase 2 manifests, but the holdout split remains
 reserved and the legacy benchmark still anchors continuity across research

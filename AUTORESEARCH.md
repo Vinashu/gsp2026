@@ -47,6 +47,12 @@ Primary metric: **avgRatio** = mean of (solver moves / known best score) across 
 
 All metrics are computed identically every run by `evaluate.js`. The 150-move budget is a constant that never changes.
 
+Phase 2 adds one important nuance: some genomic reference scores come from the
+legacy OrthoAlign tool, which uses a broader event model than this repo's game
+engine. Those scores are still useful comparative references, but they are not
+always fair like-for-like lower bounds for our solver. See
+[ORTHOALIGN_COMPARATOR_NOTE.md](/c:/Repos/gsp2026/ORTHOALIGN_COMPARATOR_NOTE.md).
+
 ### 4. A curated benchmark set
 
 `benchmark/puzzles.json` contains 8 puzzles across categories:
@@ -83,6 +89,10 @@ Every kept revision produces a structured report:
 - and what the result tells us about the problem.
 
 The agent writes this report to the session log. Over time, these reports become a research dataset of heuristic strategies.
+
+On genomic puzzles, that interpretation must be careful: a missed OrthoAlign
+reference does not automatically falsify a heuristic if the missed improvement
+likely depends on an event our engine does not support.
 
 ### 9. Keep improvements, discard regressions
 
