@@ -1,4 +1,4 @@
-// @version v17
+// @version v18
 // Genome Sorting Heuristic Solver - Terminus-Frontier Block Grower
 //
 // Strategy: build an exact matching core around [t], prefer block duplications
@@ -24,7 +24,7 @@ const LOOKAHEAD_CANDIDATES = 8;
 const MAX_DUPLICATION_LENGTH_OPTIONS = 3;
 const EXTRA_SHORT_INVERSION_CANDIDATES = 4;
 const INVERSION_ROLLOUT_CORE_THRESHOLD = 1;
-const INVERSION_ROLLOUT_CANDIDATES = 6;
+const INVERSION_ROLLOUT_CANDIDATES = 8;
 const INVERSION_ROLLOUT_MAX_MOVES = 24;
 const DUPLICATION_LENGTH_ROLLOUT_CANDIDATES = 4;
 const DUPLICATION_LENGTH_ROLLOUT_MAX_MOVES = 12;
