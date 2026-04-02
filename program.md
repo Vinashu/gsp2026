@@ -23,6 +23,19 @@ It should be a set of reusable algorithmic ideas.
 
 ---
 
+## File Responsibilities
+
+| File | Your access |
+|------|-------------|
+| `solver.js` | **Read and write freely.** This is the only file you modify. |
+| `gameEngine.js` | Read only. Never modify. |
+| `evaluate.js` | Read only. Never modify. |
+| `benchmark/puzzles.json` | Read only. Never modify. |
+| `results.tsv` | Read only (written automatically by evaluate.js). |
+| `program.md` | Read only. Your operating manual. |
+
+---
+
 ## Problem Definition
 
 We are solving a version of the genome sorting problem.
@@ -31,7 +44,7 @@ A puzzle contains:
 
 - a **target genome**
 - a **mutable genome**
-- a distinguished central pivot called the **terminus**
+- a distinguished central pivot called the **terminus `[t]`**
 
 The objective is to transform the mutable genome into the target genome using the fewest valid operations possible.
 
@@ -43,7 +56,7 @@ Lower scores are better.
 
 ## Allowed Operations
 
-There are exactly three allowed operations:
+There are exactly three allowed operations, implemented in `gameEngine.js`:
 
 ### 1. Duplication
 Copy one or more genes from one location and insert them elsewhere.
@@ -52,37 +65,50 @@ Copy one or more genes from one location and insert them elsewhere.
 Remove one or more genes.
 
 ### 3. Inversion
-Invert a contiguous sequence of genes around the terminus.
+Invert a contiguous sequence of genes that includes the terminus.
 
 ---
 
 ## Critical Constraints
 
-These constraints are mandatory and must always be respected.
+These constraints are enforced by `gameEngine.js`. Operations that violate them throw an error and must not be used.
 
 ### Inversion Constraint
-An inversion is only valid if the selected segment:
-
-- includes the terminus, or
-- is directly adjacent to the terminus.
-
-Do not invent generalized inversions that ignore this rule.
+An inversion is only valid if the selected segment **includes `[t]`** (the terminus index must be strictly inside the inverted range).
 
 ### Cross-Terminus Duplication Constraint
-If genes are duplicated from one side of the terminus to the other side, the copied sequence is inverted.
+If genes are duplicated from one side of the terminus to the other side, the copied sequence is **automatically reversed** by the engine.
 
 Example:
-
-- source: `A B`
-- duplicated across the terminus
+- source: `A B` (left of `[t]`)
+- duplicated to right of `[t]`
 - result inserted as: `B A`
 
-This is a structural rule of the model, not an implementation detail.
-
 ### Terminus Anchoring
-The genomes are conceptually anchored on the terminus.
-The terminus is not just a marker.
-It is a structural reference point that strongly affects good solution strategies.
+The terminus is not just a marker. It is a structural reference point that strongly affects good solution strategies. You cannot delete it.
+
+---
+
+## How to Run an Experiment
+
+```bash
+HYPOTHESIS="description of what you are testing" node evaluate.js
+```
+
+This:
+1. Runs `solver.js` on all 8 benchmark puzzles with a fixed 150-move budget
+2. Prints per-puzzle results and a summary
+3. Appends one row to `results.tsv`
+
+To test a single puzzle during development:
+```bash
+node evaluate.js --puzzle level20 --verbose
+```
+
+To revert `solver.js` after a failed experiment:
+```bash
+git checkout HEAD -- solver.js
+```
 
 ---
 
@@ -124,8 +150,8 @@ Prior observations from puzzle players suggest:
 5. Puzzle regions far from the terminus are often harder to reason about correctly.
 6. Repetitive local patterns can mislead both humans and algorithms.
 
-These are useful starting priors.
-Your job is to test, refine, confirm, or challenge them.
+### Known v0 Baseline Weakness
+The current v0 solver uses a positional alignment score from absolute index 0. This fails when genomes have different lengths, because insertions and deletions shift all downstream positions. The solver gets stuck on all 8 benchmark puzzles. This is the deliberate starting point. The most natural first improvement is to score alignment relative to the terminus position, not absolute index.
 
 ---
 
@@ -153,7 +179,7 @@ This project depends on controlled comparisons.
 When evaluating changes:
 
 - keep the puzzle set fixed unless explicitly told otherwise,
-- keep the evaluation budget fixed,
+- keep the evaluation budget fixed (150 moves, set in `evaluate.js`),
 - keep the rules fixed,
 - and change only the solver logic under study.
 
@@ -167,8 +193,8 @@ Small, interpretable improvements are preferred over chaotic leaps.
 
 A proposed solver revision is good if it improves one or more of the following without causing unacceptable regressions:
 
-- average solution quality,
-- number of puzzles solved at or near best-known score,
+- average solution quality (`avgRatio`),
+- number of puzzles solved within budget (`solvedCount`),
 - robustness across puzzle categories,
 - clarity of decision-making,
 - and usefulness as a general heuristic principle.
@@ -181,7 +207,7 @@ A solver revision is especially valuable if it reveals a reusable pattern such a
 
 ---
 
-## Primary Evaluation Questions
+## Evaluation Questions
 
 When analyzing a solver revision, ask:
 
@@ -198,62 +224,17 @@ A change that helps on one puzzle but makes the solver conceptually worse is usu
 
 ## Puzzle Categories to Respect
 
-The benchmark may contain different categories of puzzles.
-You should pay attention to whether a strategy helps or hurts specific classes such as:
+The benchmark contains:
 
-- terminus-centered easy cases,
-- inversion-critical cases,
-- duplication-heavy cases,
-- deletion-heavy cleanup cases,
-- far-from-terminus difficult cases,
-- repetitive-pattern misleading cases.
+- `small` — level20, level21, level22 (synthetic, 15–22 genes)
+- `medium` — level28 (synthetic, 26 genes)
+- `large` — level29 (synthetic, ~115 genes), and all three real bacterial puzzles
+- `inversion-critical` — level20
+- `inversion-heavy` — level21
+- `real-bacterial` — three real bacterial genome pairs
+- `hard` — level29 (synthetic), ed91 (real)
 
 Do not assume one strategy fits all cases equally well.
-
-Part of the research goal is to understand which heuristic ideas work best for which puzzle structures.
-
----
-
-## Search Strategy Guidelines
-
-You may explore different solver styles, but do so methodically.
-
-Examples of acceptable directions:
-
-- greedy heuristics,
-- beam search with heuristic ranking,
-- two-phase solving,
-- move scoring functions,
-- mismatch clustering,
-- inversion-first policies,
-- or hybrid strategies.
-
-Examples of unacceptable directions:
-
-- invalid operations,
-- hidden manual solutions,
-- hardcoding answers for known puzzles,
-- or unrestricted search that wins only by spending more compute.
-
-If a strategy performs better only because it uses substantially more search effort, that is not a true heuristic improvement.
-
----
-
-## Preferred Research Style
-
-When proposing a new idea, state it in plain language first.
-
-Bad:
-- "Adjusted some weights and got a better score."
-
-Good:
-- "I changed move scoring so that inversions that resolve mismatches on both sides of the terminus are evaluated before local deletions."
-
-Every change should have:
-1. a hypothesis,
-2. an implementation target,
-3. an evaluation result,
-4. and an interpretation.
 
 ---
 
@@ -267,13 +248,13 @@ Include:
 What idea is being tested?
 
 ### B. Change
-What was changed in the solver?
+What was changed in `solver.js`?
 
 ### C. Expected Benefit
 Why should this help?
 
 ### D. Result
-What happened on the benchmark?
+What happened on the benchmark? (paste key numbers from evaluate.js output)
 
 ### E. Failure Modes
 Where did it do worse?
@@ -320,26 +301,6 @@ A solver that ignores the strategic role of the terminus is unlikely to become s
 
 ---
 
-## Global vs Local Reasoning
-
-This project strongly values global reasoning.
-
-You should explicitly compare:
-
-- a local move that fixes one mismatch now,
-versus
-- a larger move that resolves multiple structural problems.
-
-When possible, prefer the move that creates a better global arrangement, even if it seems less immediately obvious.
-
-However, do not blindly favor large moves.
-Large moves are valuable only when they improve total structure.
-
-The right goal is not "large moves".
-The right goal is "globally efficient moves".
-
----
-
 ## Attitude Toward Inversions
 
 Inversions deserve special attention.
@@ -356,24 +317,11 @@ At the same time, do not force inversions where they are not beneficial.
 
 ---
 
-## Attitude Toward Duplication and Deletion
-
-Duplication and deletion are essential, but can easily become a crutch for greedy solvers.
-
-Watch for these anti-patterns:
-- duplicating to patch a tiny local mismatch,
-- deleting small surplus regions too early,
-- or using multiple short repairs where one structural move would be better.
-
-You should favor duplication/deletion usage that supports a broader plan.
-
----
-
 ## Anti-Goals
 
 Do not do the following:
 
-- do not hardcode puzzle answers,
+- do not hardcode puzzle answers or use puzzle IDs in solver logic,
 - do not exploit benchmark artifacts,
 - do not silently change puzzle rules,
 - do not optimize purely for one category while harming all others,
@@ -384,16 +332,14 @@ If a strategy is strong but impossible to explain, it is less valuable for this 
 
 ---
 
-## Promotion Criteria for Ideas
+## Solver Version Tracking
 
-An idea should be considered promotion-worthy if:
-
-1. it improves results on multiple puzzles,
-2. it appears robust across puzzle categories,
-3. it is conceptually understandable,
-4. and it contributes to a coherent final solver design.
-
-Repeatedly successful ideas should graduate from "experimental tweak" to "heuristic rule".
+The top of `solver.js` must always contain:
+```js
+// @version vN
+```
+Increment the version number with each accepted revision (v0 → v1 → v2 ...).
+`evaluate.js` reads this automatically and logs it to `results.tsv`.
 
 ---
 
@@ -413,35 +359,6 @@ For example, a final solver may eventually be expressible as:
 This is just an example shape, not a final prescription.
 
 Your work should help discover the real version.
-
----
-
-## JavaScript Environment Assumptions
-
-The implementation language is JavaScript.
-
-Prioritize:
-- clarity,
-- modularity,
-- deterministic behavior where possible,
-- and readable solver logic.
-
-Avoid clever but opaque tricks.
-
-The purpose of the code is to support research, not to impress with style.
-
----
-
-## Decision Rule
-
-For any solver revision, ask:
-
-- Is it valid?
-- Is it better?
-- Is it interpretable?
-- Is it generalizable?
-
-If the answer is not clearly yes to most of these, the revision is not yet good enough.
 
 ---
 

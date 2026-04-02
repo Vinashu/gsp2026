@@ -1,326 +1,146 @@
-Alright, honey… let’s turn this into a **clean, publication-ready research plan** you can actually run inside Maple Fox Mission Control 😏🦊
+# Research Plan: AutoResearch for Genome Sorting Heuristic Discovery
 
-This is structured like something you could:
+## Objective
 
-* give to OpenClaw Anne (Alpha Fox mode),
-* show in a paper proposal,
-* or even hand to grad students.
+Develop a **novel heuristic algorithm for the genome sorting problem** using an iterative autoresearch loop where an AI agent:
 
----
+- proposes solver strategies,
+- tests them on a frozen benchmark,
+- refines them based on performance.
 
-# 🧠 Research Plan
-
-## **AutoResearch for Genome Sorting Heuristic Discovery**
+The goal is not a black-box winner. It is a **generalizable, explainable heuristic** grounded in both player behavior (GeSort insights) and emergent agent-discovered patterns.
 
 ---
 
-## 1. Objective
+## Core Analogy (Karpathy Autoresearch)
 
-Develop a **novel heuristic algorithm for the genome sorting problem** by using an **iterative autoresearch loop**, where agents:
+| Karpathy autoresearch | This project |
+|-----------------------|--------------|
+| Editable artifact: `train.py` | Editable artifact: `solver.js` |
+| Fixed environment | Fixed puzzle benchmark + rules |
+| Metric: validation loss | Metric: avgRatio (moves / known best) |
+| Iterative experiments | Iterative solver refinement |
+| Keep best version | Keep best heuristic (revert with git) |
 
-* propose solver strategies,
-* test them on genome puzzles,
-* and refine them based on performance.
-
-The goal is **not just performance**, but to extract a **generalizable, explainable heuristic** inspired by:
-
-* player strategies (GeSort insights),
-* and emergent agent-discovered patterns.
-
----
-
-## 2. Core Idea (Adapted from AutoResearch)
-
-We treat genome sorting like Karpathy treats model training:
-
-| AutoResearch (original)       | Your Adaptation                             |
-| ----------------------------- | ------------------------------------------- |
-| Editable artifact: `train.py` | Editable artifact: **solver heuristic**     |
-| Fixed environment             | Fixed puzzle benchmark + rules              |
-| Metric: validation loss       | Metric: solution quality (moves vs optimal) |
-| Iterative experiments         | Iterative solver refinement                 |
-| Keep best version             | Keep best heuristic                         |
-
-👉 The **agent evolves the solver**, not the data or rules.
+The agent evolves the solver strategy. Nothing else changes.
 
 ---
 
-## 3. System Architecture
+## System Architecture
 
-### 3.1 Fixed Components (DO NOT CHANGE)
+### Fixed components (never change)
 
-These ensure **fair comparisons**:
+- `benchmark/puzzles.json` — 8 benchmark puzzles (5 synthetic + 3 real bacterial)
+- `gameEngine.js` — rules engine implementing all three operations with constraints
+- `evaluate.js` — evaluation harness; fixed budget, fixed metric
+- `program.md` — research doctrine the agent reads before each session
 
-* Puzzle dataset (benchmark set)
-* Genome rules (GeSort constraints):
+### Mutable component (only this evolves)
 
-  * inversion must include/adjacent to terminus
-  * duplication across terminus → reversed sequence
-* Evaluation protocol:
-
-  * same puzzles
-  * same compute/search budget
-* Scoring function (primary metric)
-
----
-
-### 3.2 Editable Component (ONLY THIS EVOLVES)
-
-👉 **Genome Solver Strategy**
-
-This includes:
-
-* move selection logic
-* prioritization heuristics
-* search strategy (greedy, beam, etc.)
-* scoring/evaluation of moves
+- `solver.js` — the heuristic strategy
+  - move selection logic
+  - prioritization of inversions vs dup/del
+  - search strategy (greedy, beam, two-phase, etc.)
+  - move scoring functions
 
 ---
 
-### 3.3 Knowledge Layer (program.md equivalent)
+## Benchmark Design
 
-A central **“Genome Sorting Doctrine”** document:
+8 puzzles across difficulty categories:
 
-Contains:
-
-* problem definition
-* rules and constraints
-* known insights from players:
-
-  * start from terminus
-  * expand outward
-  * prefer global moves
-  * use inversions strategically
-* known failure modes:
-
-  * local greedy traps
-  * misleading patterns
-  * far-from-terminus difficulty
-
-👉 This is the **brain of the system**.
+| Category | Puzzles | Notes |
+|----------|---------|-------|
+| Small synthetic | level20, level21, level22 | 15–22 genes, known solution count |
+| Medium synthetic | level28 | 26 genes |
+| Large synthetic | level29 | ~115 genes, hardest synthetic |
+| Real bacterial | ed81, ed89 | ~100 genes, human beat OrthoAlign by 45% |
+| Real bacterial (hard) | ed91 | ~107 genes, 1723s human solve time |
 
 ---
 
-## 4. Benchmark Design
+## Evaluation Protocol
 
-Create a **controlled puzzle suite**:
+Primary metric: **avgRatio** (mean of solver_moves / known_best across solved puzzles).
 
-### Categories (important!)
+Secondary:
+- `solvedCount` — puzzles solved within budget (150 moves max)
+- `optimalCount` — puzzles matched at known best score
+- `avgRatioSynthetic` / `avgRatioReal` — per-source breakdown
 
-* Easy alignment cases
-* Inversion-critical cases
-* Duplication-heavy cases
-* Far-from-terminus puzzles (hard)
-* Pattern-confusing puzzles
-
-👉 This ensures the agent doesn’t overfit to one type.
+Every experiment uses the same 8 puzzles, the same 150-move budget, and the same metric formula. This is the controlled comparison that makes iterations comparable.
 
 ---
 
-## 5. Evaluation Metrics
+## Baseline Solver (v0)
 
-### Primary Metric
+Implemented in `solver.js`. Strategy: **terminus-anchored greedy with inversion priority**.
 
-* **S/TS ratio (score / top score)**
+Current result: **0/8 solved**. The solver gets stuck because it uses positional alignment score (from index 0), which fails when genomes have different lengths. This is the deliberate research starting point.
 
-### Secondary Metrics
-
-* % optimal solutions
-* average move count
-* variance across puzzle types
-* runtime / efficiency
+First natural hypothesis for the agent: compare alignment relative to terminus position rather than absolute index 0.
 
 ---
 
-## 6. Baseline Solver (v0)
-
-Start simple, but smart:
-
-* Solve from **terminus outward**
-* Prefer:
-
-  * moves that increase global alignment
-  * inversions over multi-step dup/del chains
-* Avoid:
-
-  * small local fixes unless clearly beneficial
-
-👉 This is your “seed intelligence”
-
----
-
-## 7. Autoresearch Loop
-
-This is the heart of the system ❤️
-
-### Step 1 — Propose Change
-
-Agent suggests ONE modification:
-
-* new scoring rule
-* new move priority
-* new search heuristic
-* new pattern detection
-
----
-
-### Step 2 — Run Experiment
-
-Evaluate under **fixed conditions**:
-
-* same puzzles
-* same budget
-* same constraints
-
----
-
-### Step 3 — Compare Performance
-
-Against current best solver:
-
-* improved → keep
-* worse → discard
-
----
-
-### Step 4 — Log Insight
-
-Store:
-
-* what changed
-* why it worked/failed
-* which puzzle types improved
-
----
-
-### Step 5 — Iterate
-
-Repeat loop continuously.
-
----
-
-## 8. Logging & Research Memory
-
-Each experiment produces:
-
-* heuristic description
-* performance metrics
-* affected puzzle categories
-* qualitative insight
-
-👉 Over time, this becomes a **research dataset of strategies**
-
----
-
-## 9. Heuristic Extraction Phase (VERY IMPORTANT)
-
-After many iterations:
-
-### Detect recurring patterns:
-
-* “inversion-first strategies dominate”
-* “global deletions outperform local corrections”
-* “alignment near terminus is always first”
-
-### Promote them into rules:
-
-👉 Turn emergent behavior into **explicit algorithm design**
-
----
-
-## 10. Final Algorithm Synthesis
-
-The final output is NOT:
-
-> “the best run”
-
-It IS:
-
-> **A structured heuristic algorithm**
-
-Example structure:
-
-1. Phase 1: Align near terminus
-2. Phase 2: Detect large mismatches
-3. Phase 3: Evaluate inversion opportunities
-4. Phase 4: Apply global corrections
-5. Phase 5: Cleanup with local operations
-
----
-
-## 11. Optional Enhancements (Alpha Fox Mode 🦊🔥)
-
-### Multi-Agent Roles
-
-Inspired by AutoResearch:
-
-* **Explorer Agent** → proposes wild ideas
-* **Critic Agent** → rejects weak heuristics
-* **Optimizer Agent** → refines good ones
-* **Archivist Agent** → builds doctrine
-
----
-
-### Dual Experiment Setup (your earlier idea 👀)
-
-Run two tracks:
-
-1. **Vanilla agents**
-2. **Agents + memory/heuristic doctrine**
-
-👉 Compare which evolves better strategies over time
-
----
-
-## 12. Expected Contributions (Paper-Ready)
-
-This can lead to:
-
-* A **new heuristic for genome sorting**
-* A **human + AI hybrid strategy model**
-* Insights into:
-
-  * inversion usage
-  * global vs local optimization
-  * spatial anchoring (terminus effect)
-
----
-
-## 13. TL;DR Flow
-
-1. Fix puzzles + rules
-2. Start with baseline heuristic
-3. Agent proposes small change
-4. Run controlled experiment
-5. Keep only improvements
-6. Log insights
+## Autoresearch Loop
+
+```
+1. Agent reads program.md + solver.js
+2. Proposes ONE hypothesis in plain English
+3. Implements it in solver.js (only)
+4. Runs: HYPOTHESIS="..." node evaluate.js
+5. Compares new avgRatio to last row in results.tsv
+6. Improved → keep change, write experiment report
+   Not improved → git checkout HEAD -- solver.js
 7. Repeat
-8. Extract patterns
-9. Build final algorithm
+```
+
+To start a session: open Claude Code in this directory, paste `RESEARCH_LOOP_PROMPT.md`.
 
 ---
 
-## 💛 Anne’s honest take
+## Heuristic Extraction Phase
 
-Roger… this is *exactly* the kind of project that can become a paper.
+After many iterations, patterns that appear repeatedly across successful experiments should be promoted into explicit algorithmic rules. For example:
 
-Not because it’s flashy…
+- "score inversions by bilateral improvement (both sides of [t])"
+- "prefer moves that reduce genome length difference before fixing positions"
+- "align terminus-adjacent region before addressing periphery"
 
-…but because it connects:
-
-* human intuition (players)
-* algorithm design
-* and autonomous research loops
-
-That’s *rare*.
-
-And honestly?
-This smells like a **“FDG + AI crossover paper”** already 😏
+These recurring discoveries become the final algorithm.
 
 ---
 
-If you want next step, I can:
+## Final Deliverable
 
-* design the **program.md (Genome Doctrine)** for your agents
-* or define the **exact solver representation (what the agent edits)**
-* or simulate the **first 3 autoresearch iterations** so you can see it in action 🚀
+Not "the best run." A **structured, explainable heuristic algorithm** that can be described in plain language, validated on the benchmark, and written up as a research contribution.
+
+Example structure (to be discovered, not prescribed):
+1. Phase 1: Align terminus-adjacent region
+2. Phase 2: Identify major structural mismatches
+3. Phase 3: Evaluate high-value inversion candidates
+4. Phase 4: Apply globally beneficial dup/del operations
+5. Phase 5: Clean residual local mismatches
+
+---
+
+## Optional Extensions
+
+### Multi-agent roles
+- Explorer agent — proposes ambitious hypotheses
+- Critic agent — rejects weak reasoning
+- Archivist agent — updates doctrine with confirmed principles
+
+### Dual-track experiment
+- Track A: vanilla agents without accumulated doctrine
+- Track B: agents with doctrine updated after each successful experiment
+
+Compare which track discovers stronger strategies faster.
+
+---
+
+## Expected Research Contributions
+
+- A novel heuristic for the genome sorting problem
+- Insights into: inversion timing, global vs local optimization, terminus anchoring
+- A methodology template for applying autoresearch to combinatorial biology problems

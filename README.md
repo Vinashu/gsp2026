@@ -1,83 +1,111 @@
-## 1. Genome Sorting Problem (Definition)
+# Genome Sorting Problem — Autoresearch Project
 
-* The **genome sorting problem** aims to find the **shortest sequence of evolutionary operations** that transforms one genome (gene order) into another. 
-* Genomes are represented as **ordered sequences of genes (labels)**, possibly with duplicates.
-* The problem becomes **NP-hard when duplicate genes exist**, so solutions rely on heuristics or optimization methods. 
+Discover a novel heuristic algorithm for the **Genome Sorting Problem** using an iterative AI-driven research loop adapted from Karpathy's autoresearch methodology.
 
 ---
 
-## 2. GeSort Model (Ruleset)
+## The Problem
 
-GeSort translates the problem into a puzzle with **three operations**:
+The genome sorting problem finds the shortest sequence of evolutionary operations that transforms one genome (ordered gene sequence) into another.
 
-### Operations
+A puzzle contains:
+- a **target genome** — the goal state
+- a **mutable genome** — the starting state
+- a **terminus `[t]`** — a fixed central pivot that anchors all operations
 
-* **Duplication**: copy one or more genes
-* **Deletion**: remove one or more genes
-* **Inversion**: reverse a segment of genes
+### Allowed Operations
 
-### Key Constraints (Biologically Inspired)
+| Operation | Description |
+|-----------|-------------|
+| **Inversion** | Reverse a contiguous segment. **Constraint:** segment must include `[t]`. |
+| **Duplication** | Copy a segment and insert it elsewhere. If crossing `[t]`, the copy is automatically reversed. |
+| **Deletion** | Remove a contiguous segment. Cannot delete `[t]`. |
 
-* **Inversion constraint**:
-
-  * Must occur **around or including the terminus (pivot)**
-  * Only allowed if the segment includes or is adjacent to the terminus 
-
-* **Duplication constraint (with implicit inversion)**:
-
-  * When genes are duplicated **to the opposite side of the terminus**, they are **automatically inverted**
-  * Example: A–B → duplicated across → B–A 
-
-* **Genome structure constraint**:
-
-  * Genomes are **anchored at the terminus**, which acts as a fixed reference point
-  * All transformations are relative to this central pivot 
+Lower operation count = better solution.
 
 ---
 
-## 3. Heuristic Insights from Player Strategies
+## Project Layout
 
-Analysis of player solutions revealed **effective human heuristics**:
-
-### Strong Strategies (What works)
-
-* **Start from the terminus and expand outward**
-
-  * Alignments naturally propagate from the center
-  * Prevents breaking previously aligned regions 
-
-* **Use inversions strategically**
-
-  * Can replace multiple operations (duplication + deletion sequences)
-  * Leads to significantly shorter solutions 
-
-* **Look for global moves**
-
-  * Large operations can fix multiple mismatches at once
-  * Often outperform greedy/local fixes
+```
+gsp2026/
+├── gameEngine.js                      # Rules engine — never modified by agents
+├── solver.js                          # Heuristic solver — the ONLY file the agent edits
+├── evaluate.js                        # Fixed evaluation harness
+├── results.tsv                        # Append-only experiment log
+├── program.md                         # Research doctrine for agents
+├── RESEARCH_LOOP_PROMPT.md            # Paste into Claude Code to start a session
+├── benchmark/
+│   ├── puzzles.json                   # 8 benchmark puzzles (5 synthetic + 3 real)
+│   └── validation/
+│       └── checkBenchmark.js          # One-time engine validator (87 checks)
+├── real_puzzles/                      # Source: 3 real bacterial genome puzzles
+└── syntetic_puzles/                   # Source: 5 synthetic puzzles
+```
 
 ---
 
-### Weak Strategies (What to avoid)
+## Quick Start
 
-* **Local/greedy fixes**
+### 1. Validate the engine (once, after cloning)
+```bash
+node benchmark/validation/checkBenchmark.js
+```
+Expected: `ALL CHECKS PASSED — engine is ready for research.`
 
-  * Matching small regions first often leads to extra operations later
-* **Ignoring inversion opportunities**
+### 2. Run the baseline evaluation
+```bash
+HYPOTHESIS="v0 baseline" node evaluate.js
+```
+This runs the current `solver.js` on all 8 benchmark puzzles and appends results to `results.tsv`.
 
-  * Leads to unnecessarily long solutions
+### 3. Run a single puzzle (debugging)
+```bash
+node evaluate.js --puzzle level20
+node evaluate.js --puzzle level20 --verbose
+```
+
+### 4. Start an autoresearch session
+Open Claude Code in this directory and paste the contents of `RESEARCH_LOOP_PROMPT.md`. The agent will autonomously iterate on `solver.js`, evaluating each hypothesis and reverting failures with:
+```bash
+git checkout HEAD -- solver.js
+```
 
 ---
 
-### Additional Observations
+## Research Approach
 
-* **Puzzles are harder when changes are far from the terminus** (loss of reference point) 
-* **Visual patterns can mislead players**, causing suboptimal choices
+This project adapts Karpathy's autoresearch methodology to the genome sorting domain:
+
+| Karpathy autoresearch | This project |
+|----------------------|--------------|
+| Editable artifact: `train.py` | Editable artifact: `solver.js` |
+| Fixed environment | Fixed puzzle benchmark + rules |
+| Metric: validation loss | Metric: `avgRatio` (solver moves / known best) |
+| Keep best, discard regressions | Keep best, revert with git |
+
+The agent proposes **one heuristic change at a time**, evaluates it under identical conditions, and keeps it only if `avgRatio` improves. Over many iterations, recurring successful patterns are promoted into explicit algorithmic rules.
 
 ---
 
-## 🔑 Takeaway Heuristic (from players)
+## Key Prior Knowledge (from player studies)
 
-A good human-inspired strategy:
+Strong strategies observed in human players:
+1. Start near the **terminus** and expand outward
+2. Use **inversions strategically** — one inversion can replace a chain of dup/del operations
+3. Prefer **large global moves** over small local fixes
 
-> **Work from the terminus outward, prioritize large/global transformations, and exploit inversions whenever possible instead of chaining local edits.**
+Failure modes to avoid:
+- Greedy local matching traps (fix one position, break three others)
+- Ignoring inversion opportunities
+- Losing the terminus as a spatial anchor
+
+---
+
+## Evaluation Metric
+
+Primary: **avgRatio** = average of (solver moves / known best score) across solved puzzles. Lower is better. 1.0 = matches best known. A run that solves 0 puzzles reports N/A.
+
+Secondary: `solvedCount`, `optimalCount`, `avgRatioSynthetic`, `avgRatioReal`.
+
+The benchmark is frozen for the duration of the research. Only `solver.js` evolves.

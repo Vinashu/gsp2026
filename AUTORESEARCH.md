@@ -1,131 +1,131 @@
-## Adapted methodology
+# Karpathy Autoresearch — Adapted for Genome Sorting
+
+This document describes how Karpathy's autoresearch methodology is adapted to the genome sorting domain, and maps each principle to the concrete files in this repository.
+
+Original repo: [karpathy/autoresearch](https://github.com/karpathy/autoresearch)
+
+---
+
+## The Analogy
+
+In Karpathy's system, an AI agent iterates on `train.py` (a GPT training script) inside a fixed environment (dataset, optimizer, evaluation metric). Each experiment takes ~5 minutes, keeps only improvements, and discards regressions via git. Over many cycles the model improves autonomously.
+
+Here, the agent iterates on `solver.js` (the genome sorting heuristic) inside a fixed environment (benchmark puzzles, game rules, evaluation harness). Each experiment runs in seconds, keeps only improvements, and discards regressions via `git checkout HEAD -- solver.js`.
+
+| Karpathy autoresearch | This project |
+|-----------------------|--------------|
+| `train.py` — editable artifact | `solver.js` — editable artifact |
+| `prepare.py` — fixed environment | `gameEngine.js` + `evaluate.js` + `benchmark/puzzles.json` |
+| `program.md` — research doctrine | `program.md` — research doctrine |
+| Metric: validation bits-per-byte | Metric: `avgRatio` (moves / known best) |
+| ~5 min per experiment | <30 s per experiment |
+| git revert on regression | `git checkout HEAD -- solver.js` |
+
+---
+
+## Methodology Principles (Implemented)
 
 ### 1. Freeze the world, vary only the solver
 
-Autoresearch works because only one core artifact is edited while the rest stays stable. For you, that means the agent should not keep changing everything at once. It should only modify the **solver strategy**, while the puzzle set, move rules, evaluation logic, and reporting format remain fixed. That gives you clean experimental comparisons, just like the repo fixes the environment and lets the agent edit only the researchable part. ([GitHub][1])
+The benchmark puzzles, game rules, evaluation budget, and scoring formula are all fixed. Only `solver.js` changes between experiments. This gives clean, comparable results across every iteration.
 
-### 2. Define the “program.md” for genome sorting
+**Implementation:** `gameEngine.js`, `evaluate.js`, and `benchmark/puzzles.json` are committed to git and must never be modified by the agent.
 
-In the repo, the human mainly programs the agents through `program.md`, which acts like the operating manual for the research organization. In your version, this document should explain:
+### 2. The research doctrine (`program.md`)
 
-* the genome sorting problem definition,
-* the exact GeSort-style rules,
-* constraints such as inversions being around/including the terminus,
-* duplications across the terminus reversing orientation,
-* what counts as a valid solution,
-* what counts as improvement,
-* and what prior insights from player behavior should guide search.
-  This becomes the research doctrine the agents follow. ([GitHub][1]) 
+`program.md` is the agent's operating manual. It contains:
+- the full problem definition and operation constraints,
+- known player insights and failure modes,
+- the known weakness of the current baseline,
+- and the experimental discipline rules.
 
-### 3. Build a benchmark set of puzzle examples
+The agent reads it at the start of every session.
 
-Instead of training on language data, your experimental substrate is a curated set of genome-sorting puzzles. You would want a benchmark collection with a range of difficulty:
+### 3. A stable fitness metric
 
-* simple cases,
-* cases where inversion is crucial,
-* cases with duplicates/deletions,
-* cases far from the terminus,
-* and cases with misleading local patterns.
-  This matters because the paper shows that puzzles vary meaningfully by location of events and by repetitive patterns, so the benchmark should reflect those failure modes. 
+Primary metric: **avgRatio** = mean of (solver moves / known best score) across solved puzzles. Secondary: `solvedCount`, `optimalCount`, per-category ratios.
 
-### 4. Choose one stable fitness metric
+All metrics are computed identically every run by `evaluate.js`. The 150-move budget is a constant that never changes.
 
-Autoresearch succeeds because every experiment is judged by one consistent score. For your case, the main metric should be something like:
+### 4. A curated benchmark set
 
-* average number of moves,
-* number of puzzles solved optimally,
-* gap from best-known score,
-* validity rate,
-* and maybe runtime as a secondary metric.
-  The crucial point is to keep the metric stable across all experiments so the agent is not optimizing a moving target. This is directly analogous to the repo’s fixed validation metric and fixed experiment budget. ([GitHub][1])
+`benchmark/puzzles.json` contains 8 puzzles across categories:
+- easy synthetic cases (level20–22)
+- medium synthetic (level28)
+- large/hard synthetic (level29)
+- real bacterial genome pairs (3 puzzles, human-validated solutions)
 
-### 5. Start from a baseline heuristic, not from nothing
+This range prevents overfitting to a single difficulty class.
 
-The original methodology starts from a working baseline and iterates. For you, the first solver should be a simple, explainable heuristic baseline, ideally inspired by what players did well:
+### 5. Start from a working baseline
 
-* start at the terminus,
-* expand toward the edges,
-* search for moves that improve global alignment,
-* prefer a single inversion if it replaces several dup/del operations,
-* avoid greedy short local fixes unless they clearly reduce future complexity.
-  This gives the agents something usable to improve instead of forcing them to invent everything from scratch. 
+`solver.js` v0 implements a simple terminus-anchored greedy strategy. It gets stuck on all 8 puzzles (0/8 solved) because its alignment score uses absolute position instead of terminus-relative position. This is the intentional, interpretable starting point — not a blank slate.
 
-### 6. Let the agent propose one solver revision at a time
+### 6. One revision at a time
 
-Each experiment should be small and reviewable. The agent should propose one change in reasoning, for example:
+Each experiment proposes **one** hypothesis, implements it in `solver.js`, and evaluates it. This makes experiments interpretable and regressions diagnosable. The agent must not bundle multiple ideas.
 
-* a new move scoring function,
-* a better way to rank inversion candidates,
-* a rule for when to prefer deletion over duplication,
-* a search policy that rewards global cleanup,
-* or a two-phase strategy: central alignment first, extremities second.
-  This mirrors the repo’s design choice of keeping changes limited and easy to compare. ([GitHub][1])
+### 7. Fixed-budget experiments
 
-### 7. Run a fixed-budget experiment
+Every experiment uses:
+- the same 8 puzzles
+- the same 150-move maximum per puzzle
+- the same scoring formula
 
-Karpathy’s setup uses a fixed wall-clock training window so every experiment is comparable. Your equivalent is a fixed evaluation budget, for example:
+A solver that "wins" only by spending more search iterations is not a true heuristic improvement.
 
-* same set of puzzles,
-* same max search depth,
-* same compute time per puzzle,
-* same beam width or candidate count,
-* same tie-breaking policy.
-  Without this, an agent could “win” just by spending more search effort instead of being smarter. ([GitHub][1])
+### 8. Log behavioral evidence, not just scores
 
-### 8. Log not just score, but behavioral evidence
+Every kept revision produces a structured report:
+- what changed,
+- why it was expected to help,
+- which categories improved/worsened,
+- and what the result tells us about the problem.
 
-For your case, raw score is not enough. You also want each run to produce a research note:
+The agent writes this report to the session log. Over time, these reports become a research dataset of heuristic strategies.
 
-* what heuristic changed,
-* which puzzle types improved,
-* which puzzle types got worse,
-* whether gains came from better inversion use,
-* whether the agent became too greedy or too global,
-* and whether it overfit to certain visual/structural patterns.
-  This is especially important because your end goal is not just a black-box winner, but a **new algorithmic idea** you can describe and justify.
+### 9. Keep improvements, discard regressions
 
-### 9. Preserve only improvements, discard regressions
+If `avgRatio` improves (or `solvedCount` increases without avgRatio worsening): keep the commit.
+If not: `git checkout HEAD -- solver.js` and try the next hypothesis.
 
-This is core autoresearch: keep the revision only if it improves the benchmark under the fixed protocol. Otherwise roll it back and try another branch. Over many cycles, the system incrementally accumulates useful ideas. ([GitHub][1])
+### 10. Promote recurring discoveries into doctrine
 
-### 10. Periodically elevate repeated discoveries into explicit rules
-
-This is where your case becomes especially interesting. If multiple successful runs independently converge on patterns like:
-
-* “align from the terminus first,”
-* “evaluate inversions before chains of duplication/deletion,”
-* “favor moves that resolve two mismatches at once,”
-* “be cautious with repetitive local motifs,”
-  then these should be promoted from accidental behavior into the explicit solver design. That is how you turn repeated agent experiments into a publishable heuristic framework. The player-study paper already gives you a strong prior for several of these rules. 
+If multiple successful experiments independently converge on the same pattern — for example, "scoring inversions by bilateral improvement beats unilateral" — that pattern is promoted from an experimental observation into an explicit rule. The doctrine in `program.md` may be updated to reflect confirmed findings.
 
 ---
 
-## Suggested sequence of steps
+## Running the Loop
 
-1. **Formalize the problem and rules** exactly as your solver must obey.
-2. **Write a genome-sorting research brief** equivalent to `program.md`.
-3. **Create a benchmark suite** of representative puzzle examples.
-4. **Define one main success metric** and a few secondary diagnostics.
-5. **Implement a simple baseline heuristic** inspired by player behavior.
-6. **Run autonomous iterations** where the agent proposes one heuristic refinement at a time.
-7. **Evaluate each revision under identical budget constraints.**
-8. **Keep only improvements** and log why they helped.
-9. **Cluster successful revisions** into recurring strategic principles.
-10. **Synthesize those principles into a final algorithm** that is no longer just a collection of patches, but a coherent heuristic strategy.
+### One-time setup
+```bash
+node benchmark/validation/checkBenchmark.js   # verify engine (87 checks)
+HYPOTHESIS="v0 baseline" node evaluate.js     # establish baseline in results.tsv
+git add solver.js results.tsv && git commit -m "feat: v0 baseline"
+```
+
+### Starting a research session
+Open Claude Code in this directory and paste the contents of `RESEARCH_LOOP_PROMPT.md`.
+
+The agent will run autonomously until you tell it to stop.
+
+### Reviewing progress
+```bash
+cat results.tsv          # full log of all experiments
+tail -1 results.tsv      # latest result only
+git log --oneline        # history of kept improvements
+```
 
 ---
 
-## What the final outcome should look like
+## What the Final Output Should Look Like
 
-If this works well, the output should not be “an agent that solved some puzzles.” It should be:
+Not "the agent's best run."
 
-* a **human-readable heuristic algorithm** for genome sorting,
-* grounded in puzzle examples,
-* validated on a stable benchmark,
-* and partly inspired by both **human player behavior** and **iterative agent-led search**.
+A **human-readable heuristic algorithm** for genome sorting that:
+- is grounded in benchmark evidence,
+- is validated on a stable, diverse puzzle set,
+- is partly inspired by human player behavior and partly by agent-discovered patterns,
+- and can be described and justified to a research audience.
 
-That is the real adaptation of autoresearch to your domain: not autonomous coding for its own sake, but an **autonomous heuristic discovery pipeline**. ([GitHub][1]) 
-
-I can turn this into a sharper **research plan document** next, with sections like objective, artifacts, evaluation protocol, agent roles, and iteration loop.
-
-[1]: https://github.com/karpathy/autoresearch "GitHub - karpathy/autoresearch: AI agents running research on single-GPU nanochat training automatically · GitHub"
+That is the real adaptation of autoresearch to this domain: not autonomous coding for its own sake, but an **autonomous heuristic discovery pipeline**.
