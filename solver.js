@@ -1,4 +1,4 @@
-// @version v14
+// @version v15
 // Genome Sorting Heuristic Solver - Terminus-Frontier Block Grower
 //
 // Strategy: build an exact matching core around [t], prefer block duplications
@@ -22,6 +22,7 @@ const MAX_FRONTIER_DELETION = 64;
 const MAX_SOURCE_MATCHES = 8;
 const LOOKAHEAD_CANDIDATES = 8;
 const MAX_DUPLICATION_LENGTH_OPTIONS = 3;
+const EXTRA_SHORT_INVERSION_CANDIDATES = 4;
 
 /**
  * Solve a genome sorting puzzle.
@@ -113,6 +114,18 @@ function chooseLookaheadMove(target, immediate, seen) {
   if (immediate.length === 0) return null;
 
   const shortlist = immediate.slice(0, LOOKAHEAD_CANDIDATES);
+  const extraInversions = immediate
+    .filter(candidate => candidate.move.type === 'inversion')
+    .sort((a, b) => {
+      if (a.move.length !== b.move.length) return a.move.length - b.move.length;
+      return compareScores(b.score, a.score);
+    });
+
+  for (const candidate of extraInversions) {
+    if (shortlist.some(existing => existing.serial === candidate.serial)) continue;
+    shortlist.push(candidate);
+    if (shortlist.length >= LOOKAHEAD_CANDIDATES + EXTRA_SHORT_INVERSION_CANDIDATES) break;
+  }
 
   let best = null;
 
