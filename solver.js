@@ -1,4 +1,4 @@
-// @version v20
+// @version v24
 // Genome Sorting Heuristic Solver - Terminus-Frontier Block Grower
 //
 // Strategy: build an exact matching core around [t], prefer block duplications
@@ -29,6 +29,8 @@ const INVERSION_ROLLOUT_MAX_MOVES = 24;
 const DUPLICATION_LENGTH_ROLLOUT_CANDIDATES = 4;
 const DUPLICATION_LENGTH_ROLLOUT_MAX_MOVES = 12;
 const NEUTRAL_INVERSION_ROLLOUT_CANDIDATES = 3;
+const STRONG_GROWTH_GAP_THRESHOLD = 20;
+const GROWTH_STATE_SOURCE_MATCH_LIMIT = 4;
 
 /**
  * Solve a genome sorting puzzle.
@@ -85,8 +87,10 @@ function generateCandidates(current, target) {
 
   addFrontierDuplicationCandidates(candidates, current, target, core, 'left');
   addFrontierDuplicationCandidates(candidates, current, target, core, 'right');
-  addFrontierDeletionCandidates(candidates, current, target, core, 'left');
-  addFrontierDeletionCandidates(candidates, current, target, core, 'right');
+  if (shouldUseFrontierDeletions(current, target)) {
+    addFrontierDeletionCandidates(candidates, current, target, core, 'left');
+    addFrontierDeletionCandidates(candidates, current, target, core, 'right');
+  }
   addInversionCandidates(candidates, current);
 
   return [...candidates.values()];
@@ -316,6 +320,12 @@ function addFrontierDuplicationCandidates(candidates, current, target, core, sid
 
   const destIndex = side === 'left' ? core.currentLeftFrontier : core.currentRightFrontier;
   const maxLen = Math.min(MAX_BLOCK_DUPLICATION, remaining);
+  const sourceMatchLimit = isStrongGrowthState(current, target)
+    ? GROWTH_STATE_SOURCE_MATCH_LIMIT
+    : MAX_SOURCE_MATCHES;
+  const lengthOptionLimit = isStrongGrowthState(current, target)
+    ? 1
+    : MAX_DUPLICATION_LENGTH_OPTIONS;
   let matchedLengths = 0;
 
   for (let len = maxLen; len >= 1; len--) {
@@ -323,7 +333,7 @@ function addFrontierDuplicationCandidates(candidates, current, target, core, sid
       ? target.genes.slice(targetFrontier - len, targetFrontier)
       : target.genes.slice(targetFrontier, targetFrontier + len);
 
-    const matches = findSourceMatches(current, desired, side, destIndex, len);
+    const matches = findSourceMatches(current, desired, side, destIndex, len, sourceMatchLimit);
     for (const srcStart of matches) {
       addCandidate(candidates, {
         type: 'duplication',
@@ -335,7 +345,7 @@ function addFrontierDuplicationCandidates(candidates, current, target, core, sid
 
     if (matches.length > 0) {
       matchedLengths++;
-      if (matchedLengths >= MAX_DUPLICATION_LENGTH_OPTIONS) return;
+      if (matchedLengths >= lengthOptionLimit) return;
     }
   }
 }
@@ -386,7 +396,7 @@ function addInversionCandidates(candidates, current) {
   }
 }
 
-function findSourceMatches(current, desired, destSide, destIndex, len) {
+function findSourceMatches(current, desired, destSide, destIndex, len, limit = MAX_SOURCE_MATCHES) {
   const results = [];
   const sameSide = destSide;
   const crossSide = destSide === 'left' ? 'right' : 'left';
@@ -398,7 +408,7 @@ function findSourceMatches(current, desired, destSide, destIndex, len) {
     desired,
     destIndex,
     len,
-    MAX_SOURCE_MATCHES
+    limit
   );
 
   collectPatternMatches(
@@ -408,10 +418,10 @@ function findSourceMatches(current, desired, destSide, destIndex, len) {
     reverseArray(desired),
     destIndex,
     len,
-    MAX_SOURCE_MATCHES
+    limit
   );
 
-  return results.slice(0, MAX_SOURCE_MATCHES);
+  return results.slice(0, limit);
 }
 
 function collectPatternMatches(results, current, sourceSide, pattern, destIndex, len, limit) {
@@ -452,7 +462,15 @@ function reverseArray(values) {
 }
 
 function shouldUseDuplicationLengthRollout(current, target) {
-  return (target.genes.length - current.genes.length) < 20;
+  return !isStrongGrowthState(current, target);
+}
+
+function shouldUseFrontierDeletions(current, target) {
+  return !isStrongGrowthState(current, target);
+}
+
+function isStrongGrowthState(current, target) {
+  return (target.genes.length - current.genes.length) >= STRONG_GROWTH_GAP_THRESHOLD;
 }
 
 function computeAnchoredCore(current, target) {
