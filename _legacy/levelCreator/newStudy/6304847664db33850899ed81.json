@@ -1,0 +1,57 @@
+{
+    "_id" : "6304847664db33850899ed81",
+    "moves" : [ 
+        "I57:6;", 
+        "L63:1;", 
+        "D51:3:50;", 
+        "D11:3:10;", 
+        "D101:4:100;", 
+        "D83:3:82;"
+    ],
+    "restart" : 0,
+    "level" : 11,
+    "score" : 6,
+    "topScore" : 11,
+    "time" : 262.409810302779,
+    "points" : 350,
+    "player" : "63045fdf64db33850899ece0",
+    "currDiff" : 0,
+    "genomePair" : "none",
+    "sysTime" : "2022-08-23T05:40:38.000Z",
+    "puzzleData" : {
+        "_id" : "60e637f67765e86e5cff88ec",
+        "active" : true,
+        "scores" : [ 
+            {
+                "_id" : "60e637f67765e86e5cff88ed",
+                "algorithm" : "Haming Distance",
+                "score" : 290
+            }, 
+            {
+                "_id" : "60e637f67765e86e5cff88ee",
+                "algorithm" : "OrthoAlign",
+                "score" : 11
+            }
+        ],
+        "topScore" : [ 
+            {
+                "_id" : "6304846f64db33850899ed80",
+                "score" : 6,
+                "date" : "2022-08-23T05:40:30.000Z"
+            }
+        ],
+        "created" : "2021-07-07T23:25:42.297Z"
+    },
+    "targetGenome" : {
+        "_id" : "60e4d3e84a6ed454e476facb",
+        "geneBankId" : "CP001078",
+        "name" : "508767.5",
+        "sequence" : "[o], 16S, 23S, 5S, Met, Ala, Ser, Ser, Ser, Ser, Arg, Leu, Met, Met, Leu, Met, Met, Leu, Asn, Asn, Asn, 16S, Ala, Ile, 23S, 5S, Phe, Cys, Thr, Pro, Gly, Arg, Pro, Gly, Arg, His, Gln, Lys, Leu, Gly, Gly, Lys, His, Gln, Lys, Leu, Gly, Gly, Arg, 16S, Ile, 23S, Asn, Tyr, Val, Thr, Tyr, Val, Thr, Tyr, Trp, Trp, Met, Arg, Lys, Arg, Lys, [t], Cys, Leu, Glu, Phe, 5S, Ala, Met, 5S, 23S, 16S, 5S, 23S, 16S, Ser, Arg, 5S, 23S, 16S, 5S, 23S, 16S, 5S, 23S, 16S, 5S, 23S, 16S, 5S, 23S, 16S, Lys, 5S, Lys, 5S, 23S, 16S, Asp, Val, Glu, Thr, Asp, Val, Glu, Thr, Asp, Val, Glu"
+    },
+    "mutableGenome" : {
+        "_id" : "60e4d5384a6ed454e476fad4",
+        "geneBankId" : "CP006903",
+        "name" : "1415774.5",
+        "sequence" : "[o], 16S, 23S, 5S, Met, Ala, Ser, Ser, Ser, Ser, Arg, Leu, Met, Met, Leu, Asn, Asn, Asn, 16S, Ala, Ile, 23S, 5S, Phe, Cys, Thr, Pro, Gly, Arg, Pro, Gly, Arg, His, Gln, Lys, Leu, Gly, Gly, Lys, His, Gln, Lys, Leu, Gly, Gly, Arg, 16S, Ile, 23S, Asn, Tyr, Val, Thr, Tyr, Trp, Trp, Met, Cys, [t], Lys, Arg, Lys, Arg, Arg, Leu, Glu, Phe, 5S, Ala, Met, 5S, 23S, 16S, 5S, 23S, 16S, Ser, Arg, 5S, 23S, 16S, 5S, 23S, 16S, 5S, 23S, 16S, 5S, 23S, 16S, Lys, 5S, Lys, 5S, 23S, 16S, Asp, Val, Glu, Thr, Asp, Val, Glu"
+    }
+}

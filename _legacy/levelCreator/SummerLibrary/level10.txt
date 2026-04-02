@@ -1,0 +1,10 @@
+levelCreator-v2.py 14 5 0.8 > level10.txt
+Deletion of Arg
+Inversion of Trp,[t],Trp
+Duplication of Trp
+Deletion of Asp,Gln
+Deletion of Val
+>target 5
+Ala,Thr,Pro,Phe,Ile,Trp,Trp,[t],Trp,Val,Gln,Tyr
+>mutable
+Ala,Thr,Pro,Val,Phe,Ile,Trp,[t],Trp,Arg,Val,Gln,Asp,Gln,Tyr

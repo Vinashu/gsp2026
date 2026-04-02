@@ -1,0 +1,9 @@
+levelCreator-v2.py 12 4 0.8 > level08.txt
+Duplication of Phe
+Deletion of Cys
+Deletion of Phe
+Duplication of His
+>target 4
+Trp,Ile,Met,Arg,His,[t],Ser,Glu,Phe,His,Glu,Phe,Lys
+>mutable
+Trp,Ile,Met,Arg,His,Cys,[t],Ser,Glu,Phe,Glu,Lys,Phe

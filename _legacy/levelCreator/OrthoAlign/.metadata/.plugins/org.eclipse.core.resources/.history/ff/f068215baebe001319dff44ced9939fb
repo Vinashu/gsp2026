@@ -1,0 +1,18 @@
+
+public class Fg {
+
+	
+	long time=0;
+	
+	String hhmmss; // temps de calcul sous la forme hh:mm:ss
+	
+	String format = String.format("%%0%dd", 2);  
+	  
+	String seconds = String.format(format, (time/1000) % 60);  
+	String minutes = String.format(format, ((time/1000) % 3600) / 60);  
+	
+	String hours = String.format(format, (time/1000) / 3600) ;
+	
+	hhmmss =  hours + ":" + minutes + ":" + seconds;
+	
+}

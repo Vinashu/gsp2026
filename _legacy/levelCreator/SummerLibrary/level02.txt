@@ -1,0 +1,7 @@
+levelCreator-v2.py 8 2 0.8 > level02.txt
+Inversion of Ile,[t],Met
+Deletion of Ile
+>target 2
+Trp,Gln,Val,Met,[t],Ile,Cys,Gly
+>mutable
+Trp,Gln,Val,Ile,[t],Met,Ile,Cys,Gly

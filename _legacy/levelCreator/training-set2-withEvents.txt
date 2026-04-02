@@ -1,0 +1,26 @@
+> python levelCreator.py 12 2 0.5
+Inversion of Pro,Asp,[t],Cys,Met,Pro
+Deletion of Val
+>target 2
+Val,Val,Tyr,Trp,Pro,Met,Cys,[t],Asp,Pro,Cys,Ala
+>mutable
+Val,Val,Tyr,Trp,Pro,Asp,[t],Cys,Met,Pro,Cys,Ala,Val
+
+
+> python levelCreator.py 12 2 0.5
+Inversion of Glu,Met,[t],Ile
+Duplication of Asn
+>target 2
+Asn,Ala,Arg,Thr,Val,Ile,[t],Met,Glu,Asp,Asn,Lys,His,Glu
+>mutable
+Ala,Arg,Thr,Val,Glu,Met,[t],Ile,Asp,Asn,Lys,His,Glu
+
+
+> python levelCreator.py 12 3 0.5
+Inversion of Val,Pro,[t],Phe
+Duplication of Gln,Gly
+Deletion of Pro,Phe
+>target 3
+Gln,Gly,Gln,Gly,Phe,[t],Pro,Val,Pro,Met,Gln,Glu,Pro
+>mutable
+Gln,Gly,Pro,Phe,Val,Pro,[t],Phe,Pro,Met,Gln,Glu,Pro

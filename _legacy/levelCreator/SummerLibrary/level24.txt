@@ -1,0 +1,15 @@
+levelCreator-v2.py 22 10 0.8 > level24.txt
+Inversion of Cys,Glu,Val,Val,[t],Pro
+Deletion of Ala,Glu
+Inversion of Gln,Pro,[t],Val
+Deletion of Gln,Val
+Deletion of Val,Trp
+Inversion of Ile,Val,[t],Pro
+Duplication of Glu
+Deletion of Arg
+Deletion of Pro
+Inversion of Phe,[t],Val
+>target 10
+Val,Phe,Val,[t],Phe,Ile,Glu,Cys,His,Arg,Tyr,Glu,Lys,Arg,Thr,Phe
+>mutable
+Val,Phe,Ala,Glu,Phe,Ile,Gln,Cys,Glu,Val,Val,[t],Pro,His,Arg,Arg,Tyr,Lys,Arg,Thr,Val,Trp,Phe

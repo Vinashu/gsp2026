@@ -1,0 +1,12 @@
+levelCreator-v2.py 14 7 0.8 > level12.txt
+Duplication of Trp
+Deletion of Lys
+Deletion of Val
+Duplication of Glu,Trp
+Inversion of Pro,[t],Cys,Arg
+Deletion of Glu
+Deletion of Lys,Asn
+>target 7
+Glu,Trp,Leu,Arg,Trp,Val,Trp,Arg,Cys,[t],Pro,His,Asp
+>mutable
+Val,Leu,Arg,Glu,Trp,Val,Pro,[t],Cys,Arg,His,Asp,Lys,Lys,Asn

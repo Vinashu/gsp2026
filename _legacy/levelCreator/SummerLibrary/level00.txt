@@ -1,0 +1,6 @@
+levelCreator-v2.py 6 1 0.8 > level00.txt
+Inversion of Ser,[t],Trp
+>target 1
+Val,Thr,Trp,[t],Ser,Ala,Leu
+>mutable
+Val,Thr,Ser,[t],Trp,Ala,Leu

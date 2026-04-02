@@ -1,0 +1,14 @@
+levelCreator-v2.py 16 9 0.8 > level15.txt
+Duplication of Glu
+Inversion of Ala,[t],His,Asp
+Deletion of His
+Deletion of Arg,Asp
+Inversion of Arg,Glu,Ala,[t],Ala
+Inversion of Ala,[t],Ala
+Duplication of Asn
+Duplication of Cys
+Duplication of Cys
+>target 9
+Cys,Ser,Cys,Cys,Val,Asn,Ala,[t],Ala,Glu,Arg,Cys,Glu,Tyr,Ser,His,Leu,Asn
+>mutable
+Ser,Cys,Cys,Val,Arg,Ala,Arg,Ala,[t],His,Asp,Glu,Tyr,Ser,His,Leu,Asn

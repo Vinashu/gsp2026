@@ -1,0 +1,6 @@
+levelCreator-v2.py 8 1 0.8 > level01.txt
+Deletion of Trp,Cys,Ala
+>target 1
+Arg,[t],Asp,Val,Trp,Met
+>mutable
+Trp,Cys,Ala,Arg,[t],Asp,Val,Trp,Met

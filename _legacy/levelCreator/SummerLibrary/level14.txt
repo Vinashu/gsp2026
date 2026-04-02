@@ -1,0 +1,13 @@
+levelCreator-v2.py 16 8 0.8 > level14.txt
+Deletion of Ala
+Duplication of Tyr
+Inversion of Tyr,[t],Met
+Deletion of Met
+Deletion of Cys
+Duplication of Glu
+Inversion of Met,[t],Tyr,Ser
+Deletion of Ser
+>target 8
+Glu,His,Glu,Tyr,Asn,Ser,Glu,Gln,Tyr,[t],Met,Gly,Ser,Lys,Asn
+>mutable
+His,Glu,Asn,Met,Ser,Glu,Gln,Tyr,[t],Met,Ser,Gly,Ser,Lys,Ala,Asn,Cys

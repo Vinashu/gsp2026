@@ -1,0 +1,8 @@
+levelCreator-v2.py 8 3 0.8 > level03.txt
+Duplication of Ser
+Deletion of Thr
+Inversion of Tyr,[t],Pro
+>target 3
+Ala,Asn,Ser,Ser,Pro,[t],Tyr,Glu,Ile
+>mutable
+Ala,Asn,Ser,Tyr,[t],Thr,Pro,Glu,Ile

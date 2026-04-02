@@ -1,0 +1,16 @@
+levelCreator-v2.py 18 11 0.8 > level19.txt
+Inversion of Leu,Trp,[t],Arg,Gly
+Deletion of Asp
+Deletion of Trp
+Deletion of Val
+Duplication of Ile
+Deletion of Tyr
+Duplication of Tyr
+Duplication of Tyr
+Duplication of Phe
+Inversion of Arg,[t],Ile
+Deletion of Ala
+>target 11
+Cys,Trp,Tyr,Ile,Asn,Gly,Ile,[t],Arg,Tyr,Leu,Glu,Phe,Phe,Cys,Leu,Tyr,Tyr
+>mutable
+Asp,Cys,Val,Tyr,Trp,Ile,Asn,Leu,Trp,[t],Arg,Gly,Glu,Phe,Cys,Leu,Tyr,Ala,Tyr

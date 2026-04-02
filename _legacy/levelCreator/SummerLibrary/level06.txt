@@ -1,0 +1,9 @@
+levelCreator-v2.py 10 4 0.8 > level06.txt
+Duplication of Leu
+Duplication of Trp
+Duplication of Tyr
+Deletion of Leu
+>target 4
+Gln,Ile,Tyr,Phe,Tyr,Leu,[t],Arg,Trp,Trp,Ser,Met,Ser
+>mutable
+Gln,Ile,Tyr,Phe,Leu,[t],Arg,Trp,Ser,Met,Ser

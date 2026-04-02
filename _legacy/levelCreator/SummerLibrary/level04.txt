@@ -1,0 +1,7 @@
+levelCreator-v2.py 10 2 0.8 > level04.txt
+Duplication of Asn,Thr
+Deletion of Phe
+>target 2
+Asn,Asp,Thr,Asn,Val,His,[t],His,Asn,Thr,Arg,Tyr
+>mutable
+Asn,Asp,Val,Phe,His,[t],His,Asn,Thr,Arg,Tyr

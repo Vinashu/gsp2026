@@ -1,0 +1,32 @@
+## target 
+Met,Val,Met,Tyr,Asn,Ser,Arg,Cys,Val,Tyr,Gly,Lys,His,Pro,Ser,His,Lys,Gly,Leu,Asn,Glu,Asn,Glu,Glu,Cys,Ala,Lys,Pro,Tyr,Pro,Trp,Asp,Thr,Gln,Thr,Met,Trp,Trp,Gly,Asn,Cys,Glu,Ala,Val,Phe,Asn,Ile,Val,Phe,Gly,Asn,Arg,Gly,Lys,Asn,Leu,Tyr,Thr,[t],Val,Glu,Val,Tyr,Thr,Asn,Thr,Glu,Thr,Asn,Val,Glu,Ser,Ile,His,Tyr,Met,Val,Arg,Leu,Ala,Arg,Ile,Arg,Cys,Thr,Thr,Ala,Gly,His,Tyr,Ile,Leu,Phe,Pro,Met,Tyr,Cys,Lys,Ala,Met,Cys,Pro,Phe,Ala,Asn,Val,Pro,Phe,Tyr,Met,His,Val
+
+## mutable
+Met,Val,Met,Tyr,Asn,Ser,Arg,Cys,Val,Tyr,Gly,Lys,Cys,His,Ser,His,Lys,Gly,Leu,Asn,Glu,Asn,Glu,Glu,Cys,Pro,Tyr,Pro,Trp,Asp,Thr,Gln,Thr,Met,Leu,Gly,Trp,Trp,Asn,Gly,Asn,Cys,Glu,Ala,Val,Arg,Phe,Asn,Ile,Val,Phe,Gly,Asn,Arg,Lys,Lys,Asn,Leu,Tyr,Thr,[t],Val,Glu,Val,Tyr,Pro,Thr,Asn,Thr,Glu,Thr,Thr,Asn,Val,Glu,Asn,Ser,His,Arg,Leu,His,Thr,Tyr,Ala,Arg,Ile,Thr,Val,Arg,Cys,Thr,Thr,Ala,Glu,Met,Gly,His,Thr,Tyr,Ile,Ile,Leu,Phe,Pro,Met,Cys,Lys,Ala,Met,Cys,Pro,Phe,Ala,Asn,Val,Pro,Phe,Tyr,Met,His,Val
+
+## moves
+Inversion of Thr,[t],Val
+Deletion of Thr
+Duplication of Tyr
+Inversion of Val,[t],Thr
+Deletion of Arg
+Inversion of Thr,[t],Val
+Duplication of Ile
+Deletion of Glu,Met
+Duplication of Val,Met,Tyr
+Duplication of Lys,Ala
+Deletion of Cys
+Deletion of Ile
+Deletion of Pro
+Inversion of Val,[t],Thr
+Deletion of His,Thr,Tyr
+Duplication of Gly
+Inversion of Thr,[t],Val
+Deletion of Thr
+Deletion of Asn
+Duplication of Pro
+Deletion of Lys
+Inversion of Val,[t],Thr
+Deletion of Thr,Val
+Deletion of Asn
+Deletion of Leu,Gly

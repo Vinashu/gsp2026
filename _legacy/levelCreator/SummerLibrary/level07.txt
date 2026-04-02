@@ -1,0 +1,8 @@
+levelCreator-v2.py 12 3 0.8 > level07.txt
+Deletion of Thr
+Inversion of Met,[t],Tyr
+Duplication of Val,Ile
+>target 3
+Pro,Arg,Val,Ile,Asp,Val,Ile,Tyr,[t],Met,Leu,Gly,Lys,Pro
+>mutable
+Pro,Arg,Asp,Val,Ile,Met,[t],Tyr,Leu,Gly,Thr,Lys,Pro

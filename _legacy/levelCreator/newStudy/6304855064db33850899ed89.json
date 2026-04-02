@@ -1,0 +1,57 @@
+{
+    "_id" : "6304855064db33850899ed89",
+    "moves" : [ 
+        "L104:4;", 
+        "L83:3;", 
+        "I63:6;", 
+        "D68:1:68;", 
+        "L53:3;", 
+        "L11:3;"
+    ],
+    "restart" : 0,
+    "level" : 11,
+    "score" : 6,
+    "topScore" : 11,
+    "time" : 193.433901512995,
+    "points" : 350,
+    "player" : "63045fdf64db33850899ece0",
+    "currDiff" : 0,
+    "genomePair" : "none",
+    "sysTime" : "2022-08-23T05:44:16.000Z",
+    "puzzleData" : {
+        "_id" : "60e637fc7765e86e5cff88ef",
+        "active" : true,
+        "scores" : [ 
+            {
+                "_id" : "60e637fc7765e86e5cff88f0",
+                "algorithm" : "Haming Distance",
+                "score" : 349
+            }, 
+            {
+                "_id" : "60e637fc7765e86e5cff88f1",
+                "algorithm" : "OrthoAlign",
+                "score" : 11
+            }
+        ],
+        "topScore" : [ 
+            {
+                "_id" : "6304854b64db33850899ed88",
+                "score" : 6,
+                "date" : "2022-08-23T05:44:11.000Z"
+            }
+        ],
+        "created" : "2021-07-07T23:25:48.416Z"
+    },
+    "targetGenome" : {
+        "_id" : "60e4d5384a6ed454e476fad4",
+        "geneBankId" : "CP006903",
+        "name" : "1415774.5",
+        "sequence" : "[o], 16S, 23S, 5S, Met, Ala, Ser, Ser, Ser, Ser, Arg, Leu, Met, Met, Leu, Asn, Asn, Asn, 16S, Ala, Ile, 23S, 5S, Phe, Cys, Thr, Pro, Gly, Arg, Pro, Gly, Arg, His, Gln, Lys, Leu, Gly, Gly, Lys, His, Gln, Lys, Leu, Gly, Gly, Arg, 16S, Ile, 23S, Asn, Tyr, Val, Thr, Tyr, Trp, Trp, Met, Cys, [t], Lys, Arg, Lys, Arg, Arg, Leu, Glu, Phe, 5S, Ala, Met, 5S, 23S, 16S, 5S, 23S, 16S, Ser, Arg, 5S, 23S, 16S, 5S, 23S, 16S, 5S, 23S, 16S, 5S, 23S, 16S, Lys, 5S, Lys, 5S, 23S, 16S, Asp, Val, Glu, Thr, Asp, Val, Glu"
+    },
+    "mutableGenome" : {
+        "_id" : "60e4d3e84a6ed454e476facb",
+        "geneBankId" : "CP001078",
+        "name" : "508767.5",
+        "sequence" : "[o], 16S, 23S, 5S, Met, Ala, Ser, Ser, Ser, Ser, Arg, Leu, Met, Met, Leu, Met, Met, Leu, Asn, Asn, Asn, 16S, Ala, Ile, 23S, 5S, Phe, Cys, Thr, Pro, Gly, Arg, Pro, Gly, Arg, His, Gln, Lys, Leu, Gly, Gly, Lys, His, Gln, Lys, Leu, Gly, Gly, Arg, 16S, Ile, 23S, Asn, Tyr, Val, Thr, Tyr, Val, Thr, Tyr, Trp, Trp, Met, Arg, Lys, Arg, Lys, [t], Cys, Leu, Glu, Phe, 5S, Ala, Met, 5S, 23S, 16S, 5S, 23S, 16S, Ser, Arg, 5S, 23S, 16S, 5S, 23S, 16S, 5S, 23S, 16S, 5S, 23S, 16S, 5S, 23S, 16S, Lys, 5S, Lys, 5S, 23S, 16S, Asp, Val, Glu, Thr, Asp, Val, Glu, Thr, Asp, Val, Glu"
+    }
+}

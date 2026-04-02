@@ -1,0 +1,1 @@
+[o], Ser, Ser, Arg, Arg, Ser, Leu, Met, Met, Glu, Val, Arg, 16S, Ile, 23S, 5S, 16S, 23S, 5S, Lys, Glu, Asp, Thr, Tyr, 16S, Ala, 23S, 5S, Asn, Val, Gly, Gly, Gly, Arg, Leu, His, Gln, Lys, Lys, Leu, Ala, Glu, Pro, Trp, [t], Met, Asn, Leu, Met, Phe, Tyr, Leu, Thr, Gln, Pro, Cys, Gly, Phe, Asp, Val, Thr, Gly, Thr, Val, Pro, Ser, 5S, 23S, Ala, 16S

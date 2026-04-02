@@ -1,0 +1,8 @@
+levelCreator-v2.py 10 3 0.8 > level05.txt
+Inversion of His,[t],Tyr
+Deletion of Leu
+Duplication of Ile
+>target 3
+Pro,Asp,Ile,Thr,Tyr,[t],His,Cys,Ile,Trp,Val
+>mutable
+Leu,Pro,Asp,Thr,His,[t],Tyr,Cys,Ile,Trp,Val

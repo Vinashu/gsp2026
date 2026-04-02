@@ -1,0 +1,19 @@
+levelCreator-v2.py 22 14 0.8 > level27.txt
+Duplication of Phe
+Deletion of Pro
+Inversion of Ser,[t],Ala,Arg
+Deletion of Gly
+Duplication of Cys
+Deletion of Ala
+Duplication of Arg
+Duplication of Ser
+Deletion of Arg
+Duplication of Ala
+Inversion of Ala,[t],Ser
+Deletion of Cys,His,Lys
+Deletion of Gly,Asn
+Duplication of Phe
+>target 14
+Arg,Ser,Asp,Phe,Asp,Glu,Thr,Cys,Ala,Ser,[t],Ala,Cys,Ala,Ser,Phe,Phe,Phe,Arg,Phe
+>mutable
+Pro,Arg,Asp,Phe,Gly,Asn,Asp,Glu,Thr,Ala,Ser,[t],Ala,Arg,Cys,Ser,Gly,Ala,Phe,Cys,His,Lys,Phe

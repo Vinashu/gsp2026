@@ -1,0 +1,17 @@
+levelCreator-v2.py 20 12 0.8 > level23.txt
+Inversion of Ser,[t],Glu
+Duplication of Glu
+Duplication of Thr,Asp
+Duplication of Thr
+Inversion of Glu,Glu,[t],Ser
+Inversion of Ser,[t],Glu,Glu,Asp
+Duplication of Glu
+Inversion of Glu,Glu,[t],Ser,Thr
+Deletion of Ser
+Duplication of Thr
+Deletion of Glu
+Inversion of Thr,[t],Glu
+>target 12
+Val,Arg,Glu,Thr,His,Thr,Thr,Asp,Met,Asp,Asp,Glu,[t],Thr,Glu,His,Pro,Trp,Glu,Leu,Leu,His,Gln,Thr,Cys
+>mutable
+Val,Arg,Glu,His,Thr,Asp,Met,Asp,Glu,Ser,[t],Glu,His,Pro,Trp,Leu,Leu,His,Gln,Thr,Cys

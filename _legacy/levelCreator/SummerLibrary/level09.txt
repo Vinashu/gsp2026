@@ -1,0 +1,10 @@
+levelCreator-v2.py 12 5 0.8 > level09.txt
+Deletion of Leu
+Deletion of Cys
+Duplication of Val
+Inversion of Asp,[t],Trp,Ala,Asn
+Inversion of Trp,[t],Asp
+>target 5
+Val,Val,Glu,Phe,Met,Asn,Ala,Asp,[t],Trp,Pro,Ala
+>mutable
+Val,Glu,Phe,Met,Asp,Leu,[t],Cys,Trp,Ala,Asn,Pro,Ala

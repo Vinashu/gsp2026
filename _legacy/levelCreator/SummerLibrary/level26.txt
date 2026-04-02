@@ -1,0 +1,17 @@
+levelCreator-v2.py 22 12 0.8 > level26.txt
+Inversion of Cys,[t],Gln,Pro
+Deletion of Glu
+Deletion of Leu
+Duplication of Ile
+Duplication of Ile
+Deletion of Pro,Gln
+Duplication of Gln
+Duplication of Cys,Asn
+Inversion of Arg,[t],Cys
+Duplication of Cys
+Duplication of Ser,Cys
+Duplication of Cys
+>target 12
+Ser,Cys,Met,Tyr,Cys,Gln,Ser,Cys,Cys,Asp,Phe,Ile,Tyr,Cys,[t],Arg,Asn,Asn,Gln,Tyr,Ile,Cys,Cys,Asn,Ser,Ile,Gln,Gly
+>mutable
+Met,Leu,Tyr,Gln,Ser,Cys,Asp,Phe,Tyr,Arg,Cys,[t],Gln,Pro,Asn,Glu,Asn,Tyr,Cys,Ser,Ile,Gln,Gly

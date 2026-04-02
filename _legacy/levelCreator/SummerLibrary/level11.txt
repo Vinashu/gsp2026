@@ -1,0 +1,11 @@
+levelCreator-v2.py 14 6 0.8 > level11.txt
+Inversion of Glu,Arg,[t],Gly
+Duplication of Ile
+Duplication of Tyr
+Deletion of Thr
+Duplication of Ile
+Duplication of Tyr
+>target 6
+Gln,Ile,Tyr,Ile,Ile,Gly,[t],Arg,Tyr,Tyr,Glu,Val,Tyr,Ile,Leu,Pro,Tyr,Arg
+>mutable
+Gln,Ile,Tyr,Thr,Ile,Glu,Arg,[t],Gly,Val,Tyr,Leu,Pro,Tyr,Arg

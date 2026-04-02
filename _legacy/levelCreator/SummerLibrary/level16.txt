@@ -1,0 +1,14 @@
+python levelCreator-v2.py 18 9 0.8 > level16.txt
+Inversion of Met,[t],Arg
+Inversion of Met,Arg,[t],Met
+Inversion of Met,[t],Arg
+Duplication of Met,Met
+Duplication of Leu
+Duplication of Met
+Deletion of Asp,Leu
+Inversion of Val,Thr,Arg,[t],Met
+Inversion of Met,[t],Arg
+>target 9
+Met,Met,Tyr,Met,Met,Lys,Asn,Arg,[t],Met,Thr,Val,Met,Ser,Ile,Asp,Leu,Ile,Arg,Ala,Asp
+>mutable
+Tyr,Met,Asp,Lys,Asn,Val,Thr,Met,Met,[t],Arg,Ser,Ile,Asp,Leu,Ile,Arg,Ala,Asp

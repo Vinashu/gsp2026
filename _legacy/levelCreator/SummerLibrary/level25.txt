@@ -1,0 +1,16 @@
+levelCreator-v2.py 22 11 0.8 > level25.txt
+Deletion of Asp,Ala
+Duplication of Asp,Glu
+Duplication of Arg
+Deletion of Asn
+Duplication of Asp
+Duplication of Phe
+Deletion of Gln
+Inversion of Arg,Phe,Phe,[t],Cys
+Duplication of Asp
+Duplication of Phe
+Duplication of Cys
+>target 11
+Arg,Gly,Phe,Glu,Cys,Lys,Glu,His,Arg,Ala,Cys,[t],Phe,Phe,Arg,Glu,Cys,Asp,Asp,Asn,Phe,Asp,Glu,Ala,Lys,Asp,Glu
+>mutable
+Arg,Gly,Glu,Lys,Glu,His,Arg,Ala,Gln,Phe,Phe,[t],Cys,Glu,Asp,Ala,Cys,Asn,Asp,Glu,Ala,Lys,Asn

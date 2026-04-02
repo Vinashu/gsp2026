@@ -1,0 +1,8 @@
+>target,1,Experiment_0a
+Ala,Arg,Asn,Asp,Cys,Gln,Glu,Gly,His,Ile,Leu,Lys,Met,Phe,Pro,Ser,Thr,Trp,Tyr,Val,[t],[o]
+>mutable,Experiment_0a
+[t],Ala,Arg,Asn,Asp,Cys,Gln,Glu,Gly,His,Ile,Leu,Lys,Met,Phe,Pro,Ser,Thr,Trp,Tyr,Val,[o]
+>target,1,Experiment_0b
+Ala,Asn,Gly,Glu,[t],His,Pro,Ser,Thr,[o]
+>mutable,Experiment_0b
+Ala,Asn,Gly,His,[t],Glu,Pro,Ser,Thr,[o]
