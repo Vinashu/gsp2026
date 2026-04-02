@@ -34,6 +34,11 @@ It should be a set of reusable algorithmic ideas.
 | `results.tsv` | Read only (written automatically by evaluate.js). |
 | `program.md` | Read only. Your operating manual. |
 
+Additional puzzle sources such as `syntetic_puzles/dev/` and
+`real_puzzles/dev/` may be read for exploratory context, but they are not the
+official benchmark and must not replace `benchmark/puzzles.json` when deciding
+whether a solver revision is accepted.
+
 ---
 
 ## Problem Definition
@@ -182,6 +187,11 @@ When evaluating changes:
 - keep the evaluation budget fixed (150 moves, set in `evaluate.js`),
 - keep the rules fixed,
 - and change only the solver logic under study.
+
+The repo may contain auxiliary development puzzle sets outside the benchmark.
+You may use them as optional diagnostic context, but the official keep/revert
+decision for solver revisions must still be based on the frozen benchmark and
+its `results.tsv` history.
 
 Do not change multiple unrelated ideas at once if it makes the result hard to interpret.
 
