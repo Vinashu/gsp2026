@@ -1,4 +1,4 @@
-// @version v18
+// @version v19
 // Genome Sorting Heuristic Solver - Terminus-Frontier Block Grower
 //
 // Strategy: build an exact matching core around [t], prefer block duplications
@@ -28,6 +28,7 @@ const INVERSION_ROLLOUT_CANDIDATES = 8;
 const INVERSION_ROLLOUT_MAX_MOVES = 24;
 const DUPLICATION_LENGTH_ROLLOUT_CANDIDATES = 4;
 const DUPLICATION_LENGTH_ROLLOUT_MAX_MOVES = 12;
+const NEUTRAL_INVERSION_ROLLOUT_CANDIDATES = 3;
 
 /**
  * Solve a genome sorting puzzle.
@@ -177,6 +178,33 @@ function chooseOpeningRolloutCandidate(current, target, immediate, fallback) {
     if (rolloutCandidates.some(existing => existing.serial === candidate.serial)) continue;
     rolloutCandidates.push(candidate);
     if (rolloutCandidates.length >= INVERSION_ROLLOUT_CANDIDATES + (fallback ? 1 : 0)) break;
+  }
+
+  // When no improving inversion exists, also try a few near-neutral inversions as
+  // potential setup moves — they temporarily worsen the score but may unlock a
+  // shorter overall path.
+  if (rolloutCandidates.length <= 1 && NEUTRAL_INVERSION_ROLLOUT_CANDIDATES > 0) {
+    const baseScore = scoreGenome(current, target);
+    const tIdx = current.terminusIndex;
+    const maxBefore = Math.min(tIdx, MAX_INVERSION_RADIUS);
+    const maxAfter = Math.min(current.genes.length - tIdx - 1, MAX_INVERSION_RADIUS);
+    const neutralInvs = [];
+    for (let before = 1; before <= maxBefore; before++) {
+      for (let after = 1; after <= maxAfter; after++) {
+        const move = { type: 'inversion', start: tIdx - before, length: before + 1 + after };
+        let result;
+        try { result = applyMove(current, move); } catch (_) { continue; }
+        const serial = serializeGenome(result);
+        if (rolloutCandidates.some(e => e.serial === serial)) continue;
+        const score = scoreGenome(result, target);
+        if (compareScores(score, baseScore) >= 0) continue;
+        neutralInvs.push({ move, result, score, serial });
+      }
+    }
+    neutralInvs.sort((a, b) => compareScores(b.score, a.score));
+    for (const c of neutralInvs.slice(0, NEUTRAL_INVERSION_ROLLOUT_CANDIDATES)) {
+      rolloutCandidates.push(c);
+    }
   }
 
   if (rolloutCandidates.length <= 1) return fallback;
