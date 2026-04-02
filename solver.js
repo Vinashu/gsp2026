@@ -1,4 +1,4 @@
-// @version v15
+// @version v16
 // Genome Sorting Heuristic Solver - Terminus-Frontier Block Grower
 //
 // Strategy: build an exact matching core around [t], prefer block duplications
@@ -23,6 +23,9 @@ const MAX_SOURCE_MATCHES = 8;
 const LOOKAHEAD_CANDIDATES = 8;
 const MAX_DUPLICATION_LENGTH_OPTIONS = 3;
 const EXTRA_SHORT_INVERSION_CANDIDATES = 4;
+const INVERSION_ROLLOUT_CORE_THRESHOLD = 1;
+const INVERSION_ROLLOUT_CANDIDATES = 6;
+const INVERSION_ROLLOUT_MAX_MOVES = 24;
 
 /**
  * Solve a genome sorting puzzle.
@@ -33,7 +36,7 @@ const EXTRA_SHORT_INVERSION_CANDIDATES = 4;
  * @returns {{ moves: object[], finalGenome: object, solved: boolean, moveCount: number }}
  */
 function solve(mutableGenome, targetGenome, options = {}) {
-  const { maxMoves = 150, debug = false } = options;
+  const { maxMoves = 150, debug = false, rolloutMode = false } = options;
 
   let current = cloneGenome(mutableGenome);
   const target = targetGenome;
@@ -44,7 +47,7 @@ function solve(mutableGenome, targetGenome, options = {}) {
     const baseScore = scoreGenome(current, target);
     const candidates = generateCandidates(current, target);
     const immediate = evaluateImmediateCandidates(current, target, candidates, seen, baseScore);
-    const best = chooseLookaheadMove(target, immediate, seen);
+    const best = chooseLookaheadMove(current, target, immediate, seen, rolloutMode);
 
     if (!best) {
       if (debug) {
@@ -110,7 +113,7 @@ function evaluateImmediateCandidates(current, target, candidates, seen, baseScor
   return evaluated;
 }
 
-function chooseLookaheadMove(target, immediate, seen) {
+function chooseLookaheadMove(current, target, immediate, seen, rolloutMode = false) {
   if (immediate.length === 0) return null;
 
   const shortlist = immediate.slice(0, LOOKAHEAD_CANDIDATES);
@@ -138,7 +141,61 @@ function chooseLookaheadMove(target, immediate, seen) {
     }
   }
 
+  if (!rolloutMode) {
+    const rolloutBest = chooseOpeningRolloutCandidate(current, target, immediate, best);
+    if (rolloutBest) {
+      return rolloutBest;
+    }
+  }
+
   return best || immediate[0];
+}
+
+function chooseOpeningRolloutCandidate(current, target, immediate, fallback) {
+  const core = computeAnchoredCore(current, target);
+  if (core.left + core.right > INVERSION_ROLLOUT_CORE_THRESHOLD) return fallback;
+
+  const rolloutCandidates = [];
+  if (fallback) {
+    rolloutCandidates.push(fallback);
+  }
+
+  const inversionCandidates = immediate
+    .filter(candidate => candidate.move.type === 'inversion')
+    .sort((a, b) => compareScores(b.score, a.score));
+
+  for (const candidate of inversionCandidates) {
+    if (rolloutCandidates.some(existing => existing.serial === candidate.serial)) continue;
+    rolloutCandidates.push(candidate);
+    if (rolloutCandidates.length >= INVERSION_ROLLOUT_CANDIDATES + (fallback ? 1 : 0)) break;
+  }
+
+  if (rolloutCandidates.length <= 1) return fallback;
+
+  let best = null;
+  for (const candidate of rolloutCandidates) {
+    const rollout = solve(candidate.result, target, {
+      maxMoves: INVERSION_ROLLOUT_MAX_MOVES,
+      rolloutMode: true
+    });
+    const finalScore = scoreGenome(rollout.finalGenome, target);
+    const rolloutRank = [
+      rollout.solved ? 1 : 0,
+      rollout.solved ? -rollout.moveCount : 0,
+      ...finalScore,
+      ...candidate.score
+    ];
+
+    if (!best || compareScores(rolloutRank, best.rolloutRank) > 0) {
+      best = {
+        ...candidate,
+        rank: rolloutRank,
+        rolloutRank
+      };
+    }
+  }
+
+  return best || fallback;
 }
 
 function bestSuccessorScore(current, target, seen, currentSerial, fallbackScore) {
