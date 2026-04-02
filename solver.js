@@ -113,6 +113,7 @@ function chooseLookaheadMove(target, immediate, seen) {
   if (immediate.length === 0) return null;
 
   const shortlist = immediate.slice(0, LOOKAHEAD_CANDIDATES);
+
   let best = null;
 
   for (const candidate of shortlist) {
