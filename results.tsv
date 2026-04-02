@@ -1,0 +1,3 @@
+timestamp	hypothesis	solver_version	solved_count	avg_ratio	avg_ratio_synthetic	avg_ratio_real	optimal_count	per_puzzle_ratios
+2026-04-02T01:05:43.441Z	v0 baseline	v0	0	NA	NA	NA	0	level20:STUCK;level21:STUCK;level22:STUCK;level28:STUCK;level29:STUCK;6304847664db33850899ed81:STUCK;6304855064db33850899ed89:STUCK;630497b064db33850899ed91:STUCK
+2026-04-02T01:07:17.973Z	v0 baseline	v0	0	NA	NA	NA	0	level20:STUCK;level21:STUCK;level22:STUCK;level28:STUCK;level29:STUCK;6304847664db33850899ed81:STUCK;6304855064db33850899ed89:STUCK;630497b064db33850899ed91:STUCK
