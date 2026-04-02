@@ -1,4 +1,4 @@
-// @version v19
+// @version v20
 // Genome Sorting Heuristic Solver - Terminus-Frontier Block Grower
 //
 // Strategy: build an exact matching core around [t], prefer block duplications
@@ -151,7 +151,7 @@ function chooseLookaheadMove(current, target, immediate, seen, rolloutMode = fal
     }
   }
 
-  if (!rolloutMode) {
+  if (!rolloutMode && shouldUseDuplicationLengthRollout(current, target)) {
     const lengthRolloutBest = chooseDuplicationLengthRolloutCandidate(target, immediate, best);
     if (lengthRolloutBest) {
       best = lengthRolloutBest;
@@ -449,6 +449,10 @@ function distanceToDestination(srcStart, destIndex) {
 
 function reverseArray(values) {
   return [...values].reverse();
+}
+
+function shouldUseDuplicationLengthRollout(current, target) {
+  return (target.genes.length - current.genes.length) < 20;
 }
 
 function computeAnchoredCore(current, target) {
