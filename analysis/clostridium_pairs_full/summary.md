@@ -26,6 +26,17 @@ Solver version: `v19`
 | Avg OrthoAlign runtime (ms) | 301.6 |
 | Avg solver runtime (ms) | 16153.0 |
 
+## Visual Overview
+
+![Figure 1: quality wins are broad, but runtime is expensive](figures/quality_runtime_overview.svg)
+
+Figure 1 summarizes the high-level tradeoff. The left panel shows that most
+comparable pairs land below zero on `(solver - OrthoAlign)`, so the win is not
+coming from just a few outliers. The right panel shows the cost of that win:
+the solver is about `53.6x` slower on average (`16.15s` vs `0.30s`).
+All three figures in this document are generated from `pairs_all.tsv` by
+`generate_figures.py`.
+
 ## How v19 Works
 
 `v19` is still the terminus-frontier block grower, but with two bounded rollout
@@ -236,6 +247,15 @@ and `CP006777_ 864803.3` from several 23-gene-family mutables such as
 `CP001078_ 508767.5`, `CP010520_ 1491.354`, and `CP010521_ 1491.355`. Those
 look like good candidates for a future hard-genomic dev subset.
 
+![Figure 2: the loss pattern is concentrated, not diffuse](figures/loss_cluster_heatmap.svg)
+
+Figure 2 makes the cluster structure explicit. The `AP012212` row is uniformly
+positive against the long-target set, while the `CP001078` / `CP010520` /
+`CP010521` rows only light up against `CP000721` and `CP006777`. That is the
+visual signature of a targeted growth-phase weakness rather than a general
+quality collapse. For readability, the heatmap axes use the short accession
+prefixes instead of the full genome labels.
+
 ### Runtime tradeoff
 
 The solver is much slower than OrthoAlign on average: about `16.2s` per pair
@@ -330,6 +350,14 @@ The magnitude also scales with how large the length gap is:
 | 0–20 genes | 289 | 4.09 |
 | 21–50 genes | 198 | 9.75 |
 | 51+ genes | 37 | 19.49 |
+
+![Figure 3: directional asymmetry vs length gap](figures/directional_asymmetry.svg)
+
+Figure 3 shows the same asymmetry numerically and geometrically. Once the
+target becomes longer than the mutable, the points move into the upper-right:
+forward growth gets harder. When the target is shorter, they move into the
+lower-left: contraction gets easier. The near-linear trend is why the length
+gap explains so much of the directional bias.
 
 ### Extreme examples
 
