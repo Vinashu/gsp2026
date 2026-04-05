@@ -2,7 +2,7 @@
 <title id="title">Clostridium sweep: concentrated loss cluster</title>
 <desc id="desc">Heatmap of solver minus OrthoAlign deltas for the recurring hard cluster discussed in the summary.</desc>
 <rect x="0.0" y="0.0" width="980.0" height="430.0" fill="#ffffff" stroke="none" stroke-width="1" />
-<text x="48.0" y="42.0" fill="#16324f" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="start">Figure 2. The loss pattern is concentrated, not diffuse</text>
+<text x="48.0" y="42.0" fill="#16324f" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="start">The loss pattern is concentrated, not diffuse</text>
 <text x="48.0" y="68.0" fill="#6b7c93" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="start">Selected cluster from the narrative: positive values mean the solver needs more moves than OrthoAlign.</text>
 <rect x="48.0" y="100.0" width="884.0" height="270.0" fill="#f8fbff" stroke="#d9e2ec" stroke-width="1" rx="14" />
 <text x="218.0" y="201.0" fill="#16324f" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="end">AP012212</text>

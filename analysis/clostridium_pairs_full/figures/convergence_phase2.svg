@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="380" viewBox="0 0 700 380" role="img">
+<rect x="0.0" y="0.0" width="700.0" height="380.0" fill="#ffffff" stroke="none" stroke-width="1" />
+<rect x="70.0" y="50.0" width="600.0" height="270.0" fill="#f8fbff" stroke="none" stroke-width="1" />
+<text x="350.0" y="28.0" fill="#16324f" font-size="16" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="middle">Solver Convergence: avgRatio over Versions (Phase 2 Dev)</text>
+<line x1="70.0" y1="320.0" x2="670.0" y2="320.0" stroke="#d9e2ec" stroke-width="1" />
+<text x="62.0" y="325.0" fill="#6b7c93" font-size="11" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="end">0.962</text>
+<line x1="70.0" y1="265.0" x2="670.0" y2="265.0" stroke="#d9e2ec" stroke-width="1" />
+<text x="62.0" y="270.0" fill="#6b7c93" font-size="11" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="end">0.978</text>
+<line x1="70.0" y1="213.4" x2="670.0" y2="213.4" stroke="#d9e2ec" stroke-width="1" />
+<text x="62.0" y="218.4" fill="#6b7c93" font-size="11" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="end">0.993</text>
+<line x1="70.0" y1="158.3" x2="670.0" y2="158.3" stroke="#d9e2ec" stroke-width="1" />
+<text x="62.0" y="163.3" fill="#6b7c93" font-size="11" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="end">1.009</text>
+<line x1="70.0" y1="103.3" x2="670.0" y2="103.3" stroke="#d9e2ec" stroke-width="1" />
+<text x="62.0" y="108.3" fill="#6b7c93" font-size="11" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="end">1.025</text>
+<line x1="70.0" y1="51.7" x2="670.0" y2="51.7" stroke="#d9e2ec" stroke-width="1" />
+<text x="62.0" y="56.7" fill="#6b7c93" font-size="11" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="end">1.040</text>
+<text x="70.0" y="338.0" fill="#6b7c93" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">v7</text>
+<text x="200.4" y="338.0" fill="#6b7c93" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">v12</text>
+<text x="226.5" y="338.0" fill="#6b7c93" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">v13</text>
+<text x="252.6" y="338.0" fill="#6b7c93" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">v14</text>
+<text x="278.7" y="338.0" fill="#6b7c93" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">v15</text>
+<text x="304.8" y="338.0" fill="#6b7c93" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">v16</text>
+<text x="330.9" y="338.0" fill="#6b7c93" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">v17</text>
+<text x="357.0" y="338.0" fill="#6b7c93" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">v18</text>
+<text x="383.0" y="338.0" fill="#6b7c93" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">v19</text>
+<text x="409.1" y="338.0" fill="#6b7c93" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">v20</text>
+<text x="461.3" y="338.0" fill="#6b7c93" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">v22</text>
+<text x="487.4" y="338.0" fill="#6b7c93" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">v23</text>
+<text x="513.5" y="338.0" fill="#6b7c93" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">v24</text>
+<text x="539.6" y="338.0" fill="#6b7c93" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">v25</text>
+<text x="617.8" y="338.0" fill="#6b7c93" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">v28</text>
+<text x="643.9" y="338.0" fill="#6b7c93" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">v29</text>
+<text x="670.0" y="338.0" fill="#6b7c93" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">v30</text>
+<line x1="70.0" y1="189.3" x2="670.0" y2="189.3" stroke="#d1495b" stroke-width="1" stroke-dasharray="4 3" />
+<text x="673.0" y="193.3" fill="#d1495b" font-size="10" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="start">1.0</text>
+<polyline points="70.0,84.4 200.4,122.6 226.5,134.3 252.6,187.9 278.7,212.7 304.8,224.4 330.9,240.5 357.0,265.3 383.0,285.6 409.1,285.6 461.3,285.6 487.4,285.6 513.5,285.6 539.6,285.6 617.8,244.7 643.9,285.6 670.0,285.6" stroke="#2f6fed" stroke-width="2.5" fill="none" />
+<circle cx="70.0" cy="84.4" r="4.0" fill="#2f6fed" />
+<circle cx="200.4" cy="122.6" r="4.0" fill="#2f6fed" />
+<circle cx="226.5" cy="134.3" r="4.0" fill="#2f6fed" />
+<circle cx="252.6" cy="187.9" r="4.0" fill="#2f6fed" />
+<circle cx="278.7" cy="212.7" r="4.0" fill="#2f6fed" />
+<circle cx="304.8" cy="224.4" r="4.0" fill="#2f6fed" />
+<circle cx="330.9" cy="240.5" r="4.0" fill="#2f6fed" />
+<circle cx="357.0" cy="265.3" r="4.0" fill="#2f6fed" />
+<circle cx="383.0" cy="285.6" r="4.0" fill="#2f6fed" />
+<circle cx="409.1" cy="285.6" r="4.0" fill="#2f6fed" />
+<circle cx="461.3" cy="285.6" r="4.0" fill="#2f6fed" />
+<circle cx="487.4" cy="285.6" r="4.0" fill="#2f6fed" />
+<circle cx="513.5" cy="285.6" r="4.0" fill="#2f6fed" />
+<circle cx="539.6" cy="285.6" r="4.0" fill="#2f6fed" />
+<circle cx="617.8" cy="244.7" r="4.0" fill="#2f6fed" />
+<circle cx="643.9" cy="285.6" r="4.0" fill="#2f6fed" />
+<circle cx="670.0" cy="285.6" r="4.0" fill="#2f6fed" />
+<text x="350.0" y="372.0" fill="#16324f" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">Solver Version</text>
+<text x="18.0" y="190.0" fill="#16324f" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle" transform="rotate(-90.0 18.0 190.0)">avgRatio (lower is better)</text>
+<line x1="70.0" y1="50.0" x2="70.0" y2="320.0" stroke="#16324f" stroke-width="1" />
+<line x1="70.0" y1="320.0" x2="670.0" y2="320.0" stroke="#16324f" stroke-width="1" />
+</svg>

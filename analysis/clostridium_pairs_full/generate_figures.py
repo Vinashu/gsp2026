@@ -227,7 +227,7 @@ def draw_quality_runtime(summary, comparable_rows):
         '<title id="title">Clostridium sweep: quality distribution and runtime tradeoff</title>',
         '<desc id="desc">Histogram of solver minus OrthoAlign deltas across comparable pairs and a log-scale average runtime comparison.</desc>',
         rect(0, 0, width, height, "#ffffff"),
-        text(48, 42, "Figure 1. Quality wins are broad, but runtime is expensive", size=22, weight="700"),
+        text(48, 42, "Quality wins are broad, but runtime is expensive", size=22, weight="700"),
         text(
             48,
             68,
@@ -339,7 +339,7 @@ def draw_loss_heatmap(rows):
         '<title id="title">Clostridium sweep: concentrated loss cluster</title>',
         '<desc id="desc">Heatmap of solver minus OrthoAlign deltas for the recurring hard cluster discussed in the summary.</desc>',
         rect(0, 0, width, height, "#ffffff"),
-        text(48, 42, "Figure 2. The loss pattern is concentrated, not diffuse", size=22, weight="700"),
+        text(48, 42, "The loss pattern is concentrated, not diffuse", size=22, weight="700"),
         text(
             48,
             68,
@@ -438,7 +438,7 @@ def draw_asymmetry(rows):
         '<title id="title">Clostridium sweep: directional asymmetry vs length gap</title>',
         '<desc id="desc">Scatter plot of target length minus mutable length against solver forward minus reverse move count for matched directional pairs.</desc>',
         rect(0, 0, width, height, "#ffffff"),
-        text(48, 42, "Figure 3. Directional asymmetry tracks the length gap almost linearly", size=22, weight="700"),
+        text(48, 42, "Directional asymmetry tracks the length gap almost linearly", size=22, weight="700"),
         text(
             48,
             68,

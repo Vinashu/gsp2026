@@ -2,7 +2,7 @@
 <title id="title">Clostridium sweep: directional asymmetry vs length gap</title>
 <desc id="desc">Scatter plot of target length minus mutable length against solver forward minus reverse move count for matched directional pairs.</desc>
 <rect x="0.0" y="0.0" width="980.0" height="520.0" fill="#ffffff" stroke="none" stroke-width="1" />
-<text x="48.0" y="42.0" fill="#16324f" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="start">Figure 3. Directional asymmetry tracks the length gap almost linearly</text>
+<text x="48.0" y="42.0" fill="#16324f" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="start">Directional asymmetry tracks the length gap almost linearly</text>
 <text x="48.0" y="68.0" fill="#6b7c93" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="start">Matched canonical pairs: 524; Pearson r = 0.90; mean |solver diff| = 7.34; mean |OrthoAlign diff| = 1.25</text>
 <rect x="48.0" y="96.0" width="884.0" height="366.0" fill="#f8fbff" stroke="#d9e2ec" stroke-width="1" rx="14" />
 <line x1="120.0" y1="128.0" x2="120.0" y2="410.0" stroke="#d9e2ec" stroke-width="1" />

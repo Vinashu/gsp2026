@@ -2,7 +2,7 @@
 <title id="title">Clostridium sweep: quality distribution and runtime tradeoff</title>
 <desc id="desc">Histogram of solver minus OrthoAlign deltas across comparable pairs and a log-scale average runtime comparison.</desc>
 <rect x="0.0" y="0.0" width="1040.0" height="460.0" fill="#ffffff" stroke="none" stroke-width="1" />
-<text x="48.0" y="42.0" fill="#16324f" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="start">Figure 1. Quality wins are broad, but runtime is expensive</text>
+<text x="48.0" y="42.0" fill="#16324f" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="start">Quality wins are broad, but runtime is expensive</text>
 <text x="48.0" y="68.0" fill="#6b7c93" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="start">Comparable pairs: better 1210 (77.0%), equal 113 (7.2%), worse 249 (15.8%)</text>
 <rect x="48.0" y="96.0" width="610.0" height="300.0" fill="#f8fbff" stroke="#d9e2ec" stroke-width="1" rx="14" />
 <text x="66.0" y="124.0" fill="#16324f" font-size="15" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start">Delta distribution (solver - OrthoAlign, lower is better)</text>
