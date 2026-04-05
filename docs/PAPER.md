@@ -6,24 +6,28 @@
   `v30` is the frozen final solver, obtained by Phase 3 pruning and acceleration.
 - Present `v30` as the main method and describe `v19` as the historical milestone that exposed the asymmetry and runtime bottlenecks.
 
+## AI Disclaimer
+OpenAI GPT-5.4 and Anthropic Opus 4.6 were used to create the artifacts and to run the autoresearch loop.
+
 ## Introduction
 
 - Explain the genome sorting problem and how this project differs from unrestricted edit-distance formulations.
-- Explain GeSort and the `[t]`-anchored game restriction.
-- Explain what was learned from human video-game players and how those lessons shaped the heuristic search.
-- Explain the Karpathy autoresearch analogy: fixed environment, one editable artifact, repeated hypothesis-testing.
+- Explain GeSort and the `[t]`-anchored game restriction [4].
+- Explain what was learned from human video-game players and [5] how those lessons shaped the heuristic search.
+- Explain the Karpathy autoresearch [3] analogy: fixed environment, one editable artifact, repeated hypothesis-testing.
 
 ## Methodology
 
-- Adapt Karpathy autoresearch to the genome sorting problem.
-- Use historical synthetic puzzles from previous work and genomic puzzles from previous work as the starting benchmark.
+- Adapt Karpathy autoresearch [3] to the genome sorting problem.
+- Use historical synthetic puzzles from previous work [6] and genomic puzzles from previous work [5] as the starting benchmark.
 - Phase 1: iterate until the initial solver family plateaus on the legacy benchmark.
 - Phase 2: broaden the evaluation to mixed synthetic plus genomic manifests to avoid overfitting.
 - Describe the synthetic generator used for Phase 2 diagnostics.
 - Describe the genomic puzzle generation pipeline:
-  start from a random gene order, apply random evolutionary events to produce a mutable genome, and ask the solver to recover a path back.
+  start from a random gene order, apply random evolutionary events to produce a mutable genome, and ask the solver to recover a path back. 
   The generating process gives a known feasible path length, but cancellations and reversible event sequences mean the generated path is not guaranteed to be shortest.
-- Describe OrthoAlign as an external comparative baseline, not as a fully like-for-like optimum:
+- The genome database was extracted and prepared by [1]
+- Describe OrthoAlign [2] as an external comparative baseline, not as a fully like-for-like optimum:
   our engine allows deletions, duplications, and inversions around `[t]`;
   OrthoAlign models a broader event set including substitutions, inversions, and transpositions in addition to duplication/loss variants.
 - Emphasize the research discipline:
@@ -104,3 +108,20 @@
 - Archived historical sweep: `analysis/clostridium_pairs_full_v19_archive/`
 - Holdout milestone log row: `results_phase2.tsv`
 - Phase 3 experiment history: `results_phase3.tsv` and `timings_phase3.tsv`
+
+
+## References
+
+[1] BOPAL 2.0 and a study of tRNA and rRNA gene evolution in Clostridium
+Meghan Chua (1Department of Computer Science, University of Manitoba, 103 Dafoe Rd W, Winnipeg, Manitoba, Canada R3T 5V6, Canada), Anthony Tan (1Department of Computer Science, University of Manitoba, 103 Dafoe Rd W, Winnipeg, Manitoba, Canada R3T 5V6, Canada), and Olivier Tremblay-Savard (1Department of Computer Science, University of Manitoba, 103 Dafoe Rd W, Winnipeg, Manitoba, Canada R3T 5V6, Canada)
+Journal of Bioinformatics and Computational Biology 2021 19:06
+
+[2] Olivier Tremblay-Savard, Billel Benzaid, B. Franz Lang, Nadia El-Mabrouk, Evolution of tRNA Repertoires in Bacillus Inferred with OrthoAlign, Molecular Biology and Evolution, Volume 32, Issue 6, June 2015, Pages 1643–1656, https://doi.org/10.1093/molbev/msv029
+
+[3] https://github.com/karpathy/autoresearch
+
+[4] https://mspace.lib.umanitoba.ca/items/184f632d-a406-4412-8eac-2dea243d824e
+
+[5] Rogerio De Leon Pereira and Olivier Tremblay-Savard. 2023. Lessons Learned from Video Game Players Sorting Genomes. In Proceedings of the 18th International Conference on the Foundations of Digital Games (FDG '23). Association for Computing Machinery, New York, NY, USA, Article 37, 1–11. https://doi.org/10.1145/3582437.3582472
+
+[6] Rogerio de Leon Pereira, Anthony Tan, Andrea Bunt, and Olivier Tremblay-Savard. 2021. Increasing player engagement, retention and performance through the inclusion of educational content in a citizen science game. In Proceedings of the 16th International Conference on the Foundations of Digital Games (FDG '21). Association for Computing Machinery, New York, NY, USA, Article 16, 1–12. https://doi.org/10.1145/3472538.3472554
