@@ -38,29 +38,34 @@ mechanisms layered on top of the greedy core.
 2. It generates candidate moves from that frontier:
    - exact frontier duplications that would extend the anchored core
    - excess-only frontier deletions that remove genes the target does not need
-   - bounded inversions crossing `[t]` as structural reset moves
-3. It scores resulting genomes lexicographically by:
-   - anchored-core size
-   - left/right balance of the core
-   - gene-count distance to the target
-   - total length difference
-   - exact anchored matches
-   - distance-weighted anchored matches
+   - bounded inversions crossing `[t]` (inversions reorder large blocks around
+     the terminus and can unlock a different frontier-growth orientation)
+3. It scores resulting genomes by a six-component lexicographic tuple — all
+   components are maximized; the two cost terms are stored negated so they are
+   effectively minimized:
+   - total anchored-core size (`left + right` extensions; maximize)
+   - minimum of left and right core extensions (maximizing this rewards
+     symmetric growth over lopsided growth)
+   - negative gene-count distance to the target (minimize per-gene surplus/deficit)
+   - negative total length difference from the target (minimize length mismatch)
+   - count of positionally-matching anchored genes (maximize)
+   - distance-weighted count of positionally-matching anchored genes (maximize;
+     genes closer to `[t]` contribute more)
 4. It keeps only immediately improving moves, then compares a small shortlist
    with one-step lookahead.
-5. When the anchored core is still tiny, it runs a short opening rollout over
-   promising inversions.
+5. When the anchored core is still very small (≤ 1 matched gene beyond `[t]`),
+   it runs a short opening rollout over promising inversions.
 6. When the chosen move is a duplication, it sometimes tests a few shorter
    same-source lengths with a short rollout to avoid overcommitting to the
-   longest exact macro.
+   longest exact match.
 
 ### What makes `v19` different
 
 Relative to `v18`, the new ingredient is the neutral-inversion opening rollout.
 If the opening position has no improving inversion at all, `v19` also tries up
-to `3` near-neutral inversions that are closest to break-even on the score
-tuple. This lets the solver use a short-term "setup inversion" when that leads
-to a shorter overall path.
+to `3` near-neutral inversions — moves that are strictly score-worsening but
+closest to break-even. This lets the solver take a temporary step backward when
+that unlocks a shorter overall path.
 
 ### Practical bounded search size
 
@@ -75,8 +80,11 @@ So the raw candidate pool is bounded to roughly `320` moves per state before
 deduplication, and the actual comparison set is much smaller:
 
 - lookahead shortlist: top `8` improving moves plus up to `4` extra short
-  inversions
-- opening inversion rollout: at most `12` rollout candidates
+  inversions (prioritized by length)
+- opening inversion rollout: at most `12` rollout candidates total, composed
+  of `1` current-best fallback + up to `8` improving inversions + up to `3`
+  near-neutral inversions (the near-neutral group is only added when no
+  improving inversion exists in the pool)
 - duplication-length rollout: fallback plus up to `3` shorter same-source
   alternatives
 
@@ -183,7 +191,7 @@ pairs (`84.6%`). It beat OrthoAlign outright on `1207` pairs (`76.8%`), tied on
 
 The average head-to-head delta was `-8.32` moves and the median delta was `-8`,
 so this is not a "won by a few outliers" result. The center of the distribution
-also favors the game-engine solver.
+also favors the solver.
 
 ### Coverage and data quality
 
@@ -277,3 +285,92 @@ pairs. It is extracting a focused hard set from the recurring loss clusters:
 | CP010520_ 1491.354 | CP000721_ 290402.41 | 25 | 36 | 11 | 1.440 |
 | CP010520_ 1491.354 | CP006777_ 864803.3 | 25 | 36 | 11 | 1.440 |
 | CP010521_ 1491.355 | CP000721_ 290402.41 | 25 | 36 | 11 | 1.440 |
+
+## Directional Asymmetry: Is A→B Easier Than B→A?
+
+### Setup
+
+Of the `1572` comparable pairs, `571` have their reverse also present and
+comparable. Of those, `524` have both directions solved by the solver and scored
+by OrthoAlign, giving `524` matched pairs for a head-to-head directional
+comparison.
+
+### OrthoAlign is nearly symmetric
+
+OrthoAlign treats the two directions as almost equivalent. Across the `524`
+matched pairs, `183` (35%) produce exactly the same cost in both directions.
+The mean absolute difference is `1.25` moves and the maximum is `6`. In every
+case where the solver shows large asymmetry, OrthoAlign shows near-zero
+asymmetry. This is expected: OrthoAlign's edit distance is a true metric and
+should be symmetric by design.
+
+### The solver is strongly asymmetric
+
+Only `36` of the `524` matched pairs (7%) are symmetric under the solver. The
+mean absolute difference is `7.31` moves, the median is `6`, and the maximum is
+`32`. The asymmetry is not random noise — it has a clear structural cause.
+
+### Asymmetry is almost entirely explained by the length difference
+
+The Pearson correlation between (target length − mutable length) and (solver
+moves A→B minus solver moves B→A) is **r = 0.90**. The longer the target
+relative to the mutable, the more moves the solver needs going forward — and
+the fewer it needs going backward.
+
+| Direction | n | Mean solver diff (fwd − rev) | Growth harder? |
+|---|---:|---:|---|
+| Expanding (mutable shorter than target) | 315 | +7.26 | yes, 85.7% of pairs |
+| Shrinking (mutable longer than target) | 195 | −6.73 | yes (contraction easier), 90.3% of pairs |
+| Same length | 14 | −0.50 | n/a |
+
+The magnitude also scales with how large the length gap is:
+
+| Length gap | n | Mean \|solver diff\| |
+|---|---:|---:|
+| 0–20 genes | 289 | 4.09 |
+| 21–50 genes | 198 | 9.75 |
+| 51+ genes | 37 | 19.49 |
+
+### Extreme examples
+
+The most asymmetric pairs in absolute terms involve `AP012212_ 1042156.4`
+(66 genes) paired with the two 138-gene genomes `CP000721_ 290402.41` and
+`CP006777_ 864803.3`. The solver uses **73 moves** growing from the 66-gene
+mutable to the 138-gene target, but only **41 moves** going the other way. OA
+reports exactly **60** in both directions. A ratio of 1.78 in solver effort, a
+ratio of 1.00 in OrthoAlign cost.
+
+Similarly, `CP000721_ 290402.41` (138 genes) → `CP010086_ 1520.6` (85 genes)
+costs only **19 solver moves** (contraction), while the reverse costs **37**
+(growth). OrthoAlign scores both at **29–30**.
+
+At the other extreme, trivially-close pairs like `CP000726_` → `CP000939_`
+(4-gene difference) solve in **1 move** one way and **2 the other**, and OA
+also reports **1** in both directions.
+
+### Why the solver is asymmetric but OrthoAlign is not
+
+The v19 solver is a greedy frontier-grower anchored at `[t]`. Its core strategy
+is to extend a matching block outward from the terminus by duplicating material
+that already exists in the current genome. When the target is shorter or the
+same length, the solver can lean on deletions to clean up the excess and the
+frontier grows quickly. When the target is longer, the solver must manufacture
+copies of genes it may not have well-positioned near the frontier, which
+requires more moves and is more likely to require structural inversions to
+reorient before growth can proceed.
+
+OrthoAlign's edit distance is symmetric because the set of operations that
+transforms A into B is in bijection with the reverse set. The solver does not
+have this property because it is not computing edit distance — it is running a
+heuristic that has a strong structural bias toward contraction over expansion.
+
+### Implications
+
+This asymmetry is a measurable heuristic bias, not a property of the underlying
+problem. It suggests that a useful refinement target is to improve growth-phase
+performance specifically — for example, by precomputing a richer set of
+candidate source blocks when the mutable is much shorter than the target, or by
+running an early expansion rollout analogous to the opening-inversion rollout.
+It also suggests that when the solver loses to OrthoAlign, the loss is
+disproportionately likely to occur in the growing direction, which matches the
+loss-pattern analysis above.
