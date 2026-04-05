@@ -1,6 +1,6 @@
 {
   "name": "phase3-hard-genomic",
-  "description": "Phase 3 hard-genomic development manifest. Curated from the recurring loss clusters in the full Clostridium pair sweep, with v19 frozen as the historical Phase 2 winner.",
+  "description": "Phase 3 hard-genomic development manifest. Curated from the recurring loss clusters in the archived v19 Clostridium pair sweep and preserved after freezing v30 as the final solver.",
   "resultsPath": "results_phase3.tsv",
   "timingsPath": "timings_phase3.tsv",
   "decisionRule": "Optimize this manifest for better generalization and lower runtime, while treating phase2_dev and the legacy benchmark as non-regression guardrails. Use phase2_holdout only for milestone checks.",

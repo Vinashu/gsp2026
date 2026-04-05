@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="430" viewBox="0 0 980 430" role="img" aria-labelledby="title desc">
+<title id="title">Clostridium sweep: concentrated loss cluster</title>
+<desc id="desc">Heatmap of solver minus OrthoAlign deltas for the recurring hard cluster discussed in the summary.</desc>
+<rect x="0.0" y="0.0" width="980.0" height="430.0" fill="#ffffff" stroke="none" stroke-width="1" />
+<text x="48.0" y="42.0" fill="#16324f" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="start">Figure 2. The loss pattern is concentrated, not diffuse</text>
+<text x="48.0" y="68.0" fill="#6b7c93" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="start">Selected cluster from the narrative: positive values mean the solver needs more moves than OrthoAlign.</text>
+<rect x="48.0" y="100.0" width="884.0" height="270.0" fill="#f8fbff" stroke="#d9e2ec" stroke-width="1" rx="14" />
+<text x="218.0" y="201.0" fill="#16324f" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="end">AP012212</text>
+<text x="218.0" y="243.0" fill="#16324f" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="end">CP001078</text>
+<text x="218.0" y="285.0" fill="#16324f" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="end">CP010520</text>
+<text x="218.0" y="327.0" fill="#16324f" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="end">CP010521</text>
+<text x="319.0" y="158.0" fill="#16324f" font-size="12" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start" transform="rotate(-28.0 319.0 158.0)">CP010994</text>
+<text x="441.0" y="158.0" fill="#16324f" font-size="12" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start" transform="rotate(-28.0 441.0 158.0)">CP010993</text>
+<text x="563.0" y="158.0" fill="#16324f" font-size="12" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start" transform="rotate(-28.0 563.0 158.0)">CP000721</text>
+<text x="685.0" y="158.0" fill="#16324f" font-size="12" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start" transform="rotate(-28.0 685.0 158.0)">CP006777</text>
+<text x="807.0" y="158.0" fill="#16324f" font-size="12" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start" transform="rotate(-28.0 807.0 158.0)">CP002160</text>
+<rect x="258.0" y="176.0" width="120.0" height="40.0" fill="#e0828e" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="318.0" y="202.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+14</text>
+<rect x="380.0" y="176.0" width="120.0" height="40.0" fill="#e38b96" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="440.0" y="202.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+13</text>
+<rect x="502.0" y="176.0" width="120.0" height="40.0" fill="#e38b96" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="562.0" y="202.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+13</text>
+<rect x="624.0" y="176.0" width="120.0" height="40.0" fill="#e38b96" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="684.0" y="202.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+13</text>
+<rect x="746.0" y="176.0" width="120.0" height="40.0" fill="#e38b96" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="806.0" y="202.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+13</text>
+<rect x="258.0" y="218.0" width="120.0" height="40.0" fill="#2f6fed" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="318.0" y="244.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-21</text>
+<rect x="380.0" y="218.0" width="120.0" height="40.0" fill="#5e90f1" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="440.0" y="244.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-16</text>
+<rect x="502.0" y="218.0" width="120.0" height="40.0" fill="#e79ba4" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="562.0" y="244.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+11</text>
+<rect x="624.0" y="218.0" width="120.0" height="40.0" fill="#e79ba4" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="684.0" y="244.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+11</text>
+<rect x="746.0" y="218.0" width="120.0" height="40.0" fill="#bbd1fa" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="806.0" y="244.0" fill="#16324f" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-6</text>
+<rect x="258.0" y="260.0" width="120.0" height="40.0" fill="#2f6fed" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="318.0" y="286.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-21</text>
+<rect x="380.0" y="260.0" width="120.0" height="40.0" fill="#5e90f1" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="440.0" y="286.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-16</text>
+<rect x="502.0" y="260.0" width="120.0" height="40.0" fill="#e79ba4" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="562.0" y="286.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+11</text>
+<rect x="624.0" y="260.0" width="120.0" height="40.0" fill="#e79ba4" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="684.0" y="286.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+11</text>
+<rect x="746.0" y="260.0" width="120.0" height="40.0" fill="#bbd1fa" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="806.0" y="286.0" fill="#16324f" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-6</text>
+<rect x="258.0" y="302.0" width="120.0" height="40.0" fill="#2f6fed" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="318.0" y="328.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-21</text>
+<rect x="380.0" y="302.0" width="120.0" height="40.0" fill="#5e90f1" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="440.0" y="328.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-16</text>
+<rect x="502.0" y="302.0" width="120.0" height="40.0" fill="#e79ba4" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="562.0" y="328.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+11</text>
+<rect x="624.0" y="302.0" width="120.0" height="40.0" fill="#e79ba4" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="684.0" y="328.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+11</text>
+<rect x="746.0" y="302.0" width="120.0" height="40.0" fill="#bbd1fa" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="806.0" y="328.0" fill="#16324f" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-6</text>
+<rect x="298.0" y="344.0" width="5.2" height="14.0" fill="#2f6fed" stroke="none" stroke-width="1" />
+<rect x="302.2" y="344.0" width="5.2" height="14.0" fill="#3372ed" stroke="none" stroke-width="1" />
+<rect x="306.4" y="344.0" width="5.2" height="14.0" fill="#3774ee" stroke="none" stroke-width="1" />
+<rect x="310.6" y="344.0" width="5.2" height="14.0" fill="#3b77ee" stroke="none" stroke-width="1" />
+<rect x="314.8" y="344.0" width="5.2" height="14.0" fill="#3f7aee" stroke="none" stroke-width="1" />
+<rect x="319.0" y="344.0" width="5.2" height="14.0" fill="#437def" stroke="none" stroke-width="1" />
+<rect x="323.2" y="344.0" width="5.2" height="14.0" fill="#477fef" stroke="none" stroke-width="1" />
+<rect x="327.4" y="344.0" width="5.2" height="14.0" fill="#4a82f0" stroke="none" stroke-width="1" />
+<rect x="331.6" y="344.0" width="5.2" height="14.0" fill="#4e85f0" stroke="none" stroke-width="1" />
+<rect x="335.8" y="344.0" width="5.2" height="14.0" fill="#5288f0" stroke="none" stroke-width="1" />
+<rect x="340.0" y="344.0" width="5.2" height="14.0" fill="#568af1" stroke="none" stroke-width="1" />
+<rect x="344.2" y="344.0" width="5.2" height="14.0" fill="#5a8df1" stroke="none" stroke-width="1" />
+<rect x="348.4" y="344.0" width="5.2" height="14.0" fill="#5e90f1" stroke="none" stroke-width="1" />
+<rect x="352.6" y="344.0" width="5.2" height="14.0" fill="#6293f2" stroke="none" stroke-width="1" />
+<rect x="356.8" y="344.0" width="5.2" height="14.0" fill="#6695f2" stroke="none" stroke-width="1" />
+<rect x="361.0" y="344.0" width="5.2" height="14.0" fill="#6a98f2" stroke="none" stroke-width="1" />
+<rect x="365.2" y="344.0" width="5.2" height="14.0" fill="#6e9bf3" stroke="none" stroke-width="1" />
+<rect x="369.4" y="344.0" width="5.2" height="14.0" fill="#729ef3" stroke="none" stroke-width="1" />
+<rect x="373.6" y="344.0" width="5.2" height="14.0" fill="#76a0f3" stroke="none" stroke-width="1" />
+<rect x="377.8" y="344.0" width="5.2" height="14.0" fill="#79a3f4" stroke="none" stroke-width="1" />
+<rect x="382.0" y="344.0" width="5.2" height="14.0" fill="#7da6f4" stroke="none" stroke-width="1" />
+<rect x="386.2" y="344.0" width="5.2" height="14.0" fill="#81a9f5" stroke="none" stroke-width="1" />
+<rect x="390.4" y="344.0" width="5.2" height="14.0" fill="#85abf5" stroke="none" stroke-width="1" />
+<rect x="394.6" y="344.0" width="5.2" height="14.0" fill="#89aef5" stroke="none" stroke-width="1" />
+<rect x="398.8" y="344.0" width="5.2" height="14.0" fill="#8db1f6" stroke="none" stroke-width="1" />
+<rect x="403.0" y="344.0" width="5.2" height="14.0" fill="#91b4f6" stroke="none" stroke-width="1" />
+<rect x="407.2" y="344.0" width="5.2" height="14.0" fill="#95b6f6" stroke="none" stroke-width="1" />
+<rect x="411.4" y="344.0" width="5.2" height="14.0" fill="#99b9f7" stroke="none" stroke-width="1" />
+<rect x="415.6" y="344.0" width="5.2" height="14.0" fill="#9dbcf7" stroke="none" stroke-width="1" />
+<rect x="419.8" y="344.0" width="5.2" height="14.0" fill="#a1bef7" stroke="none" stroke-width="1" />
+<rect x="424.0" y="344.0" width="5.2" height="14.0" fill="#a5c1f8" stroke="none" stroke-width="1" />
+<rect x="428.2" y="344.0" width="5.2" height="14.0" fill="#a9c4f8" stroke="none" stroke-width="1" />
+<rect x="432.4" y="344.0" width="5.2" height="14.0" fill="#acc7f9" stroke="none" stroke-width="1" />
+<rect x="436.6" y="344.0" width="5.2" height="14.0" fill="#b0c9f9" stroke="none" stroke-width="1" />
+<rect x="440.8" y="344.0" width="5.2" height="14.0" fill="#b4ccf9" stroke="none" stroke-width="1" />
+<rect x="445.0" y="344.0" width="5.2" height="14.0" fill="#b8cffa" stroke="none" stroke-width="1" />
+<rect x="449.2" y="344.0" width="5.2" height="14.0" fill="#bcd2fa" stroke="none" stroke-width="1" />
+<rect x="453.4" y="344.0" width="5.2" height="14.0" fill="#c0d4fa" stroke="none" stroke-width="1" />
+<rect x="457.6" y="344.0" width="5.2" height="14.0" fill="#c4d7fb" stroke="none" stroke-width="1" />
+<rect x="461.8" y="344.0" width="5.2" height="14.0" fill="#c8dafb" stroke="none" stroke-width="1" />
+<rect x="466.0" y="344.0" width="5.2" height="14.0" fill="#ccddfb" stroke="none" stroke-width="1" />
+<rect x="470.2" y="344.0" width="5.2" height="14.0" fill="#d0dffc" stroke="none" stroke-width="1" />
+<rect x="474.4" y="344.0" width="5.2" height="14.0" fill="#d4e2fc" stroke="none" stroke-width="1" />
+<rect x="478.6" y="344.0" width="5.2" height="14.0" fill="#d8e5fc" stroke="none" stroke-width="1" />
+<rect x="482.8" y="344.0" width="5.2" height="14.0" fill="#dbe8fd" stroke="none" stroke-width="1" />
+<rect x="487.0" y="344.0" width="5.2" height="14.0" fill="#dfeafd" stroke="none" stroke-width="1" />
+<rect x="491.2" y="344.0" width="5.2" height="14.0" fill="#e3edfe" stroke="none" stroke-width="1" />
+<rect x="495.4" y="344.0" width="5.2" height="14.0" fill="#e7f0fe" stroke="none" stroke-width="1" />
+<rect x="499.6" y="344.0" width="5.2" height="14.0" fill="#ebf3fe" stroke="none" stroke-width="1" />
+<rect x="503.8" y="344.0" width="5.2" height="14.0" fill="#eff5ff" stroke="none" stroke-width="1" />
+<rect x="508.0" y="344.0" width="5.2" height="14.0" fill="#fff5f5" stroke="none" stroke-width="1" />
+<rect x="512.2" y="344.0" width="5.2" height="14.0" fill="#fef2f2" stroke="none" stroke-width="1" />
+<rect x="516.4" y="344.0" width="5.2" height="14.0" fill="#fdeeef" stroke="none" stroke-width="1" />
+<rect x="520.6" y="344.0" width="5.2" height="14.0" fill="#fcebec" stroke="none" stroke-width="1" />
+<rect x="524.8" y="344.0" width="5.2" height="14.0" fill="#fbe7e9" stroke="none" stroke-width="1" />
+<rect x="529.0" y="344.0" width="5.2" height="14.0" fill="#fae4e6" stroke="none" stroke-width="1" />
+<rect x="533.2" y="344.0" width="5.2" height="14.0" fill="#f9e0e3" stroke="none" stroke-width="1" />
+<rect x="537.4" y="344.0" width="5.2" height="14.0" fill="#f9dddf" stroke="none" stroke-width="1" />
+<rect x="541.6" y="344.0" width="5.2" height="14.0" fill="#f8d9dc" stroke="none" stroke-width="1" />
+<rect x="545.8" y="344.0" width="5.2" height="14.0" fill="#f7d6d9" stroke="none" stroke-width="1" />
+<rect x="550.0" y="344.0" width="5.2" height="14.0" fill="#f6d3d6" stroke="none" stroke-width="1" />
+<rect x="554.2" y="344.0" width="5.2" height="14.0" fill="#f5cfd3" stroke="none" stroke-width="1" />
+<rect x="558.4" y="344.0" width="5.2" height="14.0" fill="#f4ccd0" stroke="none" stroke-width="1" />
+<rect x="562.6" y="344.0" width="5.2" height="14.0" fill="#f3c8cd" stroke="none" stroke-width="1" />
+<rect x="566.8" y="344.0" width="5.2" height="14.0" fill="#f2c5ca" stroke="none" stroke-width="1" />
+<rect x="571.0" y="344.0" width="5.2" height="14.0" fill="#f1c1c7" stroke="none" stroke-width="1" />
+<rect x="575.2" y="344.0" width="5.2" height="14.0" fill="#f0bec4" stroke="none" stroke-width="1" />
+<rect x="579.4" y="344.0" width="5.2" height="14.0" fill="#efbbc1" stroke="none" stroke-width="1" />
+<rect x="583.6" y="344.0" width="5.2" height="14.0" fill="#eeb7be" stroke="none" stroke-width="1" />
+<rect x="587.8" y="344.0" width="5.2" height="14.0" fill="#eeb4ba" stroke="none" stroke-width="1" />
+<rect x="592.0" y="344.0" width="5.2" height="14.0" fill="#edb0b7" stroke="none" stroke-width="1" />
+<rect x="596.2" y="344.0" width="5.2" height="14.0" fill="#ecadb4" stroke="none" stroke-width="1" />
+<rect x="600.4" y="344.0" width="5.2" height="14.0" fill="#eba9b1" stroke="none" stroke-width="1" />
+<rect x="604.6" y="344.0" width="5.2" height="14.0" fill="#eaa6ae" stroke="none" stroke-width="1" />
+<rect x="608.8" y="344.0" width="5.2" height="14.0" fill="#e9a2ab" stroke="none" stroke-width="1" />
+<rect x="613.0" y="344.0" width="5.2" height="14.0" fill="#e89fa8" stroke="none" stroke-width="1" />
+<rect x="617.2" y="344.0" width="5.2" height="14.0" fill="#e79ca5" stroke="none" stroke-width="1" />
+<rect x="621.4" y="344.0" width="5.2" height="14.0" fill="#e698a2" stroke="none" stroke-width="1" />
+<rect x="625.6" y="344.0" width="5.2" height="14.0" fill="#e5959f" stroke="none" stroke-width="1" />
+<rect x="629.8" y="344.0" width="5.2" height="14.0" fill="#e4919c" stroke="none" stroke-width="1" />
+<rect x="634.0" y="344.0" width="5.2" height="14.0" fill="#e38e99" stroke="none" stroke-width="1" />
+<rect x="638.2" y="344.0" width="5.2" height="14.0" fill="#e28a96" stroke="none" stroke-width="1" />
+<rect x="642.4" y="344.0" width="5.2" height="14.0" fill="#e28792" stroke="none" stroke-width="1" />
+<rect x="646.6" y="344.0" width="5.2" height="14.0" fill="#e1838f" stroke="none" stroke-width="1" />
+<rect x="650.8" y="344.0" width="5.2" height="14.0" fill="#e0808c" stroke="none" stroke-width="1" />
+<rect x="655.0" y="344.0" width="5.2" height="14.0" fill="#df7d89" stroke="none" stroke-width="1" />
+<rect x="659.2" y="344.0" width="5.2" height="14.0" fill="#de7986" stroke="none" stroke-width="1" />
+<rect x="663.4" y="344.0" width="5.2" height="14.0" fill="#dd7683" stroke="none" stroke-width="1" />
+<rect x="667.6" y="344.0" width="5.2" height="14.0" fill="#dc7280" stroke="none" stroke-width="1" />
+<rect x="671.8" y="344.0" width="5.2" height="14.0" fill="#db6f7d" stroke="none" stroke-width="1" />
+<rect x="676.0" y="344.0" width="5.2" height="14.0" fill="#da6b7a" stroke="none" stroke-width="1" />
+<rect x="680.2" y="344.0" width="5.2" height="14.0" fill="#d96877" stroke="none" stroke-width="1" />
+<rect x="684.4" y="344.0" width="5.2" height="14.0" fill="#d86574" stroke="none" stroke-width="1" />
+<rect x="688.6" y="344.0" width="5.2" height="14.0" fill="#d76171" stroke="none" stroke-width="1" />
+<rect x="692.8" y="344.0" width="5.2" height="14.0" fill="#d75e6d" stroke="none" stroke-width="1" />
+<rect x="697.0" y="344.0" width="5.2" height="14.0" fill="#d65a6a" stroke="none" stroke-width="1" />
+<rect x="701.2" y="344.0" width="5.2" height="14.0" fill="#d55767" stroke="none" stroke-width="1" />
+<rect x="705.4" y="344.0" width="5.2" height="14.0" fill="#d45364" stroke="none" stroke-width="1" />
+<rect x="709.6" y="344.0" width="5.2" height="14.0" fill="#d35061" stroke="none" stroke-width="1" />
+<rect x="713.8" y="344.0" width="5.2" height="14.0" fill="#d24c5e" stroke="none" stroke-width="1" />
+<rect x="718.0" y="344.0" width="5.2" height="14.0" fill="#d1495b" stroke="none" stroke-width="1" />
+<line x1="298.0" y1="359.0" x2="718.0" y2="359.0" stroke="#16324f" stroke-width="1" />
+<line x1="298.0" y1="359.0" x2="298.0" y2="364.0" stroke="#16324f" stroke-width="1" />
+<text x="298.0" y="380.0" fill="#6b7c93" font-size="11" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">-21</text>
+<line x1="508.0" y1="359.0" x2="508.0" y2="364.0" stroke="#16324f" stroke-width="1" />
+<text x="508.0" y="380.0" fill="#6b7c93" font-size="11" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">+0</text>
+<line x1="718.0" y1="359.0" x2="718.0" y2="364.0" stroke="#16324f" stroke-width="1" />
+<text x="718.0" y="380.0" fill="#6b7c93" font-size="11" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">+21</text>
+<text x="508.0" y="338.0" fill="#6b7c93" font-size="12" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">Cell value: solver - OrthoAlign (moves)</text>
+<text x="64.0" y="126.0" fill="#16324f" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start">Mutables</text>
+<text x="508.0" y="126.0" fill="#16324f" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start">Targets</text>
+</svg>

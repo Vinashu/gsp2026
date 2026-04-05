@@ -16,7 +16,7 @@ Here, the agent iterates on `solver.js` (the genome sorting heuristic) inside a 
 |-----------------------|--------------|
 | `train.py` — editable artifact | `solver.js` — editable artifact |
 | `prepare.py` — fixed environment | `gameEngine.js` + `evaluate.js` + `benchmark/puzzles.json` |
-| `program.md` — research doctrine | `docs/program.md` — Phase 2 doctrine; `PHASE3_PROGRAM.md` — active |
+| `program.md` — research doctrine | `docs/program.md` — Phase 2 doctrine; `PHASE3_PROGRAM.md` — historical Phase 3 doctrine |
 | Metric: validation bits-per-byte | Metric: `avgRatio` (moves / known best) |
 | ~5 min per experiment | <30 s per experiment |
 | git revert on regression | `git checkout HEAD -- solver.js` |
@@ -41,7 +41,7 @@ The benchmark puzzles, game rules, evaluation budget, and scoring formula are al
 
 The agent reads it at the start of every Phase 2 session.
 
-Phase 3 uses `PHASE3_PROGRAM.md` (repo root) instead. The original
+Phase 3 used `PHASE3_PROGRAM.md` (repo root). The original
 `docs/program.md` and `docs/RESEARCH_LOOP_PROMPT.md` are preserved as
 historical artifacts so the Phase 2 story can be reconstructed later.
 
@@ -121,9 +121,9 @@ git add solver.js results.tsv && git commit -m "feat: v0 baseline"
 ### Starting a research session
 For historical Phase 2 reproduction, use `docs/RESEARCH_LOOP_PROMPT.md`.
 
-For active work going forward, use `PHASE3_LOOP_PROMPT.md` (repo root), which
-treats `v19` as the frozen Phase 2 baseline and optimizes the hard-genomic
-Phase 3 manifest plus runtime.
+If solver research is intentionally reopened, use `PHASE3_LOOP_PROMPT.md`
+(repo root) as the historical Phase 3 loop prompt. The project is currently
+frozen at `v30`.
 
 ### Reviewing progress
 ```bash

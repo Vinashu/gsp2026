@@ -316,7 +316,7 @@ def draw_quality_runtime(summary, comparable_rows):
 
     runtime_items = [
         ("OrthoAlign", summary["averageOrthoMs"], "#7b8ba1"),
-        ("Solver v19", summary["averageSolverMs"], "#7346d3"),
+        (f"Solver {summary['solverVersion']}", summary["averageSolverMs"], "#7346d3"),
     ]
     slot_w = rt_plot_w / len(runtime_items)
     for index, (label, value, fill) in enumerate(runtime_items):

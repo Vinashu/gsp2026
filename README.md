@@ -38,8 +38,8 @@ gsp2026/
 |- results_phase2.tsv              # Phase 2 manifest experiment log
 |- results_phase3.tsv              # Phase 3 hard-genomic experiment log
 |- timings_phase3.tsv              # Phase 3 runtime log
-|- PHASE3_PROGRAM.md               # Active Phase 3 doctrine
-|- PHASE3_LOOP_PROMPT.md           # Active prompt for new research sessions
+|- PHASE3_PROGRAM.md               # Historical Phase 3 doctrine that produced v30
+|- PHASE3_LOOP_PROMPT.md           # Prompt to use only if reopening solver research
 |- docs/
 |  |- AUTORESEARCH.md              # Methodology notes (Karpathy adaptation)
 |  |- IDEA.md                      # Original research plan
@@ -48,8 +48,9 @@ gsp2026/
 |  |- program.md                   # Historical Phase 2 doctrine
 |  `- RESEARCH_LOOP_PROMPT.md      # Historical Phase 2 research prompt
 |- analysis/
-|  |- analyze_clostridium_pairs.js # All-pairs sweep utility (run once for v19)
-|  `- clostridium_pairs_full/      # Full all-pairs Clostridium sweep artifacts
+|  |- analyze_clostridium_pairs.js # All-pairs sweep utility for full Clostridium reruns
+|  |- clostridium_pairs_full/      # Final frozen v30 full-sweep artifacts
+|  `- clostridium_pairs_full_v19_archive/ # Archived historical v19 full sweep
 |- benchmark/
 |  |- puzzles.json                 # Frozen 8-puzzle legacy benchmark
 |  |- phase2_dev.json              # Phase 2 development manifest
@@ -98,7 +99,8 @@ appends to `results_phase2.tsv`.
 HYPOTHESIS="baseline on phase3 hard genomic" node evaluate_dataset.js --manifest benchmark/phase3_hard_genomic.json
 ```
 
-This is the new Phase 3 development target.
+This is the historical Phase 3 development target and the main hard-genomic
+regression set if research is reopened.
 
 ### 5. Measure Phase 3 runtime
 
@@ -121,12 +123,14 @@ node evaluate.js --puzzle level20 --verbose
 node evaluate_dataset.js --manifest benchmark/phase2_dev.json --puzzle level30 --verbose
 ```
 
-### 8. Start an autoresearch session
+### 8. Reopen solver research
 
 Open Codex or Claude Code in this directory and paste the contents of
 `PHASE3_LOOP_PROMPT.md`.
 
-Use `docs/RESEARCH_LOOP_PROMPT.md` only as a historical Phase 2 reference.
+Use this only if you intentionally want to resume solver experiments beyond the
+frozen `v30` baseline. Use `docs/RESEARCH_LOOP_PROMPT.md` only as a historical
+Phase 2 reference.
 
 ## Research Approach
 
@@ -174,17 +178,18 @@ OrthoAlign tool, see [ORTHOALIGN_COMPARATOR_NOTE.md](docs/ORTHOALIGN_COMPARATOR_
 
 ## Current Baseline
 
-`v19` is the frozen Phase 2 winner.
+`v30` is the frozen final solver.
 
-Phase 2 established the current heuristic baseline on the curated manifests and
-the frozen legacy benchmark. The full Clostridium all-pairs sweep in
-`analysis/clostridium_pairs_full/` then showed that `v19` also generalizes well
-on a much larger genomic comparison set.
+`v19` remains the frozen Phase 2 winner and the historical baseline that
+launched Phase 3. The repo now preserves both full Clostridium sweeps:
 
-That means the active research question has changed:
+- `analysis/clostridium_pairs_full/`
+  Final rerun with frozen `v30`
+- `analysis/clostridium_pairs_full_v19_archive/`
+  Archived historical `v19` sweep
 
-- Phase 2: discover a strong heuristic
-- Phase 3: preserve that heuristic while making it broader and faster
+Phase 3 improved runtime much more than quality, so the project is now in a
+consolidation and paper-writing stage rather than open-ended solver tuning.
 
 ## Phase 2 and Phase 3 Study Design
 
@@ -202,13 +207,13 @@ tracks:
 
 Those Phase 2 artifacts remain historical reference points.
 
-Phase 3 adds a new primary development track:
+Phase 3 added a new primary development track:
 
 - `benchmark/phase3_hard_genomic.json`
   A curated hard-genomic subset selected from the recurring loss clusters in
   the full Clostridium pair sweep.
 
-Recommended workflow now:
+Historical Phase 3 workflow:
 
 - tune on `phase3_hard_genomic`
 - measure runtime on `phase3_hard_genomic`

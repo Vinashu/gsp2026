@@ -4,18 +4,24 @@
 
 Phase 2 is complete.
 
-The current baseline winner is `v19` in `solver.js`.
+Phase 3 discovery work is also complete.
 
-Phase 2 artifacts remain historical reference points and must be preserved:
+The frozen final solver is `v30` in `solver.js`.
+
+`v19` remains the frozen Phase 2 winner and the historical baseline that
+launched Phase 3.
+
+Historical artifacts remain preserved and must not be reinterpreted:
 
 - `docs/program.md`
 - `docs/RESEARCH_LOOP_PROMPT.md`
 - `results.tsv`
 - `results_phase2.tsv`
+- `analysis/clostridium_pairs_full_v19_archive/`
 - `analysis/clostridium_pairs_full/`
 
-Do not reinterpret those files as the new active doctrine. They document how we
-arrived at `v19`.
+Together they document how the project moved from `v19` to the final `v30`
+solver.
 
 Phase 3 has a different goal:
 
@@ -24,7 +30,7 @@ Phase 3 has a different goal:
 3. reduce runtime where possible
 4. keep the solver explainable
 
-## Active Phase 3 Tracks
+## Phase 3 Tracks
 
 There are now four distinct reference tracks:
 
@@ -37,9 +43,9 @@ There are now four distinct reference tracks:
 4. `benchmark/phase2_holdout.json`
    Reserved milestone set. Use sparingly.
 
-The full Clostridium sweep in `analysis/clostridium_pairs_full/` is not an
-inner-loop benchmark. It is historical evidence and a source for puzzle
-selection, failure analysis, and paper writing.
+The archived `v19` sweep and the final `v30` rerun are not inner-loop
+benchmarks. They are evidence for failure analysis, paper writing, and
+reproducibility.
 
 ## File Responsibilities
 
@@ -58,7 +64,7 @@ selection, failure analysis, and paper writing.
 | `timings_phase3.tsv` | Read only. Written automatically by `measure_dataset_runtime.js`. |
 | `results_phase2.tsv` | Read only. Historical Phase 2 quality log. |
 | `results.tsv` | Read only. Historical legacy log. |
-| `PHASE3_PROGRAM.md` | Read only. Your active Phase 3 doctrine. |
+| `PHASE3_PROGRAM.md` | Read only. Historical Phase 3 doctrine. |
 
 ## Phase 3 Objective
 
@@ -66,7 +72,7 @@ The Phase 2 question was:
 
 "Can we discover a strong heuristic?"
 
-The Phase 3 question is:
+The Phase 3 question was:
 
 "Can we preserve that heuristic while making it broader and cheaper?"
 
@@ -157,4 +163,5 @@ Every accepted Phase 3 revision should report:
 
 Do not treat Phase 3 as a new blank-slate search.
 
-Treat it as the generalization and efficiency phase of the same solver story.
+Treat it as the historical generalization and efficiency phase of the same
+solver story. The current repo state freezes the result of that phase at `v30`.

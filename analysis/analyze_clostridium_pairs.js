@@ -4,10 +4,10 @@
 const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
-const { parseGenome } = require('./gameEngine');
-const { solve } = require('./solver');
+const { parseGenome } = require('../gameEngine');
+const { solve } = require('../solver');
 
-const ROOT = __dirname;
+const ROOT = path.resolve(__dirname, '..');
 const GENOME_DIR = path.join(ROOT, '_legacy', 'levelCreator', 'Clostridium_gesort_format');
 const ORTHO_DIR = path.join(ROOT, '_legacy', 'levelCreator', 'OrthoAlign');
 const DEFAULT_OUT_DIR = path.join(ROOT, 'analysis', 'clostridium_pairs');
