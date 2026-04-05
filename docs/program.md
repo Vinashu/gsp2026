@@ -32,7 +32,7 @@ and refine solver strategies.
 | `benchmark/phase2_holdout.json` | Read only. Never modify. Reserved Phase 2 holdout manifest. |
 | `results.tsv` | Read only. Written automatically by `evaluate.js`. |
 | `results_phase2.tsv` | Read only. Written automatically by `evaluate_dataset.js`. |
-| `program.md` | Read only. Your operating manual. |
+| `docs/program.md` | Read only. Your operating manual. |
 
 Additional puzzle files under `syntetic_puzles/dev/` and `real_puzzles/dev/`
 may be read for context, but Phase 2 research should use the curated manifests

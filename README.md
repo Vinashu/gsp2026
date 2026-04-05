@@ -38,11 +38,17 @@ gsp2026/
 |- results_phase2.tsv              # Phase 2 manifest experiment log
 |- results_phase3.tsv              # Phase 3 hard-genomic experiment log
 |- timings_phase3.tsv              # Phase 3 runtime log
-|- program.md                      # Historical Phase 2 doctrine
 |- PHASE3_PROGRAM.md               # Active Phase 3 doctrine
-|- RESEARCH_LOOP_PROMPT.md         # Historical Phase 2 research prompt
 |- PHASE3_LOOP_PROMPT.md           # Active prompt for new research sessions
+|- docs/
+|  |- AUTORESEARCH.md              # Methodology notes (Karpathy adaptation)
+|  |- IDEA.md                      # Original research plan
+|  |- ORTHOALIGN_COMPARATOR_NOTE.md  # Caveat on OrthoAlign reference scores
+|  |- PAPER.md                     # Paper writing notes
+|  |- program.md                   # Historical Phase 2 doctrine
+|  `- RESEARCH_LOOP_PROMPT.md      # Historical Phase 2 research prompt
 |- analysis/
+|  |- analyze_clostridium_pairs.js # All-pairs sweep utility (run once for v19)
 |  `- clostridium_pairs_full/      # Full all-pairs Clostridium sweep artifacts
 |- benchmark/
 |  |- puzzles.json                 # Frozen 8-puzzle legacy benchmark
@@ -120,7 +126,7 @@ node evaluate_dataset.js --manifest benchmark/phase2_dev.json --puzzle level30 -
 Open Codex or Claude Code in this directory and paste the contents of
 `PHASE3_LOOP_PROMPT.md`.
 
-Use `RESEARCH_LOOP_PROMPT.md` only as a historical Phase 2 reference.
+Use `docs/RESEARCH_LOOP_PROMPT.md` only as a historical Phase 2 reference.
 
 ## Research Approach
 
@@ -164,7 +170,7 @@ Secondary metrics:
 - `avgRatioReal`
 
 For an important caveat on genomic references derived from the legacy
-OrthoAlign tool, see [ORTHOALIGN_COMPARATOR_NOTE.md](/c:/Repos/gsp2026/ORTHOALIGN_COMPARATOR_NOTE.md).
+OrthoAlign tool, see [ORTHOALIGN_COMPARATOR_NOTE.md](docs/ORTHOALIGN_COMPARATOR_NOTE.md).
 
 ## Current Baseline
 
@@ -244,7 +250,7 @@ Selection rules for these puzzles:
 Important: OrthoAlign uses a broader event model than this repo's game engine,
 so those genomic `topScore` values should be treated as external comparative
 references, not strict like-for-like lower bounds. See
-[ORTHOALIGN_COMPARATOR_NOTE.md](/c:/Repos/gsp2026/ORTHOALIGN_COMPARATOR_NOTE.md).
+[ORTHOALIGN_COMPARATOR_NOTE.md](docs/ORTHOALIGN_COMPARATOR_NOTE.md).
 
 These dev puzzles feed the Phase 2 manifests, but the holdout split remains
 reserved and the legacy benchmark still anchors continuity across research

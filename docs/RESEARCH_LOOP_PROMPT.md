@@ -1,6 +1,6 @@
 # Autoresearch Session: Genome Sorting Problem (Phase 2)
 
-Read `program.md` carefully before starting. It is your research doctrine.
+Read `docs/program.md` carefully before starting. It is your research doctrine.
 
 ## Your Loop
 
@@ -10,7 +10,7 @@ Repeat until I tell you to stop.
 
 Read:
 
-- `program.md`
+- `docs/program.md`
 - the current `solver.js`
 - the most recent `phase2-dev` row in `results_phase2.tsv` to know the current Phase 2 dev baseline
 - the last row of `results.tsv` to know the current legacy benchmark baseline

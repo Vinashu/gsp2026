@@ -8,8 +8,8 @@ The current baseline winner is `v19` in `solver.js`.
 
 Phase 2 artifacts remain historical reference points and must be preserved:
 
-- `program.md`
-- `RESEARCH_LOOP_PROMPT.md`
+- `docs/program.md`
+- `docs/RESEARCH_LOOP_PROMPT.md`
 - `results.tsv`
 - `results_phase2.tsv`
 - `analysis/clostridium_pairs_full/`

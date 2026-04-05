@@ -35,7 +35,7 @@ The solver evolves. The study design defines how we judge that evolution.
 - `gameEngine.js` - rules engine implementing all operations and constraints
 - `evaluate.js` - legacy benchmark harness
 - `evaluate_dataset.js` - Phase 2 manifest evaluator
-- `program.md` - research doctrine for future agent sessions
+- `docs/program.md` - research doctrine for future agent sessions
 
 ### Mutable component
 
@@ -114,7 +114,7 @@ true untouched validation set.
 ## Autoresearch Loop
 
 ```text
-1. Read program.md, solver.js, and the latest Phase 2 / legacy results
+1. Read docs/program.md, solver.js, and the latest Phase 2 / legacy results
 2. Propose one hypothesis
 3. Implement it in solver.js only
 4. Run evaluate_dataset.js on benchmark/phase2_dev.json
