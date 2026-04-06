@@ -473,6 +473,4 @@ Shao, M. and Moret, B. M. E. (2015). Comparing genomes with rearrangements and s
 
 Tremblay-Savard, O., Benzaid, B., Lang, B. F., and El-Mabrouk, N. (2015). Evolution of tRNA repertoires in Bacillus inferred with OrthoAlign. *Molecular Biology and Evolution*, 32(6), 1643–1656. https://doi.org/10.1093/molbev/msv029
 
-Tremblay-Savard, O. (2013). *OrthoAlign: A heuristic for the alignment and inference of orthologous gene orders* [Master's thesis, University of Manitoba]. MSpace. https://mspace.lib.umanitoba.ca/items/184f632d-a406-4412-8eac-2dea243d824e
-
-Vinyals, O., Fortunato, M., and Jaitly, N. (2015). Pointer networks. In *Advances in Neural Information Processing Systems 28 (NeurIPS 2015)*, pp. 2692–2700.
+Vinyals, O., Fortunato, M., and Jaitly, N. (2015). Pointer networks. In *Advances in Neural Information Processing Systems 28 (NeurIPS 2015)*, pp. 2692–2700. https://papers.nips.cc/paper_files/paper/2015/file/29921001f2f04bd3baee84a12e98098f-Paper.pdf
