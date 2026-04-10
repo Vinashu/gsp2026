@@ -21,7 +21,7 @@ The genome sorting problem seeks the shortest sequence of evolutionary operation
 
 Understanding how genomes evolve through large-scale structural changes is a fundamental question in comparative genomics. Genome rearrangement problems model the evolutionary distance between species by finding a minimum-cost sequence of operations — such as inversions, duplications, and deletions — that transforms one gene order into another (Fertin et al., 2009; Sankoff and Blanchette, 1998). These problems are computationally hard in general: even the simpler case of sorting by reversals alone is NP-hard for unsigned permutations (Caprara, 1997), and the addition of duplications, deletions, and constraints increases the complexity further.
 
-The specific variant studied here is the Genome Sorting Problem (GSP), formulated as an interactive puzzle within the GeSort framework (de Leon Pereira et al., 2021). In this formulation, a player (or algorithm) must transform a *mutable genome* into a *target genome* using three operations — *inversion*, *duplication*, and *deletion* — subject to a key structural constraint: every inversion must include the *terminus* marker `[t]`, a distinguished central pivot in the genome. This constraint reflects biological reality in circular bacterial genomes, where the terminus of replication serves as a structural anchor for large-scale rearrangements.
+The specific variant studied here is the Genome Sorting Problem (GSP), formulated as an interactive puzzle within the GeSort framework (de Leon Pereira et al., 2021). In this formulation, a player (or algorithm) must transform a *mutable genome* into a *target genome* using three operations — *inversion*, *duplication*, and *deletion* — subject to a key structural constraint: every inversion must include the *terminus* marker `[t]`, a distinguished central pivot in the genome. This constraint reflects biological reality in circular bacterial genomes, where the terminus of replication serves as a structural anchor for large-scale rearrangements (Hidaka et al., 1989).
 
 ### 1.2 Background and Prior Work
 
@@ -464,6 +464,8 @@ Kawrykow, A., Roumanis, G., Kam, A., Kwak, D., Leung, C., Wu, C., Zarour, E., Sa
 Lee, J., Kladwang, W., Lee, M., Cantu, D., Azizyan, M., Kim, H., Limpaecher, A., Gee, S., Pustilnik, A., Das, R., et al. (2014). RNA design rules from a massive open laboratory. *Proceedings of the National Academy of Sciences*, 111(6), 2122–2127. https://doi.org/10.1073/pnas.1313039111
 
 Li, Y., Choi, D., Chung, J., Kushman, N., Schrittwieser, J., Leblond, R., Eccles, T., Keeling, J., Gimeno, F., Dal Lago, A., et al. (2022). Competition-level code generation with AlphaCode. *Science*, 378(6624), 1092–1097. https://doi.org/10.1126/science.abq1158
+
+Hidaka, M. Kobayashi, T. Horiuchi, S. Takenaka, H. Takeya, and T. Horiuchi. (1989). Purification of a dna replication terminus (ter) site-binding protein in escherichia coli and identification of the structural gene. *Journal of Biological Chemistry*, 264(35):21031–21037. PMID: 2687269.
 
 Romera-Paredes, B., Barekatain, M., Novikov, A., Balog, M., Kumar, M. P., Dupont, E., Ruiz, F. J. R., Ellenberg, J. S., Wang, P., Fawzi, O., et al. (2024). Mathematical discoveries from program search with large language models. *Nature*, 625(7995), 468–475. https://doi.org/10.1038/s41586-023-06924-6
 
