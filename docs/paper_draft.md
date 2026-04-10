@@ -412,7 +412,7 @@ These findings demonstrate that the autoresearch approach can produce competitiv
 ### Future Work
 
 - Developing bidirectional search strategies to mitigate growth-direction asymmetry.
-- Investigating more efficient search architectures (beam search, A*) to reduce runtime.
+- Investigating more efficient search architectures to reduce runtime.
 - Extending the evaluation to other bacterial families beyond Clostridium.
 - Exploring hybrid approaches that combine the heuristic solver with OrthoAlign's broader event model.
 - Applying the autoresearch methodology to other combinatorial biology problems.
@@ -435,11 +435,11 @@ The Clostridium genome dataset was prepared by Chua et al. (2021) as part of the
 
 Bader M. Sorting by reversals, block interchanges, tandem duplications, and deletions. BMC Bioinformatics. 2009 Jan 30;10 Suppl 1(Suppl 1):S9. doi: 10.1186/1471-2105-10-S1-S9. PMID: 19208182; PMCID: PMC2648760. https://doi.org/10.1186/1471-2105-10-s1-s9
 
-Bello, I., Pham, H., Le, Q. V., Norouzi, M., and Bengio, S. (2016). Neural combinatorial optimization with reinforcement learning. *arXiv preprint arXiv:1611.09940*. 
+Bello, I., Pham, H., Le, Q. V., Norouzi, M., and Bengio, S. (2016). Neural combinatorial optimization with reinforcement learning. *arXiv preprint arXiv:1611.09940*. https://doi.org/10.48550/arXiv.1611.09940
 
 Caprara, A. (1997). Sorting by reversals is difficult. In *Proceedings of the First Annual International Conference on Computational Molecular Biology (RECOMB '97)*, pp. 75–83. ACM. https://doi.org/10.1145/267521.267531
 
-Chen, M., Tworek, J., Jun, H., Yuan, Q., Pinto, H. P. O., Kaplan, J., Edwards, H., Burda, Y., Joseph, N., Brockman, G., et al. (2021). Evaluating large language models trained on code. *arXiv preprint arXiv:2107.03374*.
+Chen, M., Tworek, J., Jun, H., Yuan, Q., Pinto, H. P. O., Kaplan, J., Edwards, H., Burda, Y., Joseph, N., Brockman, G., et al. (2021). Evaluating large language models trained on code. *arXiv preprint arXiv:2107.03374*. https://doi.org/10.48550/arXiv.2107.03374
 
 Chua, M., Tan, A., and Tremblay-Savard, O. (2021). BOPAL 2.0 and a study of tRNA and rRNA gene evolution in Clostridium. *Journal of Bioinformatics and Computational Biology*, 19(6), 2140007. https://doi.org/10.1142/S0219720021400072
 
