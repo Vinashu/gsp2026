@@ -371,7 +371,7 @@ Despite these caveats, the fact that our solver matches or beats OrthoAlign on 8
 
 ### 6.5 Runtime Considerations
 
-The solver is substantially slower than OrthoAlign: approximately 14.7 seconds per pair versus 0.34 seconds. This is a significant limitation for large-scale genomic studies. Phase 3 pruning improved runtime by 8.8% without quality loss, but a more fundamental speedup would require algorithmic changes to the search structure (e.g., memoization, parallelism, or a shift from greedy-plus-rollout to more efficient search methods such as beam search or A* with problem-specific bounds).
+The solver is substantially slower than OrthoAlign, requiring approximately 14.7 seconds per pair compared to only 0.34 seconds. This performance gap constitutes a clear scalability bottleneck for large-scale genomic studies. While Phase 3 pruning delivered an 8.8 % runtime improvement with no loss in solution quality, achieving practical speedups will require more fundamental changes to the search architecture—such as state memoization, parallel rollout execution, or replacing the current greedy-plus-rollout strategy with beam search guided by the evolved heuristic itself.
 
 ### 6.6 Limitations
 
@@ -457,7 +457,7 @@ Hannenhalli, S. and Pevzner, P. A. (1999). Transforming cabbage into turnip: pol
 
 Jiang, H., Zheng, C., Sankoff, D., and Zhu, B. (2012). Scaffold filling under the breakpoint and related distances. IEEE/ACM Transactions on Computational Biology and Bioinformatics, 9(4), 1220–1229. https://doi.org/10.1109/TCBB.2012.57
 
-Karpathy, A. (2026). autoresearch. GitHub repository. https://github.com/karpathy/autoresearch
+Karpathy, A. (2026). Autoresearch. GitHub repository. https://github.com/karpathy/autoresearch
 
 Kawrykow, A., Roumanis, G., Kam, A., Kwak, D., Leung, C., Wu, C., Zarour, E., Sarmenta, L., Blanchette, M., and Waldispuhl, J. (2012). Phylo: a citizen science approach for improving multiple sequence alignment. *PLoS ONE*, 7(3), e31362. https://doi.org/10.1371/journal.pone.0031362
 

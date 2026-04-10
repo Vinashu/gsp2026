@@ -119,7 +119,7 @@ function applyInversion(genome, start, length) {
   }
 
   const tIdx = genome.terminusIndex;
-  if (tIdx < start || tIdx >= end) {
+  if (tIdx < start || tIdx >= end) { // tIdx > end ?
     throw new Error(
       `Invalid inversion: segment [${start},${end}) does not include terminus at index ${tIdx}`
     );
