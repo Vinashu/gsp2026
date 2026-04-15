@@ -34,6 +34,10 @@ gsp2026/
 |- evaluate.js                     # Legacy 8-puzzle benchmark harness
 |- evaluate_dataset.js             # Phase 2 manifest-based evaluator
 |- measure_dataset_runtime.js      # Manifest runtime harness for Phase 3
+|- puzzle_catalog.js               # Shared puzzle loader and catalog builder
+|- solver_trace.js                 # Structured solver trace generator for CLI/UI playback
+|- serve_visualizer.js             # Local web server for the HTML visualizer
+|- trace_solver.js                 # Step-by-step puzzle trace and move replay tool
 |- results.tsv                     # Legacy benchmark experiment log
 |- results_phase2.tsv              # Phase 2 manifest experiment log
 |- results_phase3.tsv              # Phase 3 hard-genomic experiment log
@@ -61,6 +65,10 @@ gsp2026/
 |- real_puzzles/
 |  |- dev/                         # Phase 2 Clostridium genome-pair puzzles
 |  `- phase3/                      # Phase 3 hard genomic subset from the sweep
+|- visualizer/
+|  |- index.html                   # Browser UI for animated solver playback
+|  |- app.js                       # Puzzle picker, transport controls, and rendering
+|  `- styles.css                   # Visual system and responsive layout
 `- syntetic_puzles/
    `- dev/                         # Extra synthetic generator outputs
 ```
@@ -123,7 +131,33 @@ node evaluate.js --puzzle level20 --verbose
 node evaluate_dataset.js --manifest benchmark/phase2_dev.json --puzzle level30 --verbose
 ```
 
-### 8. Reopen solver research
+### 8. Trace a puzzle step by step
+
+```bash
+node trace_solver.js --puzzle level20
+node trace_solver.js --manifest benchmark/phase2_dev.json --puzzle level30
+node trace_solver.js --file real_puzzles/dev/clostridium_easy_01.md
+```
+
+`trace_solver.js` runs the current `solver.js`, prints the solver's move
+selection trace, and then replays the chosen moves with before/after genome
+states so you can follow exactly how a puzzle is solved.
+
+Useful options:
+
+```bash
+node trace_solver.js --list
+node trace_solver.js --manifest benchmark/phase2_dev.json --list
+node trace_solver.js --puzzle level20 --no-solver-debug
+node trace_solver.js --file real_puzzles/phase3/phase3_hard_01.md --full
+```
+
+- `--list` shows available puzzle ids for the selected source.
+- `--no-solver-debug` hides the internal score-transition log and keeps only the replay.
+- `--full` prints full genomes instead of abbreviated left/right views for long puzzles.
+- `--file` also supports the older historical export files in `real_puzzles/`.
+
+### 9. Reopen solver research
 
 Open Codex or Claude Code in this directory and paste the contents of
 `PHASE3_LOOP_PROMPT.md`.
@@ -131,6 +165,38 @@ Open Codex or Claude Code in this directory and paste the contents of
 Use this only if you intentionally want to resume solver experiments beyond the
 frozen `v30` baseline. Use `docs/RESEARCH_LOOP_PROMPT.md` only as a historical
 Phase 2 reference.
+
+## Visualizer
+
+The repo now includes a local HTML visualizer that uses the real `solver.js`
+and the real puzzle files in this repository.
+
+Start the server:
+
+```bash
+node serve_visualizer.js
+```
+
+Then open:
+
+```text
+http://127.0.0.1:4317/visualizer/
+```
+
+What it does:
+
+- builds a puzzle picker from the benchmark plus the puzzle files in `real_puzzles/` and `syntetic_puzles/`
+- runs the current solver against the selected puzzle
+- shows target, before, and after genome tracks centered on `[t]`
+- animates step-by-step playback with play, pause, restart, previous, next, and a timeline scrubber
+- narrates each move with score changes, core growth, and top competing alternatives
+
+Move markers in the UI:
+
+- green arrow: duplication source
+- blue arrow: duplication destination
+- red arrow: deletion source
+- purple arrow: inversion source
 
 ## Research Approach
 

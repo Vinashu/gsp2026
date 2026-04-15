@@ -653,4 +653,15 @@ function formatScore(score) {
   return `[${score.join(', ')}]`;
 }
 
-module.exports = { solve };
+module.exports = {
+  solve,
+  __internals: {
+    generateCandidates,
+    evaluateImmediateCandidates,
+    chooseLookaheadMove,
+    computeAnchoredCore,
+    scoreGenome,
+    compareScores,
+    formatScore
+  }
+};

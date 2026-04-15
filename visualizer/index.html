@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GSP Solver Visualizer</title>
+  <link rel="stylesheet" href="/visualizer/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-block">
+        <p class="eyebrow">Genome Sorting Problem</p>
+        <h1>Solver Visualizer</h1>
+        <p class="lede">Pick any puzzle in the repo, run the live solver trace, then play it back gene by gene around the terminus.</p>
+      </div>
+      <div class="status-strip" id="statusStrip">
+        <span class="status-pill">Catalog online</span>
+        <span class="status-pill status-pill-accent">Animation ready</span>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="sidebar controls-pane">
+        <section class="panel panel-poster">
+          <p class="panel-kicker">Puzzle Deck</p>
+          <h2>Choose a genome pair</h2>
+          <p class="panel-copy">The list is built from the benchmark plus the puzzle files in this repo, so the browser is always looking at real inputs.</p>
+          <div class="control-stack">
+            <label class="field">
+              <span>Search</span>
+              <input id="searchInput" type="search" placeholder="Find by id, source, or category">
+            </label>
+            <div id="sourceFilters" class="chip-row"></div>
+            <div class="legend">
+              <p class="legend-title">Move Markers</p>
+              <div class="legend-grid">
+                <div class="legend-item"><img src="/images/arrow-green.png" alt=""><span>Duplication source</span></div>
+                <div class="legend-item"><img src="/images/arrow-blue.png" alt=""><span>Duplication destination</span></div>
+                <div class="legend-item"><img src="/images/arrow-red.png" alt=""><span>Deletion source</span></div>
+                <div class="legend-item"><img src="/images/arrow-purple.png" alt=""><span>Inversion source</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel panel-list">
+          <div class="panel-heading">
+            <p class="panel-kicker">Catalog</p>
+            <span id="catalogCount" class="count-badge">0 puzzles</span>
+          </div>
+          <div id="puzzleList" class="puzzle-list"></div>
+        </section>
+      </aside>
+
+      <section class="center-stage">
+        <section class="panel hero-panel">
+          <div class="hero-meta">
+            <div>
+              <p class="panel-kicker">Playback</p>
+              <h2 id="heroTitle">Loading catalog...</h2>
+            </div>
+            <div id="heroStats" class="hero-stats"></div>
+          </div>
+
+          <div class="transport">
+            <button id="restartButton" class="transport-button transport-button-muted" type="button">Restart</button>
+            <button id="prevButton" class="transport-button" type="button">Previous</button>
+            <button id="playButton" class="transport-button transport-button-primary" type="button">Play</button>
+            <button id="nextButton" class="transport-button" type="button">Next</button>
+            <label class="speed-control">
+              <span>Speed</span>
+              <select id="speedSelect">
+                <option value="0.75">0.75x</option>
+                <option value="1" selected>1x</option>
+                <option value="1.5">1.5x</option>
+                <option value="2">2x</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="timeline-wrap">
+            <input id="timelineRange" type="range" min="0" max="0" value="0">
+            <div class="timeline-meta">
+              <span id="timelineLabel">Step 0 / 0</span>
+              <span id="timelineSummary">Choose a puzzle to begin.</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="stageRoot" class="stage-root">
+          <div class="empty-state">
+            <p class="empty-eyebrow">Waiting on trace</p>
+            <h2>Select a puzzle from the left</h2>
+            <p>The solver trace, animated genome tracks, and narrated move log will appear here.</p>
+          </div>
+        </section>
+      </section>
+
+      <aside class="sidebar inspector-pane">
+        <section class="panel">
+          <div class="panel-heading">
+            <p class="panel-kicker">Narration</p>
+            <span id="stepBadge" class="count-badge">Step 0</span>
+          </div>
+          <div id="narrationPanel" class="narration-panel">
+            <h2>Solver briefing</h2>
+            <p>Pick a puzzle and the visualizer will explain what the solver is doing at each move.</p>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <p class="panel-kicker">Alternatives</p>
+            <span class="count-badge">Top improving moves</span>
+          </div>
+          <div id="candidateList" class="candidate-list"></div>
+        </section>
+
+        <section class="panel panel-log">
+          <div class="panel-heading">
+            <p class="panel-kicker">Step Log</p>
+            <span id="logCount" class="count-badge">0 moves</span>
+          </div>
+          <div id="stepLog" class="step-log"></div>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <script src="/images/icons.js"></script>
+  <script type="module" src="/visualizer/app.js"></script>
+</body>
+</html>
