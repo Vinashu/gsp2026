@@ -17,6 +17,7 @@
   --radius: 28px;
   --radius-sm: 18px;
   --token-size: 58px;
+  --dock-width: 112px;
   --font-ui: "Bahnschrift", "Aptos", "Segoe UI Variable Display", sans-serif;
   --font-mono: "Cascadia Code", "Consolas", monospace;
 }
@@ -83,7 +84,7 @@ select {
 .brand-block h1 {
   font-size: clamp(2.6rem, 4vw, 4.2rem);
   line-height: 0.96;
-  max-width: 10ch;
+  /* max-width: 10ch; */
 }
 
 .lede,
@@ -143,6 +144,18 @@ select {
   align-items: start;
 }
 
+body.controls-all-hidden .workspace {
+  grid-template-columns: var(--dock-width) minmax(0, 1fr) 340px;
+}
+
+body.inspector-all-hidden .workspace {
+  grid-template-columns: 320px minmax(0, 1fr) var(--dock-width);
+}
+
+body.controls-all-hidden.inspector-all-hidden .workspace {
+  grid-template-columns: var(--dock-width) minmax(0, 1fr) var(--dock-width);
+}
+
 .sidebar,
 .center-stage {
   min-width: 0;
@@ -152,6 +165,7 @@ select {
 .inspector-pane {
   display: grid;
   gap: 18px;
+  align-content: start;
 }
 
 .panel {
@@ -163,6 +177,76 @@ select {
   box-shadow: var(--shadow);
   backdrop-filter: blur(14px);
   padding: 22px;
+}
+
+.panel-body {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.panel.is-hidden-panel {
+  display: none;
+}
+
+.collapsed-dock {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.collapsed-dock:empty {
+  display: none;
+}
+
+.dock-button {
+  display: grid;
+  justify-items: start;
+  gap: 2px;
+  width: 100%;
+  border: 1px dashed var(--line-strong);
+  border-radius: 22px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.72);
+  color: inherit;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.dock-button:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(208, 110, 43, 0.28);
+}
+
+.dock-button strong {
+  font-size: 0.96rem;
+  line-height: 1.1;
+}
+
+.dock-button-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.controls-pane .dock-button {
+  background: rgba(18, 22, 30, 0.94);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: var(--ink-inverse);
+  box-shadow: var(--shadow-strong);
+}
+
+.controls-pane .dock-button:hover {
+  background: rgba(26, 32, 42, 0.98);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.controls-pane .dock-button-kicker {
+  color: rgba(249, 244, 236, 0.58);
 }
 
 .panel::before {
@@ -190,9 +274,9 @@ select {
 }
 
 .panel-poster h2 {
-  font-size: 2rem;
+  /* font-size: 2rem; */
+  font-size: 1.5rem;
   line-height: 1;
-  margin-bottom: 12px;
 }
 
 .control-stack,
@@ -202,6 +286,14 @@ select {
 .puzzle-list {
   display: grid;
   gap: 14px;
+}
+
+.panel-heading-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .field {
@@ -234,6 +326,11 @@ select {
   min-height: 220px;
 }
 
+.panel-list {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
 .panel-heading,
 .hero-meta {
   display: flex;
@@ -246,6 +343,31 @@ select {
   padding: 7px 12px;
   background: rgba(15, 23, 32, 0.06);
   border: 1px solid var(--line);
+}
+
+.panel-toggle {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: rgba(15, 23, 32, 0.06);
+  color: inherit;
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.panel-toggle:hover {
+  transform: translateY(-1px);
+  background: rgba(15, 23, 32, 0.1);
+}
+
+.panel-toggle-inverse {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--ink-inverse);
+}
+
+.panel-toggle-inverse:hover {
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .chip-row {
@@ -350,10 +472,12 @@ select {
 
 .hero-panel {
   padding: 24px;
+  margin-bottom: 20px;
 }
 
 .hero-panel h2 {
-  font-size: clamp(1.8rem, 2.4vw, 2.6rem);
+  /* font-size: clamp(1.8rem, 2.4vw, 2.6rem); */
+  font-size: clamp(1.6rem, 2vw, 2rem);
   line-height: 1;
 }
 
@@ -442,6 +566,11 @@ select {
   gap: 18px;
 }
 
+.state-stack {
+  display: grid;
+  gap: 18px;
+}
+
 .track-panel,
 .spotlight-panel {
   position: relative;
@@ -467,6 +596,10 @@ select {
 .track-panel-target .track-meta,
 .track-panel-target .panel-kicker {
   color: rgba(249, 244, 236, 0.72);
+}
+
+.spotlight-panel-wide {
+  min-height: 0;
 }
 
 .transformation-grid {
@@ -699,6 +832,35 @@ select {
   color: var(--ink-soft);
 }
 
+.puzzle-list {
+  max-height: clamp(360px, 58vh, 760px);
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.step-log {
+  max-height: clamp(260px, 36vh, 520px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.puzzle-list::-webkit-scrollbar,
+.step-log::-webkit-scrollbar {
+  width: 10px;
+}
+
+.puzzle-list::-webkit-scrollbar-thumb,
+.step-log::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 32, 0.16);
+  border-radius: 999px;
+}
+
+.puzzle-list::-webkit-scrollbar-track,
+.step-log::-webkit-scrollbar-track {
+  background: rgba(15, 23, 32, 0.04);
+  border-radius: 999px;
+}
+
 @keyframes signal-pop {
   0% {
     transform: translateY(8px);
@@ -715,14 +877,32 @@ select {
     grid-template-columns: 300px minmax(0, 1fr);
   }
 
+  body.controls-all-hidden .workspace {
+    grid-template-columns: var(--dock-width) minmax(0, 1fr);
+  }
+
+  body.inspector-all-hidden .workspace {
+    grid-template-columns: 300px minmax(0, 1fr);
+  }
+
   .inspector-pane {
     grid-column: 1 / -1;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  body.inspector-all-hidden .inspector-pane {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
 @media (max-width: 1120px) {
   .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  body.controls-all-hidden .workspace,
+  body.inspector-all-hidden .workspace,
+  body.controls-all-hidden.inspector-all-hidden .workspace {
     grid-template-columns: 1fr;
   }
 
@@ -742,6 +922,14 @@ select {
 
   .speed-control {
     margin-left: 0;
+  }
+
+  .puzzle-list {
+    max-height: clamp(260px, 42vh, 420px);
+  }
+
+  .step-log {
+    max-height: none;
   }
 }
 

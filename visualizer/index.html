@@ -22,32 +22,46 @@
 
     <main class="workspace">
       <aside class="sidebar controls-pane">
-        <section class="panel panel-poster">
-          <p class="panel-kicker">Puzzle Deck</p>
-          <h2>Choose a genome pair</h2>
-          <p class="panel-copy">The list is built from the benchmark plus the puzzle files in this repo, so the browser is always looking at real inputs.</p>
-          <div class="control-stack">
-            <label class="field">
-              <span>Search</span>
-              <input id="searchInput" type="search" placeholder="Find by id, source, or category">
-            </label>
-            <div id="sourceFilters" class="chip-row"></div>
-            <div class="legend">
-              <p class="legend-title">Move Markers</p>
-              <div class="legend-grid">
-                <div class="legend-item"><img src="/images/arrow-green.png" alt=""><span>Duplication source</span></div>
-                <div class="legend-item"><img src="/images/arrow-blue.png" alt=""><span>Duplication destination</span></div>
-                <div class="legend-item"><img src="/images/arrow-red.png" alt=""><span>Deletion source</span></div>
-                <div class="legend-item"><img src="/images/arrow-purple.png" alt=""><span>Inversion source</span></div>
+        <div id="controlsDock" class="collapsed-dock" aria-label="Hidden left panels"></div>
+
+        <section class="panel panel-poster" data-panel-id="puzzleDeck" data-panel-label="Puzzle Deck">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">Puzzle Deck</p>
+              <h2>Choose a genome pair</h2>
+            </div>
+            <button class="panel-toggle panel-toggle-inverse" type="button" data-toggle-panel="puzzleDeck" aria-expanded="true">Hide</button>
+          </div>
+          <div class="panel-body">
+            <p class="panel-copy">The list is built from the benchmark plus the puzzle files in this repo, so the browser is always looking at real inputs.</p>
+            <div class="control-stack">
+              <label class="field">
+                <span>Search</span>
+                <input id="searchInput" type="search" placeholder="Find by id, source, or category">
+              </label>
+              <div id="sourceFilters" class="chip-row"></div>
+              <div class="legend">
+                <p class="legend-title">Move Markers</p>
+                <div class="legend-grid">
+                  <div class="legend-item"><img src="/images/arrow-green.png" alt=""><span>Duplication source</span></div>
+                  <div class="legend-item"><img src="/images/arrow-blue.png" alt=""><span>Duplication destination</span></div>
+                  <div class="legend-item"><img src="/images/arrow-red.png" alt=""><span>Deletion source</span></div>
+                  <div class="legend-item"><img src="/images/arrow-purple.png" alt=""><span>Inversion source</span></div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section class="panel panel-list">
+        <section class="panel panel-list" data-panel-id="catalog" data-panel-label="Catalog">
           <div class="panel-heading">
-            <p class="panel-kicker">Catalog</p>
-            <span id="catalogCount" class="count-badge">0 puzzles</span>
+            <div>
+              <p class="panel-kicker">Catalog</p>
+            </div>
+            <div class="panel-heading-actions">
+              <span id="catalogCount" class="count-badge">0 puzzles</span>
+              <button class="panel-toggle" type="button" data-toggle-panel="catalog" aria-expanded="true">Hide</button>
+            </div>
           </div>
           <div id="puzzleList" class="puzzle-list"></div>
         </section>
@@ -98,31 +112,54 @@
       </section>
 
       <aside class="sidebar inspector-pane">
-        <section class="panel">
+        <div id="inspectorDock" class="collapsed-dock" aria-label="Hidden right panels"></div>
+
+        <section class="panel" data-panel-id="narration" data-panel-label="Narration">
           <div class="panel-heading">
-            <p class="panel-kicker">Narration</p>
-            <span id="stepBadge" class="count-badge">Step 0</span>
+            <div>
+              <p class="panel-kicker">Narration</p>
+            </div>
+            <div class="panel-heading-actions">
+              <span id="stepBadge" class="count-badge">Step 0</span>
+              <button class="panel-toggle" type="button" data-toggle-panel="narration" aria-expanded="true">Hide</button>
+            </div>
           </div>
-          <div id="narrationPanel" class="narration-panel">
-            <h2>Solver briefing</h2>
-            <p>Pick a puzzle and the visualizer will explain what the solver is doing at each move.</p>
+          <div class="panel-body">
+            <div id="narrationPanel" class="narration-panel">
+              <h2>Solver briefing</h2>
+              <p>Pick a puzzle and the visualizer will explain what the solver is doing at each move.</p>
+            </div>
           </div>
         </section>
 
-        <section class="panel">
+        <section class="panel" data-panel-id="alternatives" data-panel-label="Alternatives">
           <div class="panel-heading">
-            <p class="panel-kicker">Alternatives</p>
-            <span class="count-badge">Top improving moves</span>
+            <div>
+              <p class="panel-kicker">Alternatives</p>
+            </div>
+            <div class="panel-heading-actions">
+              <span class="count-badge">Top improving moves</span>
+              <button class="panel-toggle" type="button" data-toggle-panel="alternatives" aria-expanded="true">Hide</button>
+            </div>
           </div>
-          <div id="candidateList" class="candidate-list"></div>
+          <div class="panel-body">
+            <div id="candidateList" class="candidate-list"></div>
+          </div>
         </section>
 
-        <section class="panel panel-log">
+        <section class="panel panel-log" data-panel-id="stepLog" data-panel-label="Step Log">
           <div class="panel-heading">
-            <p class="panel-kicker">Step Log</p>
-            <span id="logCount" class="count-badge">0 moves</span>
+            <div>
+              <p class="panel-kicker">Step Log</p>
+            </div>
+            <div class="panel-heading-actions">
+              <span id="logCount" class="count-badge">0 moves</span>
+              <button class="panel-toggle" type="button" data-toggle-panel="stepLog" aria-expanded="true">Hide</button>
+            </div>
           </div>
-          <div id="stepLog" class="step-log"></div>
+          <div class="panel-body">
+            <div id="stepLog" class="step-log"></div>
+          </div>
         </section>
       </aside>
     </main>

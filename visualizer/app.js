@@ -1,5 +1,23 @@
 const iconMap = globalThis.GSP_ICONS || {};
 
+function loadCollapsedPanels() {
+  const defaults = {
+    puzzleDeck: false,
+    catalog: false,
+    narration: false,
+    alternatives: false,
+    stepLog: false
+  };
+
+  try {
+    const raw = window.localStorage.getItem('gsp-visualizer-panels');
+    if (!raw) return defaults;
+    return { ...defaults, ...JSON.parse(raw) };
+  } catch (_) {
+    return defaults;
+  }
+}
+
 const state = {
   puzzles: [],
   filteredPuzzles: [],
@@ -10,7 +28,8 @@ const state = {
   currentStep: 0,
   playing: false,
   playTimer: null,
-  speed: 1
+  speed: 1,
+  collapsedPanels: loadCollapsedPanels()
 };
 
 const dom = {
@@ -34,8 +53,19 @@ const dom = {
   stepLog: document.querySelector('#stepLog'),
   stepBadge: document.querySelector('#stepBadge'),
   logCount: document.querySelector('#logCount'),
-  statusStrip: document.querySelector('#statusStrip')
+  statusStrip: document.querySelector('#statusStrip'),
+  panelToggles: [...document.querySelectorAll('[data-toggle-panel]')],
+  controlsDock: document.querySelector('#controlsDock'),
+  inspectorDock: document.querySelector('#inspectorDock')
 };
+
+function persistCollapsedPanels() {
+  try {
+    window.localStorage.setItem('gsp-visualizer-panels', JSON.stringify(state.collapsedPanels));
+  } catch (_) {
+    // Ignore storage failures and keep the interface responsive.
+  }
+}
 
 function escapeHtml(value) {
   return String(value)
@@ -47,7 +77,7 @@ function escapeHtml(value) {
 }
 
 function summarizeCategories(categories) {
-  return categories.slice(0, 3).join(' · ');
+  return categories.slice(0, 3).join(' / ');
 }
 
 function resolveIconFile(gene) {
@@ -94,6 +124,66 @@ function renderStatusStrip() {
     <span class="status-pill">${filtered} visible / ${total} total</span>
     <span class="status-pill status-pill-accent">${state.trace ? `${state.trace.puzzle.id} loaded` : 'Animation ready'}</span>
   `;
+}
+
+function renderCollapsedDock(dock, panelIds) {
+  const collapsedIds = panelIds.filter(panelId => state.collapsedPanels[panelId]);
+
+  if (!dock) return;
+
+  if (collapsedIds.length === 0) {
+    dock.innerHTML = '';
+    return;
+  }
+
+  dock.innerHTML = collapsedIds.map(panelId => {
+    const panel = document.querySelector(`[data-panel-id="${panelId}"]`);
+    const label = panel?.dataset.panelLabel || panelId;
+    return `
+      <button class="dock-button" type="button" data-show-panel="${escapeHtml(panelId)}" aria-label="Show ${escapeHtml(label)}">
+        <span class="dock-button-kicker">Show</span>
+        <strong>${escapeHtml(label)}</strong>
+      </button>
+    `;
+  }).join('');
+
+  dock.querySelectorAll('[data-show-panel]').forEach(button => {
+    button.addEventListener('click', () => {
+      const panelId = button.dataset.showPanel;
+      if (!panelId) return;
+      state.collapsedPanels[panelId] = false;
+      persistCollapsedPanels();
+      syncCollapsiblePanels();
+    });
+  });
+}
+
+function syncCollapsiblePanels() {
+  for (const [panelId, collapsed] of Object.entries(state.collapsedPanels)) {
+    const panel = document.querySelector(`[data-panel-id="${panelId}"]`);
+    const toggle = document.querySelector(`[data-toggle-panel="${panelId}"]`);
+
+    if (panel) {
+      panel.classList.toggle('is-hidden-panel', collapsed);
+    }
+
+    if (toggle) {
+      toggle.textContent = 'Hide';
+      toggle.setAttribute('aria-expanded', String(true));
+    }
+  }
+
+  renderCollapsedDock(dom.controlsDock, ['puzzleDeck', 'catalog']);
+  renderCollapsedDock(dom.inspectorDock, ['narration', 'alternatives', 'stepLog']);
+
+  const controlsAllHidden = state.collapsedPanels.puzzleDeck && state.collapsedPanels.catalog;
+  const inspectorAllHidden =
+    state.collapsedPanels.narration &&
+    state.collapsedPanels.alternatives &&
+    state.collapsedPanels.stepLog;
+
+  document.body.classList.toggle('controls-all-hidden', controlsAllHidden);
+  document.body.classList.toggle('inspector-all-hidden', inspectorAllHidden);
 }
 
 function renderSourceFilters() {
@@ -151,7 +241,7 @@ function renderPuzzleList() {
         <strong>${escapeHtml(puzzle.id)}</strong>
         <span class="count-badge">${escapeHtml(puzzle.source)}</span>
       </div>
-      <p class="puzzle-meta">${escapeHtml(puzzle.sourceLabel)}${puzzle.category.length ? ` · ${escapeHtml(summarizeCategories(puzzle.category))}` : ''}</p>
+      <p class="puzzle-meta">${escapeHtml(puzzle.sourceLabel)}${puzzle.category.length ? ` - ${escapeHtml(summarizeCategories(puzzle.category))}` : ''}</p>
       <div class="tag-row">
         <span class="stat-chip">${puzzle.mutableGeneCount} mutable</span>
         <span class="stat-chip">${puzzle.targetGeneCount} target</span>
@@ -254,30 +344,30 @@ function renderStage() {
     ? step.summary
     : 'This is the starting genome. Press play to let the solver begin its terminus-centered transformation.';
   const spotlightScore = step
-    ? `Score ${step.baseScoreText} → ${step.nextScoreText}`
-    : `Reference ${state.trace.puzzle.referenceScore ?? 'n/a'} · move budget ${state.trace.maxMoves}`;
+    ? `Score ${step.baseScoreText} -> ${step.nextScoreText}`
+    : `Reference ${state.trace.puzzle.referenceScore ?? 'n/a'} - move budget ${state.trace.maxMoves}`;
 
   dom.stageRoot.innerHTML = `
     <div class="visual-stack">
+      <section class="spotlight-panel spotlight-panel-wide">
+        <div>
+          <p class="spotlight-step">${step ? `Step ${step.index} of ${state.trace.steps.length}` : 'Step 0'}</p>
+          <h3>${escapeHtml(spotlightTitle)}</h3>
+          <p class="spotlight-summary">${escapeHtml(spotlightSummary)}</p>
+        </div>
+        <div class="score-line">${escapeHtml(spotlightScore)}</div>
+      </section>
       ${renderGenomeTrack(state.trace.target, {
         title: 'Target genome',
         tone: 'track-panel-target',
         meta: 'The fixed destination. The solver tries to grow an exact block outward from [t].'
       })}
-      <div class="transformation-grid">
+      <div class="state-stack">
         ${renderGenomeTrack(beforeSnapshot, {
           title: step ? 'Before move' : 'Mutable genome',
           meta: step ? `State entering move ${step.index}` : 'Initial state before any solver move.',
           ranges: beforeMarkers
         })}
-        <section class="spotlight-panel">
-          <div>
-            <p class="spotlight-step">${step ? `Step ${step.index} of ${state.trace.steps.length}` : 'Step 0'}</p>
-            <h3>${escapeHtml(spotlightTitle)}</h3>
-            <p class="spotlight-summary">${escapeHtml(spotlightSummary)}</p>
-          </div>
-          <div class="score-line">${escapeHtml(spotlightScore)}</div>
-        </section>
         ${renderGenomeTrack(afterSnapshot, {
           title: step ? 'After move' : 'Mutable genome',
           meta: step ? 'The updated sequence after the selected operation.' : 'The same initial state is shown until playback begins.',
@@ -366,7 +456,7 @@ function renderStepLog() {
         <span class="count-badge">${escapeHtml(step.moveTypeLabel)}</span>
       </div>
       <div>${escapeHtml(step.title)}</div>
-      <div class="step-score">${escapeHtml(step.baseScoreText)} → ${escapeHtml(step.nextScoreText)}</div>
+      <div class="step-score">${escapeHtml(step.baseScoreText)} -> ${escapeHtml(step.nextScoreText)}</div>
     </article>
   `).join('');
 
@@ -386,11 +476,11 @@ function renderHero() {
     return;
   }
 
-  dom.heroTitle.textContent = `${state.trace.puzzle.id} · ${state.trace.puzzle.source}`;
+  dom.heroTitle.textContent = `${state.trace.puzzle.id} - ${state.trace.puzzle.source}`;
   const stats = [
     `moves ${state.trace.moveCount}`,
     state.trace.puzzle.referenceScore ? `ratio ${state.trace.ratio.toFixed(3)}` : null,
-    `${state.trace.initial.genes.length} → ${state.trace.target.genes.length} genes`,
+    `${state.trace.initial.genes.length} -> ${state.trace.target.genes.length} genes`,
     ...(state.trace.puzzle.category || []).slice(0, 2)
   ].filter(Boolean);
 
@@ -410,9 +500,7 @@ function renderTimeline() {
   dom.timelineRange.max = String(state.trace.steps.length);
   dom.timelineRange.value = String(state.currentStep);
   dom.timelineLabel.textContent = `Step ${state.currentStep} / ${state.trace.steps.length}`;
-  dom.timelineSummary.textContent = step
-    ? step.moveLabel
-    : 'Initial mutable state';
+  dom.timelineSummary.textContent = step ? step.moveLabel : 'Initial mutable state';
 }
 
 function renderTransport() {
@@ -433,6 +521,7 @@ function renderTraceView() {
   renderNarration();
   renderCandidateList();
   renderStepLog();
+  syncCollapsiblePanels();
 }
 
 async function loadTrace(puzzleId) {
@@ -498,6 +587,16 @@ function startPlayback() {
 }
 
 function bindEvents() {
+  dom.panelToggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const panelId = toggle.dataset.togglePanel;
+      if (!panelId) return;
+      state.collapsedPanels[panelId] = !state.collapsedPanels[panelId];
+      persistCollapsedPanels();
+      syncCollapsiblePanels();
+    });
+  });
+
   dom.searchInput.addEventListener('input', event => {
     state.searchQuery = event.target.value;
     applyPuzzleFilters();
@@ -551,6 +650,7 @@ function bindEvents() {
 async function init() {
   bindEvents();
   renderStatusStrip();
+  syncCollapsiblePanels();
 
   const response = await fetch('/api/puzzles');
   const payload = await response.json();
