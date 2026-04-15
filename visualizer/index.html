@@ -4,6 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GSP Solver Visualizer</title>
+  <script>
+    try {
+      const storedTheme = localStorage.getItem('gsp-visualizer-theme');
+      if (storedTheme === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (_) {
+      // Ignore storage failures and fall back to the default theme.
+    }
+  </script>
   <link rel="stylesheet" href="/visualizer/styles.css">
 </head>
 <body>
@@ -14,9 +24,15 @@
         <h1>Solver Visualizer</h1>
         <p class="lede">Pick any puzzle in the repo, run the live solver trace, then play it back gene by gene around the terminus.</p>
       </div>
-      <div class="status-strip" id="statusStrip">
-        <span class="status-pill">Catalog online</span>
-        <span class="status-pill status-pill-accent">Animation ready</span>
+      <div class="topbar-side">
+        <div class="view-controls" aria-label="Display controls">
+          <button id="themeToggleButton" class="view-button" type="button" aria-pressed="false">Dark Theme</button>
+          <button id="focusModeButton" class="view-button view-button-strong" type="button" aria-pressed="false">Focus Mode</button>
+        </div>
+        <div class="status-strip" id="statusStrip">
+          <span class="status-pill">Catalog online</span>
+          <span class="status-pill status-pill-accent">Animation ready</span>
+        </div>
       </div>
     </header>
 

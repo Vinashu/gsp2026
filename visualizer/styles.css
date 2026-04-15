@@ -1,25 +1,177 @@
 :root {
-  --bg: #f4efe4;
-  --bg-deep: #16181d;
-  --panel: rgba(255, 250, 240, 0.88);
-  --panel-deep: rgba(18, 22, 30, 0.88);
-  --line: rgba(31, 38, 49, 0.12);
-  --line-strong: rgba(31, 38, 49, 0.2);
+  --bg: #edf4f8;
+  --bg-deep: #0a1621;
+  --panel: rgba(248, 251, 255, 0.82);
+  --panel-deep: rgba(10, 18, 29, 0.9);
+  --panel-border: rgba(255, 255, 255, 0.68);
+  --panel-shine: rgba(255, 255, 255, 0.92);
+  --line: rgba(23, 35, 49, 0.12);
+  --line-strong: rgba(23, 35, 49, 0.2);
   --ink: #0f1720;
   --ink-soft: rgba(15, 23, 32, 0.68);
-  --ink-inverse: #f9f4ec;
-  --accent: #d06e2b;
-  --accent-soft: rgba(208, 110, 43, 0.16);
-  --teal: #1e6a73;
-  --teal-soft: rgba(30, 106, 115, 0.16);
-  --shadow: 0 32px 60px rgba(22, 28, 39, 0.08);
-  --shadow-strong: 0 28px 80px rgba(22, 28, 39, 0.18);
+  --ink-inverse: #f4f8ff;
+  --accent: #d57839;
+  --accent-soft: rgba(213, 120, 57, 0.16);
+  --teal: #226c75;
+  --teal-soft: rgba(34, 108, 117, 0.16);
+  --shadow: 0 28px 60px rgba(14, 27, 41, 0.08);
+  --shadow-strong: 0 30px 84px rgba(7, 18, 31, 0.18);
   --radius: 28px;
   --radius-sm: 18px;
   --token-size: 58px;
   --dock-width: 112px;
+  --page-background:
+    radial-gradient(circle at top left, rgba(52, 129, 132, 0.18), transparent 30%),
+    radial-gradient(circle at top right, rgba(78, 107, 188, 0.12), transparent 32%),
+    linear-gradient(180deg, #eef5f8 0%, #dfe8f0 100%);
+  --status-pill-bg: rgba(255, 255, 255, 0.62);
+  --status-pill-border: rgba(255, 255, 255, 0.74);
+  --status-pill-accent-bg: rgba(11, 19, 31, 0.92);
+  --status-pill-accent-ink: #f4f8ff;
+  --poster-background:
+    linear-gradient(180deg, rgba(7, 16, 28, 0.94), rgba(17, 29, 43, 0.96)),
+    linear-gradient(135deg, rgba(41, 140, 149, 0.2), rgba(83, 112, 194, 0.18));
+  --surface-soft: rgba(15, 23, 32, 0.06);
+  --surface-soft-hover: rgba(15, 23, 32, 0.11);
+  --surface-muted: rgba(15, 23, 32, 0.05);
+  --input-bg: rgba(255, 255, 255, 0.36);
+  --input-border: rgba(255, 255, 255, 0.44);
+  --chip-active-bg: rgba(255, 255, 255, 0.95);
+  --chip-active-ink: #09121a;
+  --card-bg: rgba(250, 252, 255, 0.76);
+  --card-border: rgba(18, 32, 47, 0.1);
+  --card-active-bg: rgba(255, 255, 255, 0.95);
+  --catalog-card-bg: rgba(250, 252, 255, 0.78);
+  --catalog-card-active-bg: rgba(255, 255, 255, 0.96);
+  --stat-chip-bg: rgba(34, 108, 117, 0.1);
+  --stat-chip-ink: #226c75;
+  --transport-bg: rgba(15, 23, 32, 0.08);
+  --transport-muted-bg: rgba(15, 23, 32, 0.05);
+  --empty-background:
+    linear-gradient(145deg, rgba(252, 254, 255, 0.78), rgba(238, 245, 250, 0.96)),
+    radial-gradient(circle at top left, rgba(41, 140, 149, 0.16), transparent 28%);
+  --track-background:
+    linear-gradient(180deg, rgba(248, 252, 255, 0.94), rgba(238, 245, 251, 0.9)),
+    linear-gradient(135deg, rgba(41, 140, 149, 0.08), rgba(83, 112, 194, 0.08));
+  --target-track-background:
+    linear-gradient(180deg, rgba(8, 14, 24, 0.98), rgba(14, 24, 36, 0.94)),
+    linear-gradient(135deg, rgba(41, 140, 149, 0.18), rgba(83, 112, 194, 0.16));
+  --spotlight-background:
+    linear-gradient(180deg, rgba(83, 112, 194, 0.1), rgba(248, 252, 255, 0.96)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(230, 241, 249, 0.86));
+  --dock-bg: rgba(255, 255, 255, 0.72);
+  --dock-hover-bg: rgba(255, 255, 255, 0.88);
+  --dock-border: rgba(23, 35, 49, 0.2);
+  --dock-kicker: rgba(15, 23, 32, 0.68);
+  --left-dock-bg: rgba(11, 19, 31, 0.94);
+  --left-dock-hover-bg: rgba(18, 30, 44, 0.98);
+  --left-dock-border: rgba(255, 255, 255, 0.14);
+  --left-dock-kicker: rgba(244, 248, 255, 0.58);
+  --view-button-bg: rgba(255, 255, 255, 0.58);
+  --view-button-border: rgba(255, 255, 255, 0.74);
+  --view-button-hover-bg: rgba(255, 255, 255, 0.84);
+  --view-button-active-bg: rgba(11, 19, 31, 0.92);
+  --view-button-active-border: rgba(11, 19, 31, 0.92);
+  --view-button-active-ink: #f4f8ff;
+  --gene-bg: rgba(255, 255, 255, 0.82);
+  --gene-border: rgba(255, 255, 255, 0.84);
+  --target-gene-bg: rgba(255, 255, 255, 0.08);
+  --target-gene-border: rgba(255, 255, 255, 0.14);
+  --terminus-glow: rgba(255, 255, 255, 0.86);
+  --terminus-glow-fade: rgba(255, 255, 255, 0);
+  --terminus-beam: rgba(213, 120, 57, 0.6);
+  --terminus-dot: #0d1117;
+  --terminus-ring: rgba(255, 255, 255, 0.9);
+  --terminus-shadow: rgba(213, 120, 57, 0.45);
+  --scroll-thumb: rgba(15, 23, 32, 0.16);
+  --scroll-track: rgba(15, 23, 32, 0.04);
   --font-ui: "Bahnschrift", "Aptos", "Segoe UI Variable Display", sans-serif;
   --font-mono: "Cascadia Code", "Consolas", monospace;
+}
+
+html[data-theme="dark"] {
+  --bg: #08121b;
+  --bg-deep: #04101a;
+  --panel: rgba(10, 18, 28, 0.82);
+  --panel-deep: rgba(5, 11, 18, 0.94);
+  --panel-border: rgba(145, 174, 214, 0.14);
+  --panel-shine: rgba(160, 190, 226, 0.1);
+  --line: rgba(160, 190, 226, 0.16);
+  --line-strong: rgba(160, 190, 226, 0.26);
+  --ink: #edf5ff;
+  --ink-soft: rgba(223, 235, 248, 0.72);
+  --ink-inverse: #f5f9ff;
+  --accent: #ff9b5b;
+  --accent-soft: rgba(255, 155, 91, 0.22);
+  --teal: #73d2d8;
+  --teal-soft: rgba(115, 210, 216, 0.18);
+  --shadow: 0 28px 70px rgba(0, 0, 0, 0.34);
+  --shadow-strong: 0 34px 100px rgba(0, 0, 0, 0.48);
+  --page-background:
+    radial-gradient(circle at top left, rgba(36, 151, 153, 0.22), transparent 28%),
+    radial-gradient(circle at top right, rgba(80, 108, 214, 0.22), transparent 30%),
+    linear-gradient(180deg, #07121b 0%, #0c1723 55%, #122231 100%);
+  --status-pill-bg: rgba(8, 14, 23, 0.72);
+  --status-pill-border: rgba(145, 174, 214, 0.16);
+  --status-pill-accent-bg: rgba(255, 155, 91, 0.18);
+  --status-pill-accent-ink: #ffe9dc;
+  --poster-background:
+    linear-gradient(180deg, rgba(3, 9, 16, 0.96), rgba(8, 17, 28, 0.96)),
+    linear-gradient(135deg, rgba(36, 151, 153, 0.22), rgba(80, 108, 214, 0.18));
+  --surface-soft: rgba(232, 240, 250, 0.08);
+  --surface-soft-hover: rgba(232, 240, 250, 0.14);
+  --surface-muted: rgba(232, 240, 250, 0.05);
+  --input-bg: rgba(7, 13, 21, 0.54);
+  --input-border: rgba(145, 174, 214, 0.18);
+  --chip-active-bg: rgba(255, 155, 91, 0.18);
+  --chip-active-ink: #fff2e8;
+  --card-bg: rgba(12, 20, 31, 0.68);
+  --card-border: rgba(145, 174, 214, 0.16);
+  --card-active-bg: rgba(16, 28, 44, 0.94);
+  --catalog-card-bg: rgba(12, 20, 31, 0.72);
+  --catalog-card-active-bg: rgba(17, 29, 45, 0.96);
+  --stat-chip-bg: rgba(115, 210, 216, 0.12);
+  --stat-chip-ink: #9fe7eb;
+  --transport-bg: rgba(232, 240, 250, 0.08);
+  --transport-muted-bg: rgba(232, 240, 250, 0.05);
+  --empty-background:
+    linear-gradient(145deg, rgba(10, 18, 28, 0.82), rgba(14, 27, 41, 0.96)),
+    radial-gradient(circle at top left, rgba(36, 151, 153, 0.18), transparent 28%);
+  --track-background:
+    linear-gradient(180deg, rgba(10, 18, 28, 0.86), rgba(14, 24, 37, 0.92)),
+    linear-gradient(135deg, rgba(36, 151, 153, 0.12), rgba(80, 108, 214, 0.12));
+  --target-track-background:
+    linear-gradient(180deg, rgba(2, 7, 13, 0.98), rgba(7, 13, 21, 0.96)),
+    linear-gradient(135deg, rgba(36, 151, 153, 0.22), rgba(80, 108, 214, 0.18));
+  --spotlight-background:
+    linear-gradient(180deg, rgba(255, 155, 91, 0.12), rgba(10, 18, 28, 0.94)),
+    linear-gradient(135deg, rgba(16, 27, 41, 0.92), rgba(21, 36, 54, 0.94));
+  --dock-bg: rgba(10, 18, 28, 0.76);
+  --dock-hover-bg: rgba(15, 25, 39, 0.9);
+  --dock-border: rgba(145, 174, 214, 0.24);
+  --dock-kicker: rgba(223, 235, 248, 0.72);
+  --left-dock-bg: rgba(5, 11, 18, 0.96);
+  --left-dock-hover-bg: rgba(10, 18, 28, 0.98);
+  --left-dock-border: rgba(145, 174, 214, 0.16);
+  --left-dock-kicker: rgba(223, 235, 248, 0.6);
+  --view-button-bg: rgba(10, 18, 28, 0.68);
+  --view-button-border: rgba(145, 174, 214, 0.16);
+  --view-button-hover-bg: rgba(15, 25, 39, 0.9);
+  --view-button-active-bg: rgba(255, 155, 91, 0.18);
+  --view-button-active-border: rgba(255, 155, 91, 0.24);
+  --view-button-active-ink: #fff2e8;
+  --gene-bg: rgba(14, 23, 36, 0.86);
+  --gene-border: rgba(145, 174, 214, 0.14);
+  --target-gene-bg: rgba(255, 255, 255, 0.08);
+  --target-gene-border: rgba(145, 174, 214, 0.14);
+  --terminus-glow: rgba(177, 211, 241, 0.34);
+  --terminus-glow-fade: rgba(177, 211, 241, 0);
+  --terminus-beam: rgba(255, 155, 91, 0.56);
+  --terminus-dot: #f4f8ff;
+  --terminus-ring: rgba(10, 18, 28, 0.88);
+  --terminus-shadow: rgba(255, 155, 91, 0.28);
+  --scroll-thumb: rgba(145, 174, 214, 0.22);
+  --scroll-track: rgba(145, 174, 214, 0.08);
 }
 
 * {
@@ -35,10 +187,8 @@ body {
 body {
   color: var(--ink);
   font-family: var(--font-ui);
-  background:
-    radial-gradient(circle at top left, rgba(30, 106, 115, 0.1), transparent 28%),
-    radial-gradient(circle at top right, rgba(208, 110, 43, 0.12), transparent 32%),
-    linear-gradient(180deg, #fbf6ed 0%, #efe6d6 100%);
+  background: var(--page-background);
+  transition: background 220ms ease, color 220ms ease;
 }
 
 button,
@@ -58,6 +208,12 @@ select {
   gap: 24px;
   align-items: end;
   padding: 14px 8px 24px;
+}
+
+.topbar-side {
+  display: grid;
+  gap: 12px;
+  justify-items: end;
 }
 
 .eyebrow,
@@ -84,7 +240,7 @@ select {
 .brand-block h1 {
   font-size: clamp(2.6rem, 4vw, 4.2rem);
   line-height: 0.96;
-  /* max-width: 10ch; */
+  max-width: 11ch;
 }
 
 .lede,
@@ -115,6 +271,13 @@ select {
   justify-content: flex-end;
 }
 
+.view-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
 .status-pill,
 .count-badge,
 .chip,
@@ -127,14 +290,45 @@ select {
 
 .status-pill {
   padding: 10px 14px;
-  background: rgba(255, 255, 255, 0.66);
-  border: 1px solid rgba(255, 255, 255, 0.74);
+  background: var(--status-pill-bg);
+  border: 1px solid var(--status-pill-border);
   box-shadow: var(--shadow);
 }
 
 .status-pill-accent {
-  background: rgba(16, 24, 31, 0.92);
-  color: var(--ink-inverse);
+  background: var(--status-pill-accent-bg);
+  color: var(--status-pill-accent-ink);
+}
+
+.view-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--view-button-border);
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: var(--view-button-bg);
+  color: inherit;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+
+.view-button:hover {
+  transform: translateY(-1px);
+  background: var(--view-button-hover-bg);
+}
+
+.view-button.is-active,
+.view-button-strong {
+  background: var(--view-button-active-bg);
+  border-color: var(--view-button-active-border);
+  color: var(--view-button-active-ink);
+}
+
+.view-button-strong:hover,
+.view-button.is-active:hover {
+  background: var(--view-button-active-bg);
 }
 
 .workspace {
@@ -172,11 +366,12 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
   position: relative;
   overflow: hidden;
   border-radius: var(--radius);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--panel-border);
   background: var(--panel);
   box-shadow: var(--shadow);
   backdrop-filter: blur(14px);
   padding: 22px;
+  transition: background 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
 }
 
 .panel-body {
@@ -204,10 +399,10 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
   justify-items: start;
   gap: 2px;
   width: 100%;
-  border: 1px dashed var(--line-strong);
+  border: 1px dashed var(--dock-border);
   border-radius: 22px;
   padding: 12px 14px;
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--dock-bg);
   color: inherit;
   cursor: pointer;
   box-shadow: var(--shadow);
@@ -216,7 +411,7 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
 
 .dock-button:hover {
   transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.88);
+  background: var(--dock-hover-bg);
   border-color: rgba(208, 110, 43, 0.28);
 }
 
@@ -230,23 +425,23 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
   font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--dock-kicker);
 }
 
 .controls-pane .dock-button {
-  background: rgba(18, 22, 30, 0.94);
-  border-color: rgba(255, 255, 255, 0.14);
+  background: var(--left-dock-bg);
+  border-color: var(--left-dock-border);
   color: var(--ink-inverse);
   box-shadow: var(--shadow-strong);
 }
 
 .controls-pane .dock-button:hover {
-  background: rgba(26, 32, 42, 0.98);
+  background: var(--left-dock-hover-bg);
   border-color: rgba(255, 255, 255, 0.22);
 }
 
 .controls-pane .dock-button-kicker {
-  color: rgba(249, 244, 236, 0.58);
+  color: var(--left-dock-kicker);
 }
 
 .panel::before {
@@ -254,13 +449,11 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
   position: absolute;
   inset: 0 0 auto;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+  background: linear-gradient(90deg, transparent, var(--panel-shine), transparent);
 }
 
 .panel-poster {
-  background:
-    linear-gradient(180deg, rgba(14, 20, 28, 0.9), rgba(26, 34, 45, 0.92)),
-    linear-gradient(135deg, rgba(30, 106, 115, 0.18), rgba(208, 110, 43, 0.2));
+  background: var(--poster-background);
   color: var(--ink-inverse);
   border-color: rgba(255, 255, 255, 0.12);
   box-shadow: var(--shadow-strong);
@@ -274,8 +467,7 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
 }
 
 .panel-poster h2 {
-  /* font-size: 2rem; */
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   line-height: 1;
 }
 
@@ -313,11 +505,11 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
 .field input,
 .speed-control select {
   width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid var(--input-border);
   border-radius: 16px;
   padding: 12px 14px;
   color: inherit;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--input-bg);
   outline: none;
 }
 
@@ -341,7 +533,7 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
 
 .count-badge {
   padding: 7px 12px;
-  background: rgba(15, 23, 32, 0.06);
+  background: var(--surface-soft);
   border: 1px solid var(--line);
 }
 
@@ -349,7 +541,7 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 8px 12px;
-  background: rgba(15, 23, 32, 0.06);
+  background: var(--surface-soft);
   color: inherit;
   cursor: pointer;
   transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
@@ -357,7 +549,7 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
 
 .panel-toggle:hover {
   transform: translateY(-1px);
-  background: rgba(15, 23, 32, 0.1);
+  background: var(--surface-soft-hover);
 }
 
 .panel-toggle-inverse {
@@ -379,7 +571,7 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
 .chip {
   padding: 10px 14px;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--surface-soft);
   color: inherit;
   cursor: pointer;
   transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
@@ -394,9 +586,9 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
 }
 
 .chip.is-active {
-  background: rgba(249, 244, 236, 0.92);
-  color: var(--bg-deep);
-  border-color: rgba(249, 244, 236, 0.92);
+  background: var(--chip-active-bg);
+  color: var(--chip-active-ink);
+  border-color: var(--chip-active-bg);
 }
 
 .legend-grid {
@@ -419,8 +611,8 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
 .step-item,
 .candidate-item {
   border-radius: 22px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
   padding: 16px;
   cursor: pointer;
   transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
@@ -430,7 +622,7 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
 .step-item.is-active {
   border-color: rgba(208, 110, 43, 0.45);
   box-shadow: 0 12px 30px rgba(208, 110, 43, 0.12);
-  background: rgba(255, 250, 240, 0.94);
+  background: var(--card-active-bg);
 }
 
 .puzzle-title,
@@ -446,6 +638,49 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
 .candidate-head strong,
 .step-head strong {
   font-size: 1rem;
+}
+
+.puzzle-card {
+  border-radius: 18px;
+  padding: 12px 13px 11px;
+  gap: 0;
+  background: var(--catalog-card-bg);
+}
+
+.puzzle-card.is-active {
+  background: var(--catalog-card-active-bg);
+}
+
+.puzzle-card .count-badge {
+  padding: 5px 8px;
+  font-size: 0.67rem;
+}
+
+.puzzle-card .puzzle-title {
+  gap: 10px;
+  align-items: start;
+}
+
+.puzzle-card .puzzle-title strong {
+  font-size: 0.92rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.puzzle-card .puzzle-meta {
+  margin-top: 6px;
+  font-size: 0.78rem;
+  line-height: 1.34;
+}
+
+.puzzle-card .tag-row {
+  margin-top: 8px;
+  gap: 6px;
+}
+
+.puzzle-card .stat-chip {
+  padding: 4px 7px;
+  font-size: 0.66rem;
 }
 
 .puzzle-meta,
@@ -466,18 +701,16 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
 
 .stat-chip {
   padding: 6px 10px;
-  background: rgba(30, 106, 115, 0.1);
-  color: var(--teal);
+  background: var(--stat-chip-bg);
+  color: var(--stat-chip-ink);
 }
 
 .hero-panel {
   padding: 24px;
-  margin-bottom: 20px;
 }
 
 .hero-panel h2 {
-  /* font-size: clamp(1.8rem, 2.4vw, 2.6rem); */
-  font-size: clamp(1.6rem, 2vw, 2rem);
+  font-size: clamp(1.7rem, 2.2vw, 2.35rem);
   line-height: 1;
 }
 
@@ -500,7 +733,7 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
   border: none;
   border-radius: 16px;
   padding: 12px 18px;
-  background: rgba(15, 23, 32, 0.08);
+  background: var(--transport-bg);
   color: inherit;
   cursor: pointer;
   transition: transform 180ms ease, background 180ms ease;
@@ -512,7 +745,7 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
 }
 
 .transport-button-muted {
-  background: rgba(15, 23, 32, 0.05);
+  background: var(--transport-muted-bg);
 }
 
 .speed-control {
@@ -548,10 +781,8 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
 .loading-state {
   border-radius: calc(var(--radius) + 8px);
   padding: 60px 32px;
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.72), rgba(255, 247, 232, 0.94)),
-    radial-gradient(circle at top left, rgba(30, 106, 115, 0.1), transparent 25%);
-  border: 1px solid rgba(255, 255, 255, 0.84);
+  background: var(--empty-background);
+  border: 1px solid var(--panel-border);
   box-shadow: var(--shadow);
   text-align: center;
 }
@@ -576,18 +807,14 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
   position: relative;
   overflow: hidden;
   border-radius: calc(var(--radius) + 8px);
-  background:
-    linear-gradient(180deg, rgba(255, 250, 240, 0.94), rgba(255, 246, 230, 0.9)),
-    linear-gradient(135deg, rgba(30, 106, 115, 0.08), rgba(208, 110, 43, 0.06));
-  border: 1px solid rgba(255, 255, 255, 0.72);
+  background: var(--track-background);
+  border: 1px solid var(--panel-border);
   box-shadow: var(--shadow);
   padding: 18px 18px 20px;
 }
 
 .track-panel-target {
-  background:
-    linear-gradient(180deg, rgba(18, 22, 30, 0.96), rgba(25, 31, 41, 0.92)),
-    linear-gradient(135deg, rgba(30, 106, 115, 0.18), rgba(208, 110, 43, 0.14));
+  background: var(--target-track-background);
   border-color: rgba(255, 255, 255, 0.1);
   color: var(--ink-inverse);
   box-shadow: var(--shadow-strong);
@@ -613,9 +840,7 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background:
-    linear-gradient(180deg, rgba(208, 110, 43, 0.12), rgba(255, 250, 240, 0.96)),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.74), rgba(255, 239, 214, 0.86));
+  background: var(--spotlight-background);
 }
 
 .spotlight-step {
@@ -684,7 +909,7 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
   display: grid;
   place-items: center;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0) 72%);
+  background: radial-gradient(circle, var(--terminus-glow), var(--terminus-glow-fade) 72%);
 }
 
 .terminus-core::before,
@@ -693,7 +918,7 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
   position: absolute;
   width: 1px;
   height: 150%;
-  background: linear-gradient(180deg, rgba(208, 110, 43, 0), rgba(208, 110, 43, 0.6), rgba(208, 110, 43, 0));
+  background: linear-gradient(180deg, rgba(208, 110, 43, 0), var(--terminus-beam), rgba(208, 110, 43, 0));
 }
 
 .terminus-core::before {
@@ -705,8 +930,8 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: #0d1117;
-  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.9), 0 0 26px rgba(208, 110, 43, 0.45);
+  background: var(--terminus-dot);
+  box-shadow: 0 0 0 10px var(--terminus-ring), 0 0 26px var(--terminus-shadow);
 }
 
 .gene-token {
@@ -720,15 +945,15 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
   gap: 6px;
   padding-top: 16px;
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.82);
+  background: var(--gene-bg);
+  border: 1px solid var(--gene-border);
   box-shadow: 0 12px 24px rgba(20, 28, 39, 0.08);
   transition: transform 300ms ease, box-shadow 300ms ease;
 }
 
 .track-panel-target .gene-token {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.14);
+  background: var(--target-gene-bg);
+  border-color: var(--target-gene-border);
   box-shadow: none;
 }
 
@@ -833,6 +1058,7 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
 }
 
 .puzzle-list {
+  gap: 10px;
   max-height: clamp(360px, 58vh, 760px);
   overflow-y: auto;
   padding-right: 6px;
@@ -851,13 +1077,13 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
 
 .puzzle-list::-webkit-scrollbar-thumb,
 .step-log::-webkit-scrollbar-thumb {
-  background: rgba(15, 23, 32, 0.16);
+  background: var(--scroll-thumb);
   border-radius: 999px;
 }
 
 .puzzle-list::-webkit-scrollbar-track,
 .step-log::-webkit-scrollbar-track {
-  background: rgba(15, 23, 32, 0.04);
+  background: var(--scroll-track);
   border-radius: 999px;
 }
 
@@ -911,6 +1137,14 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
     align-items: start;
   }
 
+  .topbar-side {
+    justify-items: start;
+  }
+
+  .view-controls {
+    justify-content: flex-start;
+  }
+
   .status-strip {
     justify-content: flex-start;
   }
@@ -955,6 +1189,11 @@ body.controls-all-hidden.inspector-all-hidden .workspace {
 
   .transport-button {
     flex: 1 1 calc(50% - 10px);
+  }
+
+  .view-button {
+    width: 100%;
+    justify-content: center;
   }
 
   .speed-control {

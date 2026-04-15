@@ -18,6 +18,15 @@ function loadCollapsedPanels() {
   }
 }
 
+function loadTheme() {
+  try {
+    const raw = window.localStorage.getItem('gsp-visualizer-theme');
+    return raw === 'dark' ? 'dark' : 'light';
+  } catch (_) {
+    return 'light';
+  }
+}
+
 const state = {
   puzzles: [],
   filteredPuzzles: [],
@@ -29,10 +38,14 @@ const state = {
   playing: false,
   playTimer: null,
   speed: 1,
-  collapsedPanels: loadCollapsedPanels()
+  collapsedPanels: loadCollapsedPanels(),
+  theme: loadTheme(),
+  focusSnapshot: null
 };
 
 const dom = {
+  themeToggleButton: document.querySelector('#themeToggleButton'),
+  focusModeButton: document.querySelector('#focusModeButton'),
   searchInput: document.querySelector('#searchInput'),
   sourceFilters: document.querySelector('#sourceFilters'),
   puzzleList: document.querySelector('#puzzleList'),
@@ -62,6 +75,14 @@ const dom = {
 function persistCollapsedPanels() {
   try {
     window.localStorage.setItem('gsp-visualizer-panels', JSON.stringify(state.collapsedPanels));
+  } catch (_) {
+    // Ignore storage failures and keep the interface responsive.
+  }
+}
+
+function persistTheme() {
+  try {
+    window.localStorage.setItem('gsp-visualizer-theme', state.theme);
   } catch (_) {
     // Ignore storage failures and keep the interface responsive.
   }
@@ -126,6 +147,38 @@ function renderStatusStrip() {
   `;
 }
 
+function allPanelsCollapsed() {
+  return Object.values(state.collapsedPanels).every(Boolean);
+}
+
+function setAllPanelsCollapsed(value) {
+  for (const panelId of Object.keys(state.collapsedPanels)) {
+    state.collapsedPanels[panelId] = value;
+  }
+}
+
+function applyTheme() {
+  document.documentElement.dataset.theme = state.theme;
+  renderViewControls();
+}
+
+function renderViewControls() {
+  const isDarkTheme = state.theme === 'dark';
+  const inFocusMode = allPanelsCollapsed();
+
+  if (dom.themeToggleButton) {
+    dom.themeToggleButton.textContent = isDarkTheme ? 'Light Theme' : 'Dark Theme';
+    dom.themeToggleButton.setAttribute('aria-pressed', String(isDarkTheme));
+    dom.themeToggleButton.classList.toggle('is-active', isDarkTheme);
+  }
+
+  if (dom.focusModeButton) {
+    dom.focusModeButton.textContent = inFocusMode ? 'Show Rails' : 'Focus Mode';
+    dom.focusModeButton.setAttribute('aria-pressed', String(inFocusMode));
+    dom.focusModeButton.classList.toggle('is-active', inFocusMode);
+  }
+}
+
 function renderCollapsedDock(dock, panelIds) {
   const collapsedIds = panelIds.filter(panelId => state.collapsedPanels[panelId]);
 
@@ -151,6 +204,7 @@ function renderCollapsedDock(dock, panelIds) {
     button.addEventListener('click', () => {
       const panelId = button.dataset.showPanel;
       if (!panelId) return;
+      state.focusSnapshot = null;
       state.collapsedPanels[panelId] = false;
       persistCollapsedPanels();
       syncCollapsiblePanels();
@@ -184,6 +238,7 @@ function syncCollapsiblePanels() {
 
   document.body.classList.toggle('controls-all-hidden', controlsAllHidden);
   document.body.classList.toggle('inspector-all-hidden', inspectorAllHidden);
+  renderViewControls();
 }
 
 function renderSourceFilters() {
@@ -591,10 +646,33 @@ function bindEvents() {
     toggle.addEventListener('click', () => {
       const panelId = toggle.dataset.togglePanel;
       if (!panelId) return;
+      state.focusSnapshot = null;
       state.collapsedPanels[panelId] = !state.collapsedPanels[panelId];
       persistCollapsedPanels();
       syncCollapsiblePanels();
     });
+  });
+
+  dom.themeToggleButton?.addEventListener('click', () => {
+    state.theme = state.theme === 'dark' ? 'light' : 'dark';
+    persistTheme();
+    applyTheme();
+  });
+
+  dom.focusModeButton?.addEventListener('click', () => {
+    if (allPanelsCollapsed()) {
+      const restoreState = state.focusSnapshot || Object.fromEntries(
+        Object.keys(state.collapsedPanels).map(panelId => [panelId, false])
+      );
+      state.collapsedPanels = { ...restoreState };
+      state.focusSnapshot = null;
+    } else {
+      state.focusSnapshot = { ...state.collapsedPanels };
+      setAllPanelsCollapsed(true);
+    }
+
+    persistCollapsedPanels();
+    syncCollapsiblePanels();
   });
 
   dom.searchInput.addEventListener('input', event => {
@@ -649,6 +727,7 @@ function bindEvents() {
 
 async function init() {
   bindEvents();
+  applyTheme();
   renderStatusStrip();
   syncCollapsiblePanels();
 
