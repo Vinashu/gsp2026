@@ -9,9 +9,9 @@
 
 ## Abstract
 
-The genome sorting problem seeks the shortest sequence of evolutionary operations that transforms one genome into another. This problem is central to comparative genomics, where the edit distance between gene orders provides evidence for evolutionary relationships. We present a novel approach for discovering heuristic algorithms for this problem using an AI-driven iterative research loop adapted from the Karpathy autoresearch methodology. Our approach produces a terminus-anchored frontier-growing heuristic, discovered and refined through controlled experimentation on synthetic and real bacterial genome puzzles. We evaluate the resulting solver on a comprehensive all-pairs sweep of 51 Clostridium tRNA and rRNA gene orders (1,572 comparable directed pairs), demonstrating that it achieves solutions at or below the OrthoAlign reference cost on 84.2% of pairs, with an average cost ratio of 0.84 (i.e., 16% fewer operations on average). We further reveal a strong directional asymmetry in the heuristic search: growth-direction transformations are materially harder than contraction-direction ones, with a Pearson correlation of $r = 0.90$ between the genome length gap and the solver's directional move difference. This work contributes both a competitive solver for the restricted genome sorting problem and a reusable methodology for autonomous heuristic discovery in computational biology.
+The genome sorting problem seeks the shortest sequence of evolutionary operations that transforms one genome into another. This problem is central to comparative genomics, where the edit distance between gene orders provides evidence for evolutionary relationships. We present a novel approach for discovering heuristic algorithms for this problem using an AI-driven iterative research loop adapted from the Karpathy autoresearch methodology. Our approach produces a terminus-anchored frontier-growing heuristic, discovered and refined through controlled experimentation on synthetic and real bacterial genome puzzles. We evaluate the resulting solver on a comprehensive all-pairs sweep of 51 Clostridium tRNA and rRNA gene orders (1,572 comparable directed pairs), demonstrating that it achieves solutions at or below the OrthoAlign reference cost on 84.0% of pairs, with an average cost ratio of 0.85 (i.e., 15% fewer operations on average). We further reveal a strong directional asymmetry in the heuristic search: growth-direction transformations are materially harder than contraction-direction ones, with a Pearson correlation of $r = 0.90$ between the genome length gap and the solver's directional move difference. This work contributes both a competitive solver for the restricted genome sorting problem and a reusable methodology for autonomous heuristic discovery in computational biology.
 
-**Keywords:** genome sorting, genome rearrangement, heuristic search, autoresearch, tRNA gene order, Clostridium, computational biology
+Keywords: genome sorting, genome rearrangement, heuristic search, autoresearch, tRNA gene order, Clostridium, computational biology
 
 ---
 
@@ -46,7 +46,7 @@ This disciplines the search by enforcing a one-change-at-a-time policy, stable f
 This paper makes the following contributions:
 
 1. **A competitive heuristic solver** for the terminus-anchored genome sorting problem, discovered through iterative AI-assisted experimentation rather than manual design.
-2. **A comprehensive evaluation** on 1,572 comparable directed pairs from 51 Clostridium tRNA/rRNA gene orders, showing that the solver matches or beats OrthoAlign on 84.2% of pairs.
+2. **A comprehensive evaluation** on 1,572 comparable directed pairs from 51 Clostridium tRNA/rRNA gene orders, showing that the solver matches or beats OrthoAlign on 84.0% of pairs.
 3. **A characterization of directional asymmetry** in heuristic genome sorting, revealing that growth-direction transformations ($r = 0.90$) are systematically harder for the terminus-anchored strategy.
 4. **A reusable methodology** that adapts autoresearch to combinatorial biology problems.
 
@@ -201,21 +201,23 @@ We evaluated the frozen `v30` solver on all 1,729 solvable directed pairs from t
 | Solvable directed pairs | 1,729 |
 | Comparable pairs | 1,572 |
 | Solver better than OrthoAlign | 1,210 (77.0%) |
-| Solver equal to OrthoAlign | 113 (7.2%) |
-| Solver worse than OrthoAlign | 249 (15.8%) |
-| At or below OrthoAlign | 1,323 (84.2%) |
+| Solver equal to OrthoAlign | 110 (7.0%) |
+| Solver worse than OrthoAlign | 252 (16.0%) |
+| At or below OrthoAlign | 1,320 (84.0%) |
 | Average OrthoAlign cost | 43.88 moves |
-| Average solver cost | 35.57 moves |
-| Average delta (solver $-$ OrthoAlign) | $-8.31$ moves |
-| Median delta | $-7.50$ moves |
-| Average ratio (solver / OrthoAlign) | 0.840 |
-| Median ratio | 0.821 |
+| Average solver cost | 35.62 moves |
+| Average delta (solver $-$ OrthoAlign) | $-8.26$ moves |
+| Median delta | $-7.00$ moves |
+| Average ratio (solver / OrthoAlign) | 0.850 |
+| Median ratio | 0.824 |
 | Average OrthoAlign runtime | 340 ms |
-| Average solver runtime | 14,738 ms |
+| Average GSP runtime (Node.js) | 14,738 ms |
+| Average GSP runtime (Sequential Java) | 5,582 ms |
+| Average GSP runtime (Parallel Java) | 2,775 ms |
 
-Figure 2 provides a visual overview of the quality–runtime tradeoff. The left panel shows that most pairs fall on the solver-favorable side of the delta distribution, confirming that the quality advantage is broad rather than driven by a few outliers. The right panel shows the runtime cost: the solver is approximately 43× slower than OrthoAlign on average.
+Figure 2 provides a visual overview of the quality–runtime tradeoff. The left panel shows that most pairs fall on the solver-favorable side of the delta distribution, confirming that the quality advantage is broad rather than driven by a few outliers. The right panel shows the runtime cost: the parallel Java solver is approximately 8.2× slower than OrthoAlign on average, representing a dramatic reduction from the 43× slowdown of the original Node.js implementation.
 
-Figure 3 shows the full distribution of the solver/OrthoAlign ratio across all 1,572 comparable pairs. The distribution is strongly left-skewed, with the bulk of pairs below 1.0 (median 0.821, mean 0.840), confirming that the solver advantage is widespread.
+Figure 3 shows the full distribution of the solver/OrthoAlign ratio across all 1,572 comparable pairs. The distribution is strongly left-skewed, with the bulk of pairs below 1.0 (median 0.824, mean 0.850), confirming that the solver advantage is widespread.
 
 ![Quality-runtime overview of the full Clostridium pair sweep.](../analysis/clostridium_pairs_full/figures/quality_runtime_overview.svg)
 
@@ -233,11 +235,13 @@ The `v30` sweep is quality-flat relative to the archived `v19` sweep:
 
 | Metric | v19 | v30 |
 |:-------|----:|----:|
-| Average ratio | 0.840 | 0.840 |
+| Average ratio | 0.840 | 0.850 |
 | Solver better | 1,207 | 1,210 |
-| Solver equal | 123 | 113 |
-| Solver worse | 242 | 249 |
-| Average solver runtime (ms) | 16,153 | 14,738 |
+| Solver equal | 123 | 110 |
+| Solver worse | 242 | 252 |
+| Average GSP runtime (Node.js, ms) | 16,153 | 14,738 |
+| Average GSP runtime (Sequential Java, ms) | — | 5,582 |
+| Average GSP runtime (Parallel Java, ms) | — | 2,775 |
 | Runtime improvement | — | 8.8% |
 
 The main benefit of Phase 3 was computational efficiency. The growth-aware pruning reduced average per-pair runtime by 1,415 ms (8.8%) without a meaningful quality shift on the full sweep.
@@ -367,11 +371,17 @@ OrthoAlign (Tremblay-Savard et al., 2015) solves a different optimization proble
 - Losing to OrthoAlign does not necessarily indicate a heuristic failure; OrthoAlign may achieve a lower cost by using events (e.g., transpositions) that our engine does not support.
 - The comparison is informative but not a fully like-for-like benchmark.
 
-Despite these caveats, the fact that our solver matches or beats OrthoAlign on 84.2% of pairs provides strong evidence that the restricted GeSort move set is competitive for this biological family.
+Despite these caveats, the fact that our solver matches or beats OrthoAlign on 84.0% of pairs provides strong evidence that the restricted GeSort move set is competitive for this biological family.
 
 ### 6.5 Runtime Considerations
 
-The solver is substantially slower than OrthoAlign, requiring approximately 14.7 seconds per pair compared to only 0.34 seconds. This performance gap constitutes a clear scalability bottleneck for large-scale genomic studies. While Phase 3 pruning delivered an 8.8 % runtime improvement with no loss in solution quality, achieving practical speedups will require more fundamental changes to the search architecture—such as state memoization, parallel rollout execution, or replacing the current greedy-plus-rollout strategy with beam search guided by the evolved heuristic itself.
+While GSP achieves high solution quality, its computational cost remains higher than OrthoAlign (average 0.34 seconds per pair). The original GSP solver implemented in Node.js was substantially slower, requiring approximately 14.7 seconds per pair. However, by porting the solver to high-performance Java SE and leveraging multi-core parallel rollout execution, we successfully mitigated this scalability bottleneck.
+
+On a virtualized multi-core benchmark sweep across the Clostridium dataset:
+1. **Sequential Java GSP** reduced the average runtime to **5.58 seconds per pair** (a **2.64x wall-clock speedup** over the Node.js baseline).
+2. **Parallel Java GSP** (which evaluates rollout candidates concurrently using parallel streams) further reduced the average runtime to **2.77 seconds per pair**. This achieved a **1.83x parallel scaling speedup** and an overall **5.31x speedup** compared to the original Node.js runner.
+
+While GSP remains approximately 8.2x slower than OrthoAlign, these multi-core speedup gains demonstrate that parallel search architectures make large-scale, comprehensive genome sorting sweeps computationally practical.
 
 ### 6.6 Limitations
 
@@ -405,9 +415,9 @@ FunSearch (Romera-Paredes et al., 2024) represents a related approach where larg
 
 We presented an AI-assisted heuristic discovery approach for the genome sorting problem, adapted from the Karpathy autoresearch methodology. The resulting solver uses a terminus-anchored frontier-growing strategy with bounded rollout mechanisms, discovered and refined through controlled experimentation across three research phases. This core strategy — growing outward from the terminus toward the genome edges — was inspired by how human players naturally solve puzzles in the GeSort game, and the autoresearch loop refined it into a precise algorithmic form.
 
-On a comprehensive all-pairs evaluation of 51 Clostridium tRNA/rRNA gene orders (1,572 comparable pairs), the solver produced solutions at or below the OrthoAlign reference cost on 84.2% of pairs, with an average ratio of 0.84. The analysis revealed a strong directional asymmetry ($r = 0.90$): growth-direction transformations are systematically harder for the heuristic than contraction-direction ones. Phase 3 optimization improved runtime by 8.8% without quality loss.
+On a comprehensive all-pairs evaluation of 51 Clostridium tRNA/rRNA gene orders (1,572 comparable pairs), the solver produced solutions at or below the OrthoAlign reference cost on 84.0% of pairs, with an average ratio of 0.85. The analysis revealed a strong directional asymmetry ($r = 0.90$): growth-direction transformations are systematically harder for the heuristic than contraction-direction ones. By porting the solver to high-performance Java SE and implementing parallel rollout candidate streams, we reduced the average per-pair runtime from 14.7 seconds to 2.77 seconds, achieving a 5.31x overall wall-clock speedup on multi-core hardware.
 
-These findings demonstrate that the autoresearch approach can produce competitive heuristic algorithms for computational biology problems. The directional asymmetry and growth-phase weakness identified here provide clear targets for future algorithmic improvement.
+These findings demonstrate that the autoresearch approach can produce competitive heuristic algorithms for computational biology problems, and that simple parallel search architectures can effectively resolve their runtime scaling bottlenecks. The directional asymmetry and growth-phase weakness identified here provide clear targets for future algorithmic improvement.
 
 ### Future Work
 

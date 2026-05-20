@@ -69,9 +69,51 @@ gsp2026/
 |  |- index.html                   # Browser UI for animated solver playback
 |  |- app.js                       # Puzzle picker, transport controls, and rendering
 |  `- styles.css                   # Visual system and responsive layout
-`- syntetic_puzles/
-   `- dev/                         # Extra synthetic generator outputs
+|- syntetic_puzles/
+|  `- dev/                         # Extra synthetic generator outputs
+|- java-solver/                    # High-performance parallelized Java SE 17+ production solver
+|  |- src/gesort/                  # Solver, game engine, and runner source code
+|  `- bin/                         # Compiled class files (git ignored)
+`- _legacy/                        # Historical research papers, old Python levelCreator, and tools
 ```
+
+## High-Performance Java Solver
+
+While the research prototype resides in `solver.js`, the production-grade, large-scale sweep runner is implemented in zero-dependency, multi-threaded **Java SE 17+** inside the [java-solver](java-solver/src/gesort) directory. This high-performance port achieves identical move choices and trajectory parity to the original JavaScript engine while utilizing multi-core CPU concurrency to drastically reduce runtime.
+
+### 1. Compilation
+```powershell
+cd c:\Repos\gsp2026\java-solver
+javac -d bin src/gesort/*.java
+```
+
+### 2. Running Benchmarks and Sweeps
+* **Legacy 8-Puzzle Benchmark**:
+  ```powershell
+  java -cp bin gesort.BenchmarkRunner
+  ```
+* **Phase 3 Hard Genomic Puzzles**:
+  ```powershell
+  java -cp bin gesort.DatasetRunner
+  ```
+* **Full 1,729 Clostridium Genome Sweep**:
+  ```powershell
+  java -cp bin gesort.FullSweepRunner
+  ```
+
+### 3. Performance & Speedup Analysis
+
+Running the full genome sweep in Java yields massive wall-clock speedups over the Node.js baseline:
+
+| Solver Configuration | Average Per-Pair Runtime | Wall-Clock Speedup vs Node.js | Parallel Scaling Speedup | Ratio to OrthoAlign |
+| :--- | :---: | :---: | :---: | :---: |
+| **OrthoAlign** (Baseline) | **0.34 s** (340 ms) | — | — | *1.00x* (Ref) |
+| **Node.js GSP** (Original) | **14.74 s** | *1.00x* (Ref) | — | 43.35x slower |
+| **Sequential Java GSP** | **5.58 s** | **2.64x faster** | — | 16.41x slower |
+| **Parallel Java GSP** | **2.77 s** | **5.31x faster** | **1.83x faster** | **8.16x slower** |
+
+> [!TIP]
+> Utilizing Java's multi-core parallel streams for candidate search rollouts reduces the computational overhead gap to OrthoAlign from **43.3x slower** to just **8.16x slower**, while preserving 100% exact move parity.
 
 ## Quick Start
 

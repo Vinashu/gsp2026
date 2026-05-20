@@ -14,45 +14,45 @@
 <text x="563.0" y="158.0" fill="#16324f" font-size="12" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start" transform="rotate(-28.0 563.0 158.0)">CP000721</text>
 <text x="685.0" y="158.0" fill="#16324f" font-size="12" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start" transform="rotate(-28.0 685.0 158.0)">CP006777</text>
 <text x="807.0" y="158.0" fill="#16324f" font-size="12" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start" transform="rotate(-28.0 807.0 158.0)">CP002160</text>
-<rect x="258.0" y="176.0" width="120.0" height="40.0" fill="#e0828e" stroke="#ffffff" stroke-width="1" rx="4" />
+<rect x="258.0" y="176.0" width="120.0" height="40.0" fill="#db6f7d" stroke="#ffffff" stroke-width="1" rx="4" />
 <text x="318.0" y="202.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+14</text>
-<rect x="380.0" y="176.0" width="120.0" height="40.0" fill="#e38b96" stroke="#ffffff" stroke-width="1" rx="4" />
+<rect x="380.0" y="176.0" width="120.0" height="40.0" fill="#de7986" stroke="#ffffff" stroke-width="1" rx="4" />
 <text x="440.0" y="202.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+13</text>
-<rect x="502.0" y="176.0" width="120.0" height="40.0" fill="#e38b96" stroke="#ffffff" stroke-width="1" rx="4" />
+<rect x="502.0" y="176.0" width="120.0" height="40.0" fill="#de7986" stroke="#ffffff" stroke-width="1" rx="4" />
 <text x="562.0" y="202.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+13</text>
-<rect x="624.0" y="176.0" width="120.0" height="40.0" fill="#e38b96" stroke="#ffffff" stroke-width="1" rx="4" />
+<rect x="624.0" y="176.0" width="120.0" height="40.0" fill="#de7986" stroke="#ffffff" stroke-width="1" rx="4" />
 <text x="684.0" y="202.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+13</text>
-<rect x="746.0" y="176.0" width="120.0" height="40.0" fill="#e5939d" stroke="#ffffff" stroke-width="1" rx="4" />
+<rect x="746.0" y="176.0" width="120.0" height="40.0" fill="#e0828e" stroke="#ffffff" stroke-width="1" rx="4" />
 <text x="806.0" y="202.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+12</text>
 <rect x="258.0" y="218.0" width="120.0" height="40.0" fill="#2f6fed" stroke="#ffffff" stroke-width="1" rx="4" />
-<text x="318.0" y="244.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-21</text>
-<rect x="380.0" y="218.0" width="120.0" height="40.0" fill="#5e90f1" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="318.0" y="244.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-18</text>
+<rect x="380.0" y="218.0" width="120.0" height="40.0" fill="#457eef" stroke="#ffffff" stroke-width="1" rx="4" />
 <text x="440.0" y="244.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-16</text>
-<rect x="502.0" y="218.0" width="120.0" height="40.0" fill="#e79ba4" stroke="#ffffff" stroke-width="1" rx="4" />
+<rect x="502.0" y="218.0" width="120.0" height="40.0" fill="#e38c97" stroke="#ffffff" stroke-width="1" rx="4" />
 <text x="562.0" y="244.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+11</text>
-<rect x="624.0" y="218.0" width="120.0" height="40.0" fill="#e79ba4" stroke="#ffffff" stroke-width="1" rx="4" />
+<rect x="624.0" y="218.0" width="120.0" height="40.0" fill="#e38c97" stroke="#ffffff" stroke-width="1" rx="4" />
 <text x="684.0" y="244.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+11</text>
-<rect x="746.0" y="218.0" width="120.0" height="40.0" fill="#bbd1fa" stroke="#ffffff" stroke-width="1" rx="4" />
+<rect x="746.0" y="218.0" width="120.0" height="40.0" fill="#b2caf9" stroke="#ffffff" stroke-width="1" rx="4" />
 <text x="806.0" y="244.0" fill="#16324f" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-6</text>
 <rect x="258.0" y="260.0" width="120.0" height="40.0" fill="#2f6fed" stroke="#ffffff" stroke-width="1" rx="4" />
-<text x="318.0" y="286.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-21</text>
-<rect x="380.0" y="260.0" width="120.0" height="40.0" fill="#5e90f1" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="318.0" y="286.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-18</text>
+<rect x="380.0" y="260.0" width="120.0" height="40.0" fill="#457eef" stroke="#ffffff" stroke-width="1" rx="4" />
 <text x="440.0" y="286.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-16</text>
-<rect x="502.0" y="260.0" width="120.0" height="40.0" fill="#e79ba4" stroke="#ffffff" stroke-width="1" rx="4" />
+<rect x="502.0" y="260.0" width="120.0" height="40.0" fill="#e38c97" stroke="#ffffff" stroke-width="1" rx="4" />
 <text x="562.0" y="286.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+11</text>
-<rect x="624.0" y="260.0" width="120.0" height="40.0" fill="#e79ba4" stroke="#ffffff" stroke-width="1" rx="4" />
+<rect x="624.0" y="260.0" width="120.0" height="40.0" fill="#e38c97" stroke="#ffffff" stroke-width="1" rx="4" />
 <text x="684.0" y="286.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+11</text>
-<rect x="746.0" y="260.0" width="120.0" height="40.0" fill="#bbd1fa" stroke="#ffffff" stroke-width="1" rx="4" />
+<rect x="746.0" y="260.0" width="120.0" height="40.0" fill="#b2caf9" stroke="#ffffff" stroke-width="1" rx="4" />
 <text x="806.0" y="286.0" fill="#16324f" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-6</text>
 <rect x="258.0" y="302.0" width="120.0" height="40.0" fill="#2f6fed" stroke="#ffffff" stroke-width="1" rx="4" />
-<text x="318.0" y="328.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-21</text>
-<rect x="380.0" y="302.0" width="120.0" height="40.0" fill="#5e90f1" stroke="#ffffff" stroke-width="1" rx="4" />
+<text x="318.0" y="328.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-18</text>
+<rect x="380.0" y="302.0" width="120.0" height="40.0" fill="#457eef" stroke="#ffffff" stroke-width="1" rx="4" />
 <text x="440.0" y="328.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-16</text>
-<rect x="502.0" y="302.0" width="120.0" height="40.0" fill="#e79ba4" stroke="#ffffff" stroke-width="1" rx="4" />
+<rect x="502.0" y="302.0" width="120.0" height="40.0" fill="#e38c97" stroke="#ffffff" stroke-width="1" rx="4" />
 <text x="562.0" y="328.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+11</text>
-<rect x="624.0" y="302.0" width="120.0" height="40.0" fill="#e79ba4" stroke="#ffffff" stroke-width="1" rx="4" />
+<rect x="624.0" y="302.0" width="120.0" height="40.0" fill="#e38c97" stroke="#ffffff" stroke-width="1" rx="4" />
 <text x="684.0" y="328.0" fill="#ffffff" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">+11</text>
-<rect x="746.0" y="302.0" width="120.0" height="40.0" fill="#bbd1fa" stroke="#ffffff" stroke-width="1" rx="4" />
+<rect x="746.0" y="302.0" width="120.0" height="40.0" fill="#b2caf9" stroke="#ffffff" stroke-width="1" rx="4" />
 <text x="806.0" y="328.0" fill="#16324f" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">-6</text>
 <rect x="298.0" y="344.0" width="5.2" height="14.0" fill="#2f6fed" stroke="none" stroke-width="1" />
 <rect x="302.2" y="344.0" width="5.2" height="14.0" fill="#3372ed" stroke="none" stroke-width="1" />
@@ -157,11 +157,11 @@
 <rect x="718.0" y="344.0" width="5.2" height="14.0" fill="#d1495b" stroke="none" stroke-width="1" />
 <line x1="298.0" y1="359.0" x2="718.0" y2="359.0" stroke="#16324f" stroke-width="1" />
 <line x1="298.0" y1="359.0" x2="298.0" y2="364.0" stroke="#16324f" stroke-width="1" />
-<text x="298.0" y="380.0" fill="#6b7c93" font-size="11" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">-21</text>
+<text x="298.0" y="380.0" fill="#6b7c93" font-size="11" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">-18</text>
 <line x1="508.0" y1="359.0" x2="508.0" y2="364.0" stroke="#16324f" stroke-width="1" />
 <text x="508.0" y="380.0" fill="#6b7c93" font-size="11" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">+0</text>
 <line x1="718.0" y1="359.0" x2="718.0" y2="364.0" stroke="#16324f" stroke-width="1" />
-<text x="718.0" y="380.0" fill="#6b7c93" font-size="11" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">+21</text>
+<text x="718.0" y="380.0" fill="#6b7c93" font-size="11" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">+18</text>
 <text x="508.0" y="338.0" fill="#6b7c93" font-size="12" font-family="Segoe UI, Arial, sans-serif" font-weight="400" text-anchor="middle">Cell value: solver - OrthoAlign (moves)</text>
 <text x="64.0" y="126.0" fill="#16324f" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start">Mutables</text>
 <text x="508.0" y="126.0" fill="#16324f" font-size="13" font-family="Segoe UI, Arial, sans-serif" font-weight="600" text-anchor="start">Targets</text>

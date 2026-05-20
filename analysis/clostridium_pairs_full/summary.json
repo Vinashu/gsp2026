@@ -11,16 +11,16 @@
   "orthalignScoredPairs": 1722,
   "comparablePairs": 1572,
   "solverBetterCount": 1210,
-  "solverEqualCount": 113,
-  "solverWorseCount": 249,
-  "averageOrthoCost": 43.88104325699746,
-  "averageSolverMoves": 35.57188295165395,
-  "averageDelta": -8.30916030534351,
-  "medianDelta": -7.5,
-  "averageRatio": 0.8403784351145022,
-  "medianRatio": 0.8214,
-  "averageOrthoMs": 340.1336032388664,
-  "averageSolverMs": 14737.853672643147,
+  "solverEqualCount": 110,
+  "solverWorseCount": 252,
+  "averageOrthoCost": 43.8810432569974600,
+  "averageSolverMoves": 35.6195928753180700,
+  "averageDelta": -8.2614503816793880,
+  "medianDelta": -7.0,
+  "averageRatio": 0.8501470437017995,
+  "medianRatio": 0.8235,
+  "averageOrthoMs": 340.1336032388664000,
+  "averageSolverMs": 2774.8710237131290000,
   "bestPairs": [
     {
       "pairIndex": 130,
@@ -37,7 +37,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 7,
-      "solverMs": 2339,
+      "solverMs": 627,
       "delta": -48,
       "ratio": 0.1273,
       "comparison": "better"
@@ -57,7 +57,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 6,
-      "solverMs": 2065,
+      "solverMs": 531,
       "delta": -47,
       "ratio": 0.1132,
       "comparison": "better"
@@ -77,7 +77,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 9,
-      "solverMs": 4261,
+      "solverMs": 802,
       "delta": -47,
       "ratio": 0.1607,
       "comparison": "better"
@@ -97,7 +97,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 6,
-      "solverMs": 2871,
+      "solverMs": 437,
       "delta": -46,
       "ratio": 0.1154,
       "comparison": "better"
@@ -117,7 +117,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 6,
-      "solverMs": 2400,
+      "solverMs": 544,
       "delta": -46,
       "ratio": 0.1154,
       "comparison": "better"
@@ -137,7 +137,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 6,
-      "solverMs": 2863,
+      "solverMs": 540,
       "delta": -46,
       "ratio": 0.1154,
       "comparison": "better"
@@ -157,7 +157,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 7,
-      "solverMs": 3057,
+      "solverMs": 563,
       "delta": -46,
       "ratio": 0.1321,
       "comparison": "better"
@@ -177,7 +177,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 8,
-      "solverMs": 3605,
+      "solverMs": 692,
       "delta": -46,
       "ratio": 0.1481,
       "comparison": "better"
@@ -197,7 +197,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 8,
-      "solverMs": 3637,
+      "solverMs": 676,
       "delta": -46,
       "ratio": 0.1481,
       "comparison": "better"
@@ -217,7 +217,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 8,
-      "solverMs": 3610,
+      "solverMs": 370,
       "delta": -46,
       "ratio": 0.1481,
       "comparison": "better"
@@ -239,7 +239,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 66,
-      "solverMs": 8555,
+      "solverMs": 2324,
       "delta": 14,
       "ratio": 1.2692,
       "comparison": "worse"
@@ -259,7 +259,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 66,
-      "solverMs": 8971,
+      "solverMs": 2560,
       "delta": 13,
       "ratio": 1.2453,
       "comparison": "worse"
@@ -279,7 +279,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 73,
-      "solverMs": 8481,
+      "solverMs": 2362,
       "delta": 13,
       "ratio": 1.2167,
       "comparison": "worse"
@@ -299,9 +299,29 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 73,
-      "solverMs": 8386,
+      "solverMs": 2443,
       "delta": 13,
       "ratio": 1.2167,
+      "comparison": "worse"
+    },
+    {
+      "pairIndex": 74,
+      "mutableName": "AP012212_ 1042156.4",
+      "targetName": "CP002118_ 863638.3",
+      "mutableLength": 66,
+      "targetLength": 109,
+      "mutableUniqueGenes": 23,
+      "targetUniqueGenes": 22,
+      "solverVersion": "v30",
+      "orthoCost": 47,
+      "orthoStatus": "ok",
+      "orthoMs": 326,
+      "solverStatus": "ok",
+      "solverSolved": true,
+      "solverMoves": 59,
+      "solverMs": 1659,
+      "delta": 12,
+      "ratio": 1.2553,
       "comparison": "worse"
     },
     {
@@ -319,9 +339,9 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 60,
-      "solverMs": 5484,
+      "solverMs": 1276,
       "delta": 12,
-      "ratio": 1.25,
+      "ratio": 1.2500,
       "comparison": "worse"
     },
     {
@@ -339,9 +359,9 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 36,
-      "solverMs": 9926,
+      "solverMs": 2528,
       "delta": 11,
-      "ratio": 1.44,
+      "ratio": 1.4400,
       "comparison": "worse"
     },
     {
@@ -359,9 +379,9 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 36,
-      "solverMs": 12171,
+      "solverMs": 2541,
       "delta": 11,
-      "ratio": 1.44,
+      "ratio": 1.4400,
       "comparison": "worse"
     },
     {
@@ -379,9 +399,9 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 36,
-      "solverMs": 12896,
+      "solverMs": 2759,
       "delta": 11,
-      "ratio": 1.44,
+      "ratio": 1.4400,
       "comparison": "worse"
     },
     {
@@ -399,29 +419,9 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 36,
-      "solverMs": 12812,
+      "solverMs": 2624,
       "delta": 11,
-      "ratio": 1.44,
-      "comparison": "worse"
-    },
-    {
-      "pairIndex": 1462,
-      "mutableName": "CP010521_ 1491.355",
-      "targetName": "CP000721_ 290402.41",
-      "mutableLength": 114,
-      "targetLength": 138,
-      "mutableUniqueGenes": 23,
-      "targetUniqueGenes": 23,
-      "solverVersion": "v30",
-      "orthoCost": 25,
-      "orthoStatus": "ok",
-      "orthoMs": 352,
-      "solverStatus": "ok",
-      "solverSolved": true,
-      "solverMoves": 36,
-      "solverMs": 12946,
-      "delta": 11,
-      "ratio": 1.44,
+      "ratio": 1.4400,
       "comparison": "worse"
     }
   ],
@@ -441,9 +441,9 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 1,
-      "solverMs": 24,
+      "solverMs": 19,
       "delta": -1,
-      "ratio": 0.5,
+      "ratio": 0.5000,
       "comparison": "better"
     },
     {
@@ -461,9 +461,9 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 1,
-      "solverMs": 19,
+      "solverMs": 33,
       "delta": -1,
-      "ratio": 0.5,
+      "ratio": 0.5000,
       "comparison": "better"
     },
     {
@@ -481,9 +481,9 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 3,
-      "solverMs": 677,
+      "solverMs": 119,
       "delta": -17,
-      "ratio": 0.15,
+      "ratio": 0.1500,
       "comparison": "better"
     },
     {
@@ -501,7 +501,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 3,
-      "solverMs": 647,
+      "solverMs": 41,
       "delta": -16,
       "ratio": 0.1579,
       "comparison": "better"
@@ -521,7 +521,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 6,
-      "solverMs": 2065,
+      "solverMs": 531,
       "delta": -47,
       "ratio": 0.1132,
       "comparison": "better"
@@ -541,7 +541,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 6,
-      "solverMs": 2871,
+      "solverMs": 437,
       "delta": -46,
       "ratio": 0.1154,
       "comparison": "better"
@@ -561,7 +561,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 6,
-      "solverMs": 2400,
+      "solverMs": 544,
       "delta": -46,
       "ratio": 0.1154,
       "comparison": "better"
@@ -581,7 +581,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 6,
-      "solverMs": 2863,
+      "solverMs": 540,
       "delta": -46,
       "ratio": 0.1154,
       "comparison": "better"
@@ -601,7 +601,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 6,
-      "solverMs": 3572,
+      "solverMs": 620,
       "delta": -3,
       "ratio": 0.6667,
       "comparison": "better"
@@ -621,7 +621,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 6,
-      "solverMs": 2737,
+      "solverMs": 534,
       "delta": -3,
       "ratio": 0.6667,
       "comparison": "better"
@@ -643,7 +643,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 66,
-      "solverMs": 8555,
+      "solverMs": 2324,
       "delta": 14,
       "ratio": 1.2692,
       "comparison": "worse"
@@ -663,7 +663,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 73,
-      "solverMs": 8481,
+      "solverMs": 2362,
       "delta": 13,
       "ratio": 1.2167,
       "comparison": "worse"
@@ -683,7 +683,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 73,
-      "solverMs": 8386,
+      "solverMs": 2443,
       "delta": 13,
       "ratio": 1.2167,
       "comparison": "worse"
@@ -703,7 +703,7 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 66,
-      "solverMs": 8971,
+      "solverMs": 2560,
       "delta": 13,
       "ratio": 1.2453,
       "comparison": "worse"
@@ -723,9 +723,9 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 60,
-      "solverMs": 5484,
+      "solverMs": 1276,
       "delta": 12,
-      "ratio": 1.25,
+      "ratio": 1.2500,
       "comparison": "worse"
     },
     {
@@ -742,10 +742,10 @@
       "orthoMs": 326,
       "solverStatus": "ok",
       "solverSolved": true,
-      "solverMoves": 58,
-      "solverMs": 7760,
-      "delta": 11,
-      "ratio": 1.234,
+      "solverMoves": 59,
+      "solverMs": 1659,
+      "delta": 12,
+      "ratio": 1.2553,
       "comparison": "worse"
     },
     {
@@ -763,9 +763,9 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 36,
-      "solverMs": 9926,
+      "solverMs": 2528,
       "delta": 11,
-      "ratio": 1.44,
+      "ratio": 1.4400,
       "comparison": "worse"
     },
     {
@@ -783,9 +783,9 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 36,
-      "solverMs": 12171,
+      "solverMs": 2541,
       "delta": 11,
-      "ratio": 1.44,
+      "ratio": 1.4400,
       "comparison": "worse"
     },
     {
@@ -803,9 +803,9 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 36,
-      "solverMs": 12896,
+      "solverMs": 2759,
       "delta": 11,
-      "ratio": 1.44,
+      "ratio": 1.4400,
       "comparison": "worse"
     },
     {
@@ -823,10 +823,11 @@
       "solverStatus": "ok",
       "solverSolved": true,
       "solverMoves": 36,
-      "solverMs": 12812,
+      "solverMs": 2624,
       "delta": 11,
-      "ratio": 1.44,
+      "ratio": 1.4400,
       "comparison": "worse"
     }
   ]
 }
+

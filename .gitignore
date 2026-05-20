@@ -1,0 +1,12 @@
+# Java class files
+*.class
+
+# Java build output directories
+java-solver/bin/
+bin/
+
+# System & IDE files
+.DS_Store
+.idea/
+.vscode/
+*.log
