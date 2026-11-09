@@ -42,15 +42,17 @@ gsp2026/
 |- results_phase2.tsv              # Phase 2 manifest experiment log
 |- results_phase3.tsv              # Phase 3 hard-genomic experiment log
 |- timings_phase3.tsv              # Phase 3 runtime log
-|- PHASE3_PROGRAM.md               # Historical Phase 3 doctrine that produced v30
-|- PHASE3_LOOP_PROMPT.md           # Prompt to use only if reopening solver research
 |- docs/
 |  |- AUTORESEARCH.md              # Methodology notes (Karpathy adaptation)
 |  |- IDEA.md                      # Original research plan
 |  |- ORTHOALIGN_COMPARATOR_NOTE.md  # Caveat on OrthoAlign reference scores
 |  |- PAPER.md                     # Paper writing notes
-|  |- program.md                   # Historical Phase 2 doctrine
-|  `- RESEARCH_LOOP_PROMPT.md      # Historical Phase 2 research prompt
+|  |- PHASE1_PROGRAM.md            # Historical Phase 1 doctrine
+|  |- PHASE1_LOOP_PROMPT.md        # Historical Phase 1 research prompt
+|  |- PHASE2_PROGRAM.md            # Historical Phase 2 doctrine
+|  |- PHASE2_LOOP_PROMPT.md        # Historical Phase 2 research prompt
+|  |- PHASE3_PROGRAM.md            # Historical Phase 3 doctrine that produced v30
+|  `- PHASE3_LOOP_PROMPT.md        # Prompt to use only if reopening solver research
 |- analysis/
 |  |- analyze_clostridium_pairs.js # All-pairs sweep utility for full Clostridium reruns
 |  |- clostridium_pairs_full/      # Final frozen v30 full-sweep artifacts

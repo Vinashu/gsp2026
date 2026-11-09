@@ -1,6 +1,6 @@
 # Autoresearch Session: Genome Sorting Problem (Phase 3)
 
-Read `PHASE3_PROGRAM.md` carefully before starting. It is your active Phase 3
+Read `docs/PHASE3_PROGRAM.md` carefully before starting. It is your active Phase 3
 doctrine.
 
 ## Your Loop
@@ -11,7 +11,7 @@ Repeat until I tell you to stop.
 
 Read:
 
-- `PHASE3_PROGRAM.md`
+- `docs/PHASE3_PROGRAM.md`
 - the current `solver.js`
 - the most recent row in `results_phase3.tsv` for the current Phase 3 baseline
 - the most recent row in `timings_phase3.tsv` for the current runtime baseline
