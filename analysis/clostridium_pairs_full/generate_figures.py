@@ -438,15 +438,15 @@ def draw_asymmetry(rows):
         '<title id="title">Clostridium sweep: directional asymmetry vs length gap</title>',
         '<desc id="desc">Scatter plot of target length minus mutable length against solver forward minus reverse move count for matched directional pairs.</desc>',
         rect(0, 0, width, height, "#ffffff"),
-        text(48, 42, "Directional asymmetry tracks the length gap almost linearly", size=22, weight="700"),
-        text(
-            48,
-            68,
-            f"Matched canonical pairs: {len(matched)}; Pearson r = {corr:.2f}; "
-            f"mean |solver diff| = {statistics.fmean(solver_abs):.2f}; mean |OrthoAlign diff| = {statistics.fmean(ortho_abs):.2f}",
-            size=13,
-            fill=MUTED,
-        ),
+        # text(48, 42, "Directional asymmetry tracks the length gap almost linearly", size=22, weight="700"),
+        # text(
+        #     48,
+        #     68,
+        #     f"Matched canonical pairs: {len(matched)}; Pearson r = {corr:.2f}; "
+        #     f"mean |solver diff| = {statistics.fmean(solver_abs):.2f}; mean |OrthoAlign diff| = {statistics.fmean(ortho_abs):.2f}",
+        #     size=13,
+        #     fill=MUTED,
+        # ),
     ]
 
     panel_x = 48
@@ -461,11 +461,11 @@ def draw_asymmetry(rows):
     plot_h = panel_h - 84
 
     x_min, x_max = -80, 80
-    y_min, y_max = -35, 35
+    y_min, y_max = -40, 40
 
     for tick in range(-80, 81, 20):
         x = linear_map(tick, x_min, x_max, plot_x, plot_x + plot_w)
-        body.append(line(x, plot_y, x, plot_y + plot_h))
+        body.append(line(x, plot_y + 20, x, plot_y + plot_h))
         body.append(text(x, plot_y + plot_h + 20, tick, size=11, anchor="middle", fill=MUTED))
     for tick in range(-30, 31, 10):
         y = linear_map(tick, y_min, y_max, plot_y + plot_h, plot_y)
@@ -499,30 +499,30 @@ def draw_asymmetry(rows):
         )
     body.append(polyline(line_points, stroke=TEXT, stroke_width=2.4, dash="8 6"))
 
-    highlights = [
-        ("AP012212 -> CP000721 / CP006777", 72, 32, EXPANDING, 14, -12),
-        ("CP000721 -> CP010086", -53, -18, SHRINKING, -128, 18),
-        ("CP000726 -> CP000939", 4, 1, SAME, 10, -14),
-    ]
-    for label, x_value, y_value, color, dx, dy in highlights:
-        x = linear_map(x_value, x_min, x_max, plot_x, plot_x + plot_w)
-        y = linear_map(y_value, y_min, y_max, plot_y + plot_h, plot_y)
-        body.append(circle(x, y, 5.0, "#ffffff", stroke=color, stroke_width=2))
-        body.append(line(x, y, x + dx, y + dy, stroke=color, stroke_width=1.6))
-        anchor = "start" if dx >= 0 else "end"
-        body.append(text(x + dx + (4 if dx >= 0 else -4), y + dy + 4, label, size=12, anchor=anchor, fill=color, weight="600"))
+        # highlights = [
+        #     ("AP012212 -> CP000721 / CP006777", 72, 32, EXPANDING, 14, -12),
+        #     ("CP000721 -> CP010086", -53, -18, SHRINKING, -128, 18),
+        #     ("CP000726 -> CP000939", 4, 1, SAME, 10, -14),
+        # ]
+    # for label, x_value, y_value, color, dx, dy in highlights:
+    #     x = linear_map(x_value, x_min, x_max, plot_x, plot_x + plot_w)
+    #     y = linear_map(y_value, y_min, y_max, plot_y + plot_h, plot_y)
+    #     body.append(circle(x, y, 5.0, "#ffffff", stroke=color, stroke_width=2))
+    #     body.append(line(x, y, x + dx, y + dy, stroke=color, stroke_width=1.6))
+    #     anchor = "start" if dx >= 0 else "end"
+    #     body.append(text(x + dx + (4 if dx >= 0 else -4), y + dy + 4, label, size=12, anchor=anchor, fill=color, weight="600"))
 
-    legend_x = panel_x + 20
-    legend_y = panel_y + 20
+    legend_x = panel_x + 15
+    legend_y = panel_y + 15
     legend_items = [
         (EXPANDING, "target longer than mutable (315)"),
         (SHRINKING, "target shorter than mutable (195)"),
         (SAME, "same length (14)"),
     ]
     for index, (color, label) in enumerate(legend_items):
-        y = legend_y + 18 * index
+        y = legend_y + 14 * index
         body.append(circle(legend_x, y, 5, color))
-        body.append(text(legend_x + 12, y + 4, label, size=12, fill=MUTED))
+        body.append(text(legend_x + 12, y + 4, label, size=10, fill=MUTED))
 
     body.append(text(plot_x + plot_w / 2, plot_y + plot_h + 46, "Target length - mutable length (genes)", size=12, anchor="middle", fill=MUTED))
     body.append(text(plot_x - 50, plot_y + plot_h / 2, "Solver moves (forward - reverse)", size=12, anchor="middle", fill=MUTED, rotate=-90))

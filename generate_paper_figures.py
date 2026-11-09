@@ -30,6 +30,7 @@ BETTER = "#2b7a78"
 WORSE = "#d1495b"
 NEUTRAL = "#d4a72c"
 ACCENT = "#2f6fed"
+TIE = "#5b3a8e"
 LIGHT_BG = "#f8fbff"
 
 
@@ -178,27 +179,39 @@ def generate_ratio_histogram():
         for r in reader:
             if r["ratio_solver_to_ortho"] != "NA":
                 ratios.append(float(r["ratio_solver_to_ortho"]))
+            elif r["comparison"] == "equal":
+                # 0/0 case: both solver and OrthoAlign needed zero moves, still a tie
+                ratios.append(1.0)
 
-    # Build histogram bins
+    # Exact ties get one dedicated bar; every other ratio is binned by bin_width
+    tie_count = sum(1 for r in ratios if r == 1.0)
+    others = [r for r in ratios if r != 1.0]
+
     bin_width = 0.05
-    lo = math.floor(min(ratios) / bin_width) * bin_width
-    hi = math.ceil(max(ratios) / bin_width) * bin_width
+    lo = math.floor(min(others) / bin_width) * bin_width
+    hi = math.ceil(max(others) / bin_width) * bin_width
     n_bins = round((hi - lo) / bin_width)
     counts = [0] * n_bins
-    for r in ratios:
+    for r in others:
         idx = min(int((r - lo) / bin_width), n_bins - 1)
         counts[idx] += 1
+
+    # Slot where the tie bar is inserted, right where ratio 1.0 falls among the regular bins
+    tie_slot = min(max(int(round((1.0 - lo) / bin_width)), 0), n_bins)
+    total_slots = n_bins + 1
+    max_count = max(counts + [tie_count])
 
     W, H = 700, 380
     ml, mr, mt, mb = 70, 30, 50, 60
     pw, ph = W - ml - mr, H - mt - mb
+    bar_w = pw / total_slots
 
-    max_count = max(counts)
-    bar_w = pw / n_bins
+    def slot_x(slot):
+        return ml + slot * bar_w
 
     body = [rect(0, 0, W, H, "#ffffff")]
     body.append(rect(ml, mt, pw, ph, LIGHT_BG))
-    body.append(txt(W / 2, 28, "Distribution of Solver/OrthoAlign Ratio (1,572 pairs)", 16, TEXT, "middle", "600"))
+    # body.append(txt(W / 2, 28, f"Distribution of Solver/OrthoAlign Ratio ({len(ratios)} pairs)", 16, TEXT, "middle", "600"))
 
     # Y grid
     y_step = max(1, max_count // 5)
@@ -207,24 +220,34 @@ def generate_ratio_histogram():
         body.append(line(ml, py, ml + pw, py, GRID))
         body.append(txt(ml - 8, py + 5, str(i), 11, MUTED, "end"))
 
-    # Vertical reference at ratio=1.0
-    if lo < 1.0 < hi:
-        px1 = lin(1.0, lo, hi, ml, ml + pw)
-        body.append(line(px1, mt, px1, mt + ph, WORSE, 1.5, "4 3"))
-        body.append(txt(px1 + 4, mt + 14, "ratio = 1.0", 10, WORSE, "start"))
+    # Reference line through the dedicated tie bar (exact ratio = 1.0)
+    tie_x = slot_x(tie_slot)
+    tie_center = tie_x + bar_w / 2
+    body.append(line(tie_center, mt, tie_center, mt + ph, WORSE, 1.5, "4 3"))
+    body.append(txt(tie_center + 4, mt + 14, "ratio = 1.0", 10, WORSE, "start"))
 
-    # Bars
+    # Regular bins (everything except exact ties)
     for i, c in enumerate(counts):
-        bx = ml + i * bar_w
+        slot = i if i < tie_slot else i + 1
+        bx = slot_x(slot)
         bar_h = lin(c, 0, max_count, 0, ph)
         mid = lo + (i + 0.5) * bin_width
         color = BETTER if mid < 1.0 else (NEUTRAL if mid < 1.05 else WORSE)
         body.append(rect(bx + 1, mt + ph - bar_h, bar_w - 2, bar_h, color, "none", 0, 1, 0.85))
 
-    # X labels (every other bin)
-    for i in range(0, n_bins + 1, max(1, n_bins // 10)):
+    # Dedicated tie bar
+    tie_h = lin(tie_count, 0, max_count, 0, ph)
+    body.append(rect(tie_x + 1, mt + ph - tie_h, bar_w - 2, tie_h, TIE, TEXT, 1, 1, 0.95))
+    body.append(txt(tie_center, mt + ph - tie_h - 6, tie_count, 10, TEXT, "middle", "700"))
+    # body.append(txt(tie_center, mt + ph + 18, "tie", 10, TIE, "middle", "700"))
+
+    # X labels every 0.10 of ratio, regardless of bin width (tie slot is labeled separately above)
+    label_step = max(1, round(0.10 / bin_width))
+    for i in range(0, n_bins + 1, label_step):
         val = lo + i * bin_width
-        px = ml + i * bar_w
+        # slot = i if i < tie_slot else i + 1
+        slot = i 
+        px = slot_x(slot)
         body.append(txt(px, mt + ph + 18, f"{val:.2f}", 10, MUTED, "middle"))
 
     # Axis labels
@@ -233,6 +256,18 @@ def generate_ratio_histogram():
 
     body.append(line(ml, mt, ml, mt + ph, TEXT))
     body.append(line(ml, mt + ph, ml + pw, mt + ph, TEXT))
+
+    # Color legend
+    legend_items = [
+        (BETTER, "solver better (< 1.0)"),
+        (TIE, f"exact tie (= 1.0, n={tie_count})"),
+        (NEUTRAL, "near miss (1.0-1.05)"),
+        (WORSE, "solver worse (>= 1.05)"),
+    ]
+    lx, ly = ml + 8, mt + 14
+    for i, (color, label) in enumerate(legend_items):
+        body.append(rect(lx, ly + i * 16 - 9, 10, 10, color, "none", 0, 2, 0.9))
+        body.append(txt(lx + 16, ly + i * 16, label, 10, MUTED, "start"))
 
     # Legend text
     med = statistics.median(ratios)
